@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
-Route::get('/', function () {
-    return view('page.topPage');
-});
-
+Route::get('/', [MainController::class, 'welcomePage'])->name('welcomePage');
+Route::get('/top', [MainController::class, 'topPage'])->name('topPage');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
