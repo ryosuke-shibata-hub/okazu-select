@@ -34,7 +34,12 @@ class MainController extends Controller
 
         $targetUrlToRanking = $this->getApiDataToRanking();
 // dd($targetUrlToRanking);
+// $targetUrlToRanking = [];
         return view('page.topPage')
         ->with('targetUrlToRanking', $targetUrlToRanking);
+    }
+    public function viewTest()
+    {
+        return view('components.modal.sample-img');
     }
 }

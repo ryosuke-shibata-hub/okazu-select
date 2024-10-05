@@ -15,9 +15,11 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-white">
+    <body class="flex flex-col min-h-screen font-sans antialiased">
+        @include('components.header')
+        <div class="flex-grow bg-white">
             @yield('content')
         </div>
+        @include('components.footer')
     </body>
 </html>
