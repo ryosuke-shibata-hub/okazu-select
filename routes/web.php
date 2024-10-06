@@ -1,22 +1,15 @@
 <?php
 
-// use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ApiController;
 
+//サイトの紹介&年齢確認
 Route::get('/', [MainController::class, 'welcomePage'])->name('welcomePage');
+//サイトトップ（人気ランキングページ）
 Route::get('/top', [MainController::class, 'topPage'])->name('topPage');
+// サンプル画像の取得用ルート
+Route::get('/get-sample-img/{id}', [ApiController::class, 'getSampleImg'])->name('getSampleImg');
 
-Route::get('/test', [MainController::class, 'viewTest'])->name('viewTest');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 require __DIR__.'/auth.php';

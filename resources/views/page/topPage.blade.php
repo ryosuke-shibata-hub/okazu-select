@@ -1,6 +1,8 @@
 @extends('layouts.app')
+@section('script')
+<script src={{ asset('static/static.js') }} defer></script>
 @section('content')
-
+ @include('components.modal.sample-img')
 <h1 class="inline-block p-3 px-5 mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
     <i class="mr-2 text-yellow-400 fa-solid fa-ranking-star"></i>リアルタイム人気上位ランキング
 </h1>
@@ -42,7 +44,7 @@
                             @foreach($result['iteminfo']['genre'] as $genre)
                                 <a
                                     href=""
-                                    class="px-2 py-1 mb-2 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                    class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                     <span class="">
                                         {{ $genre['name'] }}
                                     </span>
@@ -56,14 +58,18 @@
                             <div class="lg:mx-auto">
                             @if(isset($result['sampleMovieURL']))
                                 <button
-                                    id="sampleImg"
+                                    id=""
                                     type="button"
                                     class="p-1 text-gray-900 bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                     <i class="pr-1 fa-solid fa-video" style="color: #ff6251;"></i>サンプル動画
                                 </button>
                             @endif
                             @if(isset($result['sampleImageURL']))
-                                <button type="button" class="px-2 py-1 text-gray-900 bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                <button
+                                    id=""
+                                    type="button"
+                                    data-content-id={{ $result['content_id'] }}
+                                    class="px-2 py-1 text-gray-900 bg-white border border-gray-200 rounded-full sampleImgOpenModal font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                     <i class="pr-1 fa-regular fa-image" style="color: #74C0FC;"></i>サンプル画像
                                 </button>
                             @endif
