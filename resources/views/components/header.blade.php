@@ -18,7 +18,7 @@
                         <i class="text-blue-400 lg:mr-2 fa-solid fa-magnifying-glass"></i>検索
                     </a>
                     <a
-                        href="/ranking"
+                        href="/top"
                         class="inline-block mt-4 lg:px-5 lg:mt-0 text-teal-lighter hover:text-yellow-400">
                         <i class="text-yellow-400 lg:mr-2 fa-solid fa-ranking-star"></i>人気のおかず
                     </a>
