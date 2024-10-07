@@ -2,7 +2,8 @@
 @section('script')
 <script src={{ asset('static/static.js') }} defer></script>
 @section('content')
- @include('components.modal.sample-img')
+@include('components.modal.sample-img')
+@include('components.modal.sample-video')
 <h1 class="inline-block p-3 px-5 mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
     <i class="mr-2 text-yellow-400 fa-solid fa-ranking-star"></i>リアルタイム人気上位ランキング
 </h1>
@@ -60,7 +61,8 @@
                                 <button
                                     id=""
                                     type="button"
-                                    class="p-1 text-gray-900 bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                    data-content-id={{ $result['content_id'] }}
+                                    class="p-1 text-gray-900 bg-white border border-gray-200 rounded-full sampleVideoOpenModal font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                     <i class="pr-1 fa-solid fa-video" style="color: #ff6251;"></i>サンプル動画
                                 </button>
                             @endif

@@ -1,4 +1,5 @@
 $(function () {
+    // サンプル画像の取得
 	// 変数に要素を入れる
 	var sampleImgModalWrapper = $('#sampleImgModalWrapper'),
 		sampleImgContainer = $('#sampleImgContainer')
@@ -9,7 +10,7 @@ $(function () {
         sampleImgModalWrapper.empty();
 
         $.ajax({
-            url: `get-sample-img/${targetContentId}`,
+            url: `get-sample-data-detail/${targetContentId}`,
             method: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -39,5 +40,61 @@ $(function () {
     })
     $('#sampleImgContainer').on('click', function () {
         sampleImgContainer.addClass('hidden');
+    })
+
+
+    // サンプル動画の取得
+	var sampleVideoModalWrapper = $('#sampleVideoModalWrapper'),
+		sampleVideoContainer = $('#sampleVideoContainer')
+
+    $('.sampleVideoOpenModal').on('click', function () {
+        var targetContentId = $(this).data('content-id');
+        sampleVideoModalWrapper.empty();
+
+        $.ajax({
+            url: `get-sample-data-detail/${targetContentId}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (response && response.result.items[0]['sampleMovieURL']) {
+                    targetVideoUrl = response.result.items[0]['sampleMovieURL']['size_720_480']
+                    targetVideoTitle = response.result.items[0]['title']
+                        sampleVideoModalWrapper.append(
+                            `
+                            <div
+                                style="width:100%;
+                                padding-top: 75%;
+                                position:relative;"
+                            >
+                                <iframe
+                                    class="sampleVideoIframe"
+                                    max-width="1280px"
+                                    style="position: absolute; top: 0; left: 0;"
+                                    src="${targetVideoUrl}"
+                                    scrolling="no"
+                                    frameborder="0"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            `
+                        );
+                } else {
+                    sampleVideoModalWrapper.append('<p>サンプル画像はありません。</p>');
+                }
+                sampleVideoContainer.removeClass('hidden')
+            },
+            error: function (error) {
+                sampleVideoModalWrapper.append('<p>画像を取得できませんでした。</p>');
+                sampleVideoContainer.removeClass('hidden');
+            }
+        })
+        return false;
+    })
+
+    $('#sampleVideoModalClose').on('click', function () {
+        sampleVideoContainer.addClass('hidden');
+    })
+    $('#sampleVideoContainer').on('click', function () {
+        sampleVideoContainer.addClass('hidden');
     })
 });

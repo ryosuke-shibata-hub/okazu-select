@@ -3,8 +3,6 @@
         <button id="sampleImgModalClose">
             <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
         </button>
-        <div id="sampleImgModalWrapper" class="pt-5 text-center sampleImgModalWrapper">
-
-        </div>
+        <div id="sampleImgModalWrapper" class="pt-5 text-center sampleImgModalWrapper"></div>
     </div>
 </div>

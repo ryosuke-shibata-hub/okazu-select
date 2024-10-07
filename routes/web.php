@@ -8,8 +8,8 @@ use App\Http\Controllers\ApiController;
 Route::get('/', [MainController::class, 'welcomePage'])->name('welcomePage');
 //サイトトップ（人気ランキングページ）
 Route::get('/top', [MainController::class, 'topPage'])->name('topPage');
-// サンプル画像の取得用ルート
-Route::get('/get-sample-img/{id}', [ApiController::class, 'getSampleImg'])->name('getSampleImg');
+// サンプルボタン押下時に、ターゲットのIDからそのデータの詳細を取得
+Route::get('/get-sample-data-detail/{id}', [ApiController::class, 'getSampleTargetData'])->name('getSampleTargetData');
 
 
 require __DIR__.'/auth.php';

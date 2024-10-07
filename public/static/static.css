@@ -1,4 +1,5 @@
-.sampleImgModal{
+.sampleImgModal,
+.sampleVideoModal {
     position: fixed;
     z-index: 100;
     left: 0;
@@ -8,6 +9,16 @@
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
 }
-.sampleImgModalWrapper {
+.sampleImgModalWrapper,
+.sampleVideoModalWrapper {
      z-index: 200;
+}
+.sampleVideoIframe {
+    position: fixed;
+    /* z-index: 50; */
+    /* left: 50;
+    top: 50; */
+    height: 100%;
+    width: 100%;
+    overflow: auto;
 }
