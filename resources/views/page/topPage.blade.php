@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('script')
-<script src={{ asset('static/static.js') }} defer></script>
+<script src={{ asset('static/js/static.js') }} defer></script>
 @section('content')
 @include('components.modal.sample-img')
 @include('components.modal.sample-video')

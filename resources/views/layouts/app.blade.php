@@ -15,7 +15,7 @@
         {{-- JQuery --}}
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         {{-- オリジナルCSS --}}
-        <link rel="stylesheet" href={{ asset('static/static.css') }} />
+        <link rel="stylesheet" href={{ asset('static/css/static.css') }} />
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

@@ -43,6 +43,7 @@ class MainController extends Controller
     {
         $getRandomGenre = GenreModel::getRandomGenre();
 
-        return view('page.matching');
+        return view('page.matching')
+        ->with('getRandomGenre', $getRandomGenre->toArray());
     }
 }
