@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+use App\Models\Api\GenreModel;
+
 use Log;
 class MainController extends Controller
 {
@@ -33,13 +35,14 @@ class MainController extends Controller
     {
 
         $targetUrlToRanking = $this->getApiDataToRanking();
-// dd($targetUrlToRanking);
-// $targetUrlToRanking = [];
+
         return view('page.topPage')
         ->with('targetUrlToRanking', $targetUrlToRanking);
     }
-    public function viewTest()
+    public function matchingPage()
     {
-        return view('components.modal.sample-img');
+        $getRandomGenre = GenreModel::getRandomGenre();
+
+        return view('page.matching');
     }
 }
