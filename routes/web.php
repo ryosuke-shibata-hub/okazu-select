@@ -13,7 +13,8 @@ Route::get('/top', [MainController::class, 'topPage'])->name('topPage');
 Route::get('/matching', [MainController::class, 'matchingPage'])->name('matchingPage');
 // サンプルボタン押下時に、ターゲットのIDからそのデータの詳細を取得
 Route::get('/get-sample-data-detail/{id}', [ApiController::class, 'getSampleTargetData'])->name('getSampleTargetData');
-
+// マッチングの結果表示
+Route::get('/matching/result', [MainController::class, 'matchingResultPage'])->name('matchingResultPage');
 
 //サイトの紹介&年齢確認
 Route::get('/get/api/data/genre', [GetApiDataController::class, 'getAllApiData'])->name('getAllApiData');

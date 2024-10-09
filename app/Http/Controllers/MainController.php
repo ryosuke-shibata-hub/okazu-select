@@ -46,4 +46,22 @@ class MainController extends Controller
         return view('page.matching')
         ->with('getRandomGenre', $getRandomGenre->toArray());
     }
+
+    public function matchingResultPage(Request $request)
+    {
+        // input要素をjsonに変換
+        $selectedGenres = json_decode($request->input('selectGenre'), true);
+        // データセットの初期化
+        $targetKeyWord = [];
+
+        foreach ($selectedGenres as $genre) {
+            // ジャンルの回答で「YES」のみ抽出
+            if ($answer = $genre['answer'] === config('const.GENRE.MATCHING.ANSWER.YES')) {
+                $targetKeyWord[] = ($genre['question']);
+            }
+        }
+        // 検索用に整形
+        $serachKeyWord = implode("|", $targetKeyWord);
+dd($serachKeyWord);
+    }
 }

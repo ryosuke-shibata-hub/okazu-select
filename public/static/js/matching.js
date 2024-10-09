@@ -16,7 +16,11 @@ $(document).ready(function() {
             $('#question-text').text(questions[currentQuestionIndex].genre_name); // ジャンル名を表示
         } else {
             // 全ての質問が終わったら回答をサーバーに送信
-            submitAnswers();
+            $('#question-container').addClass('hidden');
+            $('#view-matching-video').removeClass('hidden');
+
+            // 回答をhidden inputにJSON形式で格納
+            $('#selectGenre').val(JSON.stringify(answers));
         }
     }
 
@@ -27,28 +31,10 @@ $(document).ready(function() {
             question: questions[currentQuestionIndex].genre_name,
             answer: answer
         });
-
         currentQuestionIndex++;
 
         updateQuestion();
     });
-
-    // 回答をサーバーに送信する関数
-    function submitAnswers() {
-        $.ajax({
-            url: '/api/submit-answers',
-            type: 'POST',
-            data: {
-                answers: answers
-            },
-            success: function(response) {
-                alert('回答が送信されました');
-            },
-            error: function(error) {
-                console.error('送信エラー', error);
-            }
-        });
-    }
 
     // 初期化 - 最初の質問を表示
     updateQuestion();

@@ -18,6 +18,12 @@ return [
             "nikkatsu" => 45, //成人映画
             "anime" => 46, //アニメ動画
         ],
+        "MATCHING" => [
+            "ANSWER" => [
+                "YES" => "YES",
+                "NO" => "NO",
+            ],
+        ],
     ],
     "FLOOR" => [
         "FLG" => [
