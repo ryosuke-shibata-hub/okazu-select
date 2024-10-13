@@ -24,11 +24,13 @@ $(function () {
                     });
                 } else {
                     sampleImgModalWrapper.append('<p>サンプル画像はありません。</p>');
+                    sampleImgModalWrapper.addClass('bg-white');
                 }
                 sampleImgContainer.removeClass('hidden')
             },
             error: function (error) {
                 sampleImgModalWrapper.append('<p>画像を取得できませんでした。</p>');
+                sampleImgModalWrapper.addClass('bg-white pt-10');
                 sampleImgContainer.removeClass('hidden');
             }
         })
@@ -80,11 +82,13 @@ $(function () {
                         );
                 } else {
                     sampleVideoModalWrapper.append('<p>サンプル画像はありません。</p>');
+                    sampleVideoModalWrapper.addClass('bg-white')
                 }
                 sampleVideoContainer.removeClass('hidden')
             },
             error: function (error) {
                 sampleVideoModalWrapper.append('<p>画像を取得できませんでした。</p>');
+                sampleVideoModalWrapper.addClass('bg-white pt-10')
                 sampleVideoContainer.removeClass('hidden');
             }
         })

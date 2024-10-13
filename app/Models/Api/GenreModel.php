@@ -49,4 +49,14 @@ class GenreModel extends Model
         ->take(5)
         ->get();
     }
+
+    public static function getGenreId($genre)
+    {
+        return $data = GenreModel::select(
+            'genre_id',
+        )
+        ->where('genre_id', $genre)
+        ->where('delete_flg', config('const.GENRE.FLG.DELETE_FLG.ACTIVE'))
+        ->first();
+    }
 }

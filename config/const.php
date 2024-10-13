@@ -5,6 +5,15 @@ return [
     "REDIRECT" => "https://www.google.com/?hl=ja",
     "API_ID" => env('FANZA_API_ID'),
     "AFFILIATE_ID" => env('FANZA_AFFILIATE_ID'),
+    "API" => [
+        "PARAMETER" => [
+            "SEARCH" => [
+                "GENRE" => [
+                    "APISEARCHPARAM" => "&article_id[0]=",
+                ],
+            ],
+        ],
+    ],
     "GENRE" => [
         "FLG" => [
             "DELETE_FLG" => [

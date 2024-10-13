@@ -35,7 +35,7 @@
                 <div class="py-10 text-4xl text-center">
                     <i class="fa-solid fa-heart fa-bounce fa-2xl" style="color: #ff2600;"></i>
                 </div>
-                <form action="/matching/result" method="GET">
+                <form action="/result" method="GET">
                     @csrf
                     <input type="hidden" id="selectGenre" name="selectGenre" value="" />
                     <button

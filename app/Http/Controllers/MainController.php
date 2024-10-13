@@ -26,6 +26,40 @@ class MainController extends Controller
         return array();
 
     }
+
+    public function matchingResultApi(Request $request)
+    {
+
+        $apiId = config('const.API_ID');
+        $affiliateId = config('const.AFFILIATE_ID');
+
+        $apiPram = config('const.API.PARAMETER.SEARCH.GENRE');
+        // input要素をjsonに変換
+        $selectedGenres = json_decode($request->input('selectGenre'), true);
+        // データセットの初期化
+        $targetKeyWord = [];
+
+        foreach ($selectedGenres as $genre) {
+            // ジャンルの回答で「YES」のみ抽出
+            if ($answer = $genre['answer'] === config('const.GENRE.MATCHING.ANSWER.YES')) {
+                $targetId[] = $genre['question'];
+            }
+        }
+        $searchKeyWord = $apiPram['APISEARCHPARAM'] . implode($apiPram['APISEARCHPARAM'], $targetId);
+
+        $targetUrlToMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=5&sort=match&article=genre{$searchKeyWord}&output=json";
+
+        $getMatchingData = Http::get($targetUrlToMatching);
+
+        if ($getMatchingData->ok()) {
+            return view('page.matchingResult')
+            ->with('getMatchingData', $getMatchingData);
+        }
+
+        return view("page.error.404");
+    }
+
+
     public function welcomePage()
     {
         return view('page.welcomePage');
@@ -45,23 +79,5 @@ class MainController extends Controller
 
         return view('page.matching')
         ->with('getRandomGenre', $getRandomGenre->toArray());
-    }
-
-    public function matchingResultPage(Request $request)
-    {
-        // input要素をjsonに変換
-        $selectedGenres = json_decode($request->input('selectGenre'), true);
-        // データセットの初期化
-        $targetKeyWord = [];
-
-        foreach ($selectedGenres as $genre) {
-            // ジャンルの回答で「YES」のみ抽出
-            if ($answer = $genre['answer'] === config('const.GENRE.MATCHING.ANSWER.YES')) {
-                $targetKeyWord[] = ($genre['question']);
-            }
-        }
-        // 検索用に整形
-        $serachKeyWord = implode("|", $targetKeyWord);
-dd($serachKeyWord);
     }
 }

@@ -28,7 +28,7 @@ $(document).ready(function() {
     $('.answer-btn').click(function() {
         var answer = $(this).data('answer');
         answers.push({
-            question: questions[currentQuestionIndex].genre_name,
+            question: questions[currentQuestionIndex].genre_id,
             answer: answer
         });
         currentQuestionIndex++;
