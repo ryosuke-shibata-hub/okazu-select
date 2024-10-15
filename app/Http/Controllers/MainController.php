@@ -38,6 +38,7 @@ class MainController extends Controller
         $selectedGenres = json_decode($request->input('selectGenre'), true);
         // データセットの初期化
         $targetKeyWord = [];
+        $targetId = [];
 
         foreach ($selectedGenres as $genre) {
             // ジャンルの回答で「YES」のみ抽出
@@ -45,9 +46,17 @@ class MainController extends Controller
                 $targetId[] = $genre['question'];
             }
         }
+
+        if (empty($targetId)) {
+            $getRandomGenre = GenreModel::getRandomGenre();
+
+            return view('page.matching')
+            ->with('getRandomGenre', $getRandomGenre)
+            ->with('error', 'マッチするジャンルが見つかりませんでした。');
+        }
         $searchKeyWord = $apiPram['APISEARCHPARAM'] . implode($apiPram['APISEARCHPARAM'], $targetId);
 
-        $targetUrlToMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=5&sort=match&article=genre{$searchKeyWord}&output=json";
+        $targetUrlToMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=10&sort=match&article=genre{$searchKeyWord}&output=json";
 
         $getMatchingData = Http::get($targetUrlToMatching);
 
@@ -78,6 +87,7 @@ class MainController extends Controller
         $getRandomGenre = GenreModel::getRandomGenre();
 
         return view('page.matching')
+        ->with('error', '')
         ->with('getRandomGenre', $getRandomGenre->toArray());
     }
 }
