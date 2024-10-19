@@ -15,10 +15,74 @@
 }
 .sampleVideoIframe {
     position: fixed;
-    /* z-index: 50; */
-    /* left: 50;
-    top: 50; */
     height: 100%;
     width: 100%;
     overflow: auto;
+}
+.search-genre-area,
+.search-actress-area {
+    z-index: 50;
+}
+
+
+.modal {
+    display: none; /* モーダルを隠す */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    overflow: auto;
+    overflow-y: auto;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#actress-modal {
+    overflow: auto;
+    overflow-y: auto;
+}
+#actress-list {
+    display: flex;
+    flex-wrap: wrap;       /* 折り返しを許可 */
+    justify-content: start; /* 左揃え */
+    gap: 6px;              /* 要素間にスペースを追加 */
+    padding: 0;
+    list-style: none;       /* リストマーカーを非表示 */
+
+}
+.actress-image {
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.actress-name {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.actress-link {
+    text-decoration: none;
+    color: inherit;
 }

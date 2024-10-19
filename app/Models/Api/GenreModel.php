@@ -59,4 +59,11 @@ class GenreModel extends Model
         ->where('delete_flg', config('const.GENRE.FLG.DELETE_FLG.ACTIVE'))
         ->first();
     }
+
+    public static function getAllGenre()
+    {
+        return GenreModel::where('delete_flg', config('const.GENRE.FLG.DELETE_FLG.ACTIVE'))
+        ->where('floor_id', config('const.GENRE.FLOOR_CODE.videoa'))
+        ->get();
+    }
 }

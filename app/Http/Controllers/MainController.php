@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 use App\Models\Api\GenreModel;
+use App\Models\Api\ActressModel;
 
 use Log;
 class MainController extends Controller
@@ -82,12 +83,54 @@ class MainController extends Controller
         return view('page.topPage')
         ->with('targetUrlToRanking', $targetUrlToRanking);
     }
+
     public function matchingPage()
     {
+
         $getRandomGenre = GenreModel::getRandomGenre();
 
         return view('page.matching')
         ->with('error', '')
         ->with('getRandomGenre', $getRandomGenre->toArray());
+    }
+
+    public function searchPage()
+    {
+        $genreData = GenreModel::getAllGenre();
+        $actressGojuon = config('const.ACTRESS.SEARCH_NAME.GOJUON');
+        // $actressData = ActressModel::getAllActress();
+
+        // $groupedActresses = $actressData->groupBy(function($item) {
+        //     $firstChar = mb_substr($item->actress_ruby, 0, 1);
+
+        //     if (preg_match('/[あ-お]/u', $firstChar)) {
+        //         return 'あ行';
+        //     } elseif (preg_match('/[か-こ]/u', $firstChar)) {
+        //         return 'か行';
+        //     } elseif (preg_match('/[さ-そ]/u', $firstChar)) {
+        //         return 'さ行';
+        //     } elseif (preg_match('/[た-と]/u', $firstChar)) {
+        //         return 'た行';
+        //     } elseif (preg_match('/[な-の]/u', $firstChar)) {
+        //         return 'な行';
+        //     } elseif (preg_match('/[は-ほ]/u', $firstChar)) {
+        //         return 'は行';
+        //     } elseif (preg_match('/[ま-も]/u', $firstChar)) {
+        //         return 'ま行';
+        //     } elseif (preg_match('/[や-よ]/u', $firstChar)) {
+        //         return 'や行';
+        //     } elseif (preg_match('/[ら-ろ]/u', $firstChar)) {
+        //         return 'ら行';
+        //     } elseif (preg_match('/[わ-ん]/u', $firstChar)) {
+        //         return 'わ行';
+        //     }
+
+        //     // 他の行も追加...
+        //     return 'その他';
+        // });
+
+        return view('page.search')
+        ->with('genreData', $genreData)
+        ->with('actressGojuon', $actressGojuon);
     }
 }

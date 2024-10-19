@@ -14,6 +14,19 @@ return [
             ],
         ],
     ],
+    "ACTRESS" => [
+        "FLG" => [
+            "DELETE_FLG" => [
+                "ACTIVE" => 0, //有効
+                "DISABLED" => 1 //無効
+            ],
+        ],
+        "SEARCH_NAME" => [
+            "GOJUON" => [
+                'あ行','か行','さ行','た行','な行','は行','ま行','や行','ら行','わ行','その他'
+            ],
+        ],
+    ],
     "GENRE" => [
         "FLG" => [
             "DELETE_FLG" => [

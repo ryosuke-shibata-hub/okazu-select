@@ -13,10 +13,14 @@ Route::get('/top', [MainController::class, 'topPage'])->name('topPage');
 Route::get('/matching', [MainController::class, 'matchingPage'])->name('matchingPage');
 // サンプルボタン押下時に、ターゲットのIDからそのデータの詳細を取得
 Route::get('/get-sample-data-detail/{id}', [ApiController::class, 'getSampleTargetData'])->name('getSampleTargetData');
+//五十音から女優名を取得
+Route::get('/get/api/actresses/{id}', [ApiController::class, 'getActressesByGroup'])->name('getActressesByGroup');
 // マッチングの結果表示
 Route::get('/result', [MainController::class, 'matchingResultApi'])->name('matchingResultApi');
+//検索画面
+Route::get('/search', [MainController::class, 'searchPage'])->name('searchPage');
 
-//サイトの紹介&年齢確認
+//ジャンルをAPIから取得してDBに直接保存するルート
 Route::get('/get/api/data/genre', [GetApiDataController::class, 'getAllApiData'])->name('getAllApiData');
 
 require __DIR__.'/auth.php';

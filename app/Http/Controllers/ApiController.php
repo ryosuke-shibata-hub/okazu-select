@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+use App\Models\Api\ActressModel;
+
 use Log;
 class ApiController extends Controller
 {
@@ -23,6 +25,12 @@ class ApiController extends Controller
         } catch (\Throwable $th) {
             Log::error("message", [$th]);
         }
+    }
 
+    public function getActressesByGroup($id)
+    {
+        $getActressList = ActressModel::getActressTarget($id);
+
+        return $getActressList;
     }
 }
