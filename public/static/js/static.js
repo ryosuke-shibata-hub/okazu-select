@@ -10,7 +10,7 @@ $(function () {
         sampleImgModalWrapper.empty();
 
         $.ajax({
-            url: `get-sample-data-detail/${targetContentId}`,
+            url: `/get-sample-data-detail/${targetContentId}`,
             method: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -29,7 +29,7 @@ $(function () {
                 sampleImgContainer.removeClass('hidden')
             },
             error: function (error) {
-                sampleImgModalWrapper.append('<p>画像を取得できませんでした。</p>');
+                sampleImgModalWrapper.append('<p>サンプル画像を取得できませんでした。</p>');
                 sampleImgModalWrapper.addClass('bg-white pt-10');
                 sampleImgContainer.removeClass('hidden');
             }
@@ -54,7 +54,7 @@ $(function () {
         sampleVideoModalWrapper.empty();
 
         $.ajax({
-            url: `get-sample-data-detail/${targetContentId}`,
+            url: `/get-sample-data-detail/${targetContentId}`,
             method: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -81,13 +81,13 @@ $(function () {
                             `
                         );
                 } else {
-                    sampleVideoModalWrapper.append('<p>サンプル画像はありません。</p>');
+                    sampleVideoModalWrapper.append('<p>サンプル動画はありません。</p>');
                     sampleVideoModalWrapper.addClass('bg-white')
                 }
                 sampleVideoContainer.removeClass('hidden')
             },
             error: function (error) {
-                sampleVideoModalWrapper.append('<p>画像を取得できませんでした。</p>');
+                sampleVideoModalWrapper.append('<p>サンプル動画を取得できませんでした。</p>');
                 sampleVideoModalWrapper.addClass('bg-white pt-10')
                 sampleVideoContainer.removeClass('hidden');
             }

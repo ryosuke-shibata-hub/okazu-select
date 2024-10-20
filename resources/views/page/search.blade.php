@@ -10,7 +10,7 @@
 <div class="flex">
     <div class="w-10/12 p-2 mx-auto">
         <div class="">
-            <!-- Q 1 -->
+            <!-- ジャンル別 -->
             <div
                 class="my-5 border border-gray-200 rounded-md dark:border-slate-700">
                 <button
@@ -26,7 +26,7 @@
                     id="search-genre-area"
                     class="grid grid-cols-8 gap-4 p-2">
                     @foreach($genreData as $genre)
-                        <a href="" class="">
+                        <a href="/search/result/genre/{{ $genre->genre_id }}/{{ $genre->genre_name }}" class="">
                             <div
                                 class="border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md"
                             >
@@ -36,7 +36,7 @@
                     @endforeach
                 </div>
             </div>
-            <!-- Q 2 -->
+            <!-- 女優から -->
             <div
                 class="my-3 border border-gray-200 rounded-md dark:border-slate-700">
                 <button
@@ -64,6 +64,16 @@
                             @include('components.modal.actress-list')
                     @endforeach
                 </div>
+            </div>
+            {{-- フリーワード --}}
+            <div class="my-3 text-center">
+                <form action="/search/result/free-word/" method="GET">
+                    <label for="free-word" class="px-4 py-2 text-sm font-bold text-gray-600">フリーワード検索</label>
+                    <div class="">
+                        <input id="free-word" name="searchKeyword" type="text" class="w-9/12 border rounded-md border-slate-200" />
+                        <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">検索</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

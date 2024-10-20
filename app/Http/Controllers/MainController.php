@@ -98,39 +98,98 @@ class MainController extends Controller
     {
         $genreData = GenreModel::getAllGenre();
         $actressGojuon = config('const.ACTRESS.SEARCH_NAME.GOJUON');
-        // $actressData = ActressModel::getAllActress();
-
-        // $groupedActresses = $actressData->groupBy(function($item) {
-        //     $firstChar = mb_substr($item->actress_ruby, 0, 1);
-
-        //     if (preg_match('/[あ-お]/u', $firstChar)) {
-        //         return 'あ行';
-        //     } elseif (preg_match('/[か-こ]/u', $firstChar)) {
-        //         return 'か行';
-        //     } elseif (preg_match('/[さ-そ]/u', $firstChar)) {
-        //         return 'さ行';
-        //     } elseif (preg_match('/[た-と]/u', $firstChar)) {
-        //         return 'た行';
-        //     } elseif (preg_match('/[な-の]/u', $firstChar)) {
-        //         return 'な行';
-        //     } elseif (preg_match('/[は-ほ]/u', $firstChar)) {
-        //         return 'は行';
-        //     } elseif (preg_match('/[ま-も]/u', $firstChar)) {
-        //         return 'ま行';
-        //     } elseif (preg_match('/[や-よ]/u', $firstChar)) {
-        //         return 'や行';
-        //     } elseif (preg_match('/[ら-ろ]/u', $firstChar)) {
-        //         return 'ら行';
-        //     } elseif (preg_match('/[わ-ん]/u', $firstChar)) {
-        //         return 'わ行';
-        //     }
-
-        //     // 他の行も追加...
-        //     return 'その他';
-        // });
 
         return view('page.search')
         ->with('genreData', $genreData)
         ->with('actressGojuon', $actressGojuon);
+    }
+
+    public function searchResultPageGenre($id, $name)
+    {
+        if (!$id) {
+            return redirect('error.404');
+        }
+
+        $apiId = config('const.API_ID');
+        $affiliateId = config('const.AFFILIATE_ID');
+
+        try {
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$name}&article=genre&article_id={$id}&&floor=videoa&hits=50&sort=rank&output=json";
+
+            $response = Http::get($itemList);
+
+            if ($response->ok()) {
+                return view('page.searchResultGenre')
+                ->with('name', $name)
+                ->with('response', $response);
+            }
+
+            return array();
+
+        } catch (\Throwable $th) {
+            Log::error("message", [$th]);
+            return redirect('500');
+        }
+    }
+
+    public function searchResultPageActress($id, $name)
+    {
+        Log::debug("message",[$id, $name]);
+        if (!$id) {
+            return redirect('error.404');
+        }
+
+        $apiId = config('const.API_ID');
+        $affiliateId = config('const.AFFILIATE_ID');
+
+        try {
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits=50&sort=rank&output=json";
+
+            $response = Http::get($itemList);
+
+            if ($response->ok()) {
+                return view('page.searchResultActress')
+                ->with('name', $name)
+                ->with('response', $response);
+            }
+
+            return array();
+
+        } catch (\Throwable $th) {
+            Log::error("message", [$th]);
+            return redirect('500');
+        }
+    }
+
+    public function searchResultPageFreeWord(Request $request)
+    {
+
+        $keyword = $request->searchKeyword;
+        if (!$keyword) {
+            return redirect('error.404');
+        }
+
+        $apiId = config('const.API_ID');
+        $affiliateId = config('const.AFFILIATE_ID');
+
+        try {
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$keyword}&floor=videoa&hits=50&sort=rank&output=json";
+
+            $response = Http::get($itemList);
+
+            if ($response->ok()) {
+                return view('page.searchResultKeyWord')
+                ->with('keyword', $keyword)
+                ->with('response', $response);
+            }
+
+            return array();
+
+        } catch (\Throwable $th) {
+            Log::error("message", [$th]);
+            return redirect('500');
+        }
+
+
     }
 }

@@ -12,6 +12,7 @@ class ApiController extends Controller
 {
     public function getSampleTargetData($id)
     {
+        Log::alert("message",[$id]);
         try {
             $apiId = config('const.API_ID');
             $affiliateId = config('const.AFFILIATE_ID');
@@ -33,4 +34,5 @@ class ApiController extends Controller
 
         return $getActressList;
     }
+
 }

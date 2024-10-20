@@ -24,7 +24,7 @@ $(function () {
         actressList.empty().append('<p class="loading-message">読み込み中...<i class="fa-solid fa-spinner fa-spin"></i></p>');
 
         $.ajax({
-            url: `get/api/actresses/${targetGojyuon}`,
+            url: `/get/api/actresses/${targetGojyuon}`,
             method: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -34,7 +34,7 @@ $(function () {
                         actressList.append(
                             `
                             <li class="actress-item mx-auto flex flex-col items-center">
-                                <a href="/actress/${actress.actress_id}" class="actress-link">
+                                <a href="/search/result/actress/detail/${actress.actress_id}/${actress.actress_name}" class="actress-link">
                                     <img
                                         src="${actress.imageURL && actress.imageURL.trim() !== '' ?
                                         actress.imageURL : '/static/image/now_printing.jpg'}"
