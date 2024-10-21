@@ -23,7 +23,7 @@
                             @endif
                             <a
                                 href={{ $result['affiliateURL'] }}
-                                target=”_blank”
+                                target="_blank"
                             >
                                 <h3 class="px-3 py-2 text-xs font-bold text-gray-600 lg:text-lg hover:text-blue-500">
                                     {{ $result['title'] }}
@@ -76,7 +76,7 @@
                                 </button>
                             @endif
                                 <a
-                                    target=”_blank”
+                                    target="_blank"
                                     href={{ $result['affiliateURL'] }}
                                     class="px-2 py-1 text-right text-gray-900 bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                     <i class="pr-1 fa-solid fa-up-right-from-square"></i>FANZAへ

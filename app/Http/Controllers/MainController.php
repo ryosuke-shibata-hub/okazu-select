@@ -104,6 +104,11 @@ class MainController extends Controller
         ->with('actressGojuon', $actressGojuon);
     }
 
+    public function helpPage()
+    {
+        return view('page.help');
+    }
+
     public function searchResultPageGenre($id, $name)
     {
         if (!$id) {
@@ -189,7 +194,5 @@ class MainController extends Controller
             Log::error("message", [$th]);
             return redirect('500');
         }
-
-
     }
 }

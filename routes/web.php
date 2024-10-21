@@ -35,6 +35,8 @@ Route::get('/search/result/actress/detail/{id}/{name}',  [MainController::class,
 //女優検索結果画面
 Route::get('/search/result/free-word/',  [MainController::class, 'searchResultPageFreeWord'])
 ->name('searchResultPageFreeWord');
+//ヘルプページ
+Route::get('/help' , [MainController::class, 'helpPage'])->name('helpPage');
 
 //ジャンルをAPIから取得してDBに直接保存するルート
 Route::get('/get/api/data/genre', [GetApiDataController::class, 'getAllApiData'])->name('getAllApiData');
