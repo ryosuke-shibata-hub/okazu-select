@@ -8,6 +8,11 @@
             <div class="block w-full text-center lg:items-center lg:w-auto">
                 <div class="text-xs font-bold text-gray-600 lg:text-lg">
                     <a
+                        href="/infomation"
+                        class="inline-block mt-4 lg:px-5 lg:mr-4 lg:mt-0 text-teal-lighter hover:text-green-400">
+                        <i class="text-green-500 fa-solid fa-circle-info lg:mr-2"></i>お知らせ
+                    </a>
+                    <a
                         href="/matching"
                         class="inline-block mt-4 lg:px-5 lg:mr-4 lg:mt-0 text-teal-lighter hover:text-pink-400">
                         <i class="text-pink-600 lg:mr-2 fa-regular fa-heart"></i>おかずマッチング

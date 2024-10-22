@@ -9,7 +9,7 @@
 </h1>
 <div class="flex">
     <div class="w-11/12 p-2 mx-auto">
-        @if($response)
+        @if($response['result']['items'])
             <div class="">
                 @foreach($response['result']['items'] as $result)
                     <div class="p-2 mx-auto my-2 border-2 border-gray-300 border-dashed rounded-md">
@@ -86,10 +86,24 @@
                     </div>
                 @endforeach
             </div>
+            {{-- バナーコンテンツ終わり --}}
+            <div class="text-center">
+                <h3 class="text-xl font-bold text-gray-700">
+                    <i class="pl-3 fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
+                    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
+                    ご一緒にこちらもいかがですか？
+                    <i class="pl-3 fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
+                    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
+                </h3>
+                @include('components.banner.goods-banner')
+            </div>
         @else
-            @include('components.message.error')
+            <div class="py-5 text-center">
+                <h3 class="text-xl font-bold text-gray-700">
+                    {{ $keyword }}の検索結果は0件でした。
+                </h3>
+            </div>
         @endif
-        {{-- バナーコンテンツ終わり --}}
     </div>
     {{-- バナー右 --}}
     @include('components.banner.right-banner')

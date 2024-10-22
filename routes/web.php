@@ -8,6 +8,8 @@ use App\Http\Controllers\GetApiDataController;
 //サイトの紹介&年齢確認
 Route::get('/', [MainController::class, 'welcomePage'])
 ->name('welcomePage');
+Route::get('/infomation', [MainController::class, 'infomationPage'])
+->name('infomationPage');
 //サイトトップ（人気ランキングページ）
 Route::get('/top', [MainController::class, 'topPage'])
 ->name('topPage');

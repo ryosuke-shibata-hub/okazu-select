@@ -10,6 +10,7 @@ return [
             "SEARCH" => [
                 "GENRE" => [
                     "APISEARCHPARAM" => "&article_id[0]=",
+                    "APIGOODSSEARCHPARAM" => "|",
                 ],
             ],
         ],
