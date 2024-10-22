@@ -56,4 +56,12 @@ return [
             ],
         ],
     ],
+    'INFOMATION' => [
+        "FLG" => [
+            "DELETE_FLG" => [
+                "ACTIVE" => 0, //有効
+                "DISABLED" => 1 //無効
+            ],
+        ],
+    ]
 ];

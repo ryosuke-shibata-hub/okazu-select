@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 use App\Models\Api\GenreModel;
 use App\Models\Api\ActressModel;
-
+use App\Models\infomation;
 use Log;
 class MainController extends Controller
 {
@@ -19,7 +19,10 @@ class MainController extends Controller
 
     public function infomationPage()
     {
-        return view('page.infomation');
+        $infomation = infomation::getAllInfomation();
+
+        return view('page.infomation')
+        ->with('infomation', $infomation);
     }
 
     public function topPage()
