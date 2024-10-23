@@ -8,7 +8,7 @@
     <i class="text-blue-400 lg:mr-2 fa-solid fa-magnifying-glass"></i>検索
 </h1>
 <div class="flex">
-    <div class="w-10/12 p-2 mx-auto">
+    <div class="w-11/12 p-2 mx-auto">
         <div class="">
             <!-- ジャンル別 -->
             <div
@@ -24,7 +24,7 @@
                 </button>
                 <div
                     id="search-genre-area"
-                    class="grid grid-cols-8 gap-4 p-2">
+                    class="grid grid-cols-3 gap-2 p-2 md:grid-cols-8 md:gap-4">
                     @foreach($genreData as $genre)
                         <a href="/search/result/genre/{{ $genre->genre_id }}/{{ $genre->genre_name }}" class="">
                             <div
@@ -50,7 +50,7 @@
                 </button>
                 <div
                     id="search-actress-area"
-                    class="grid grid-cols-8 gap-4 p-2">
+                    class="grid grid-cols-4 gap-2 p-2 md:grid-cols-8 md:gap-4">
                     @foreach($actressGojuon as $group => $gojuon)
                             <button
                                 id="search-acress-name-btn"
@@ -74,7 +74,7 @@
                             id="free-word"
                             name="searchKeyword"
                             type="text"
-                            class="w-9/12 border rounded-md border-slate-200"
+                            class="w-8/12 border rounded-md lg:w-9/12 border-slate-200"
                             placeholder="中出し　人妻　潮吹き"
                             />
                         <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">検索</button>

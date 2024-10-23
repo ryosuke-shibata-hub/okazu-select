@@ -6,7 +6,7 @@
                 <img src="{{ asset('static/image/site-title.png') }}" alt="おかずせれくと.com" class="-mt-2 w-52" />
             </div>
             <div class="block w-full text-center lg:items-center lg:w-auto">
-                <div class="text-xs font-bold text-gray-600 lg:text-lg">
+                <div class="flex pt-5 text-xs font-bold text-gray-600 lg:block lg:text-lg">
                     <a
                         href="/infomation"
                         class="inline-block mt-4 lg:px-5 lg:mr-4 lg:mt-0 text-teal-lighter hover:text-green-400">
