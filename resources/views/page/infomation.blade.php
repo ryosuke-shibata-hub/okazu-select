@@ -5,17 +5,18 @@
 </h1>
 <div class="py-5">
 <div class="w-full text-left infomation-page">
-    <table class="mx-auto font-bold text-gray-700 table-fixed">
-        <thead class="text-xl">
+    <div class="relative overflow-x-auto">
+    <table class="mx-auto font-bold text-gray-700">
+        <thead class="py-5 text-sm lg:text-xl">
             <tr>
-            <th>お知らせ</th>
-            <th class="px-5">カテゴリ</th>
-            <th>更新日</th>
+            <th class="px-5 py-5">お知らせ</th>
+            <th class="px-5 py-5">カテゴリ</th>
+            <th class="px-5 py-5">更新日</th>
             </tr>
         </thead>
         <tbody class="">
             @foreach($infomation as $list)
-                <tr class="border-b-2 border-gray-600 text-md">
+                <tr class="text-xs border-b-2 border-gray-600 lg:text-base">
                     <td>
                         <a href="/infomation/{{ $list->id }}" class="hover:text-blue-400">
                             {{ $list->title }}
@@ -24,6 +25,10 @@
                     <td class="px-5">
                         @if($list->category === 1)
                             リリース
+                        @elseif($list->category === 3)
+                            おしらせ
+                        @elseif($list->category === 5)
+                            障害
                         @endif
                     </td>
                     <td>{{ $list->created_at->format('Y年m月d日') }}</td>
@@ -32,6 +37,7 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 </div>
 </div>
 

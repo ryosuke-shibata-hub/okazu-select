@@ -70,7 +70,13 @@
                 <form action="/search/result/free-word/" method="GET">
                     <label for="free-word" class="px-4 py-2 text-sm font-bold text-gray-600">フリーワード検索</label>
                     <div class="">
-                        <input id="free-word" name="searchKeyword" type="text" class="w-9/12 border rounded-md border-slate-200" />
+                        <input
+                            id="free-word"
+                            name="searchKeyword"
+                            type="text"
+                            class="w-9/12 border rounded-md border-slate-200"
+                            placeholder="中出し　人妻　潮吹き"
+                            />
                         <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">検索</button>
                     </div>
                 </form>

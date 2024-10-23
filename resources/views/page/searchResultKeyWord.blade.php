@@ -34,7 +34,7 @@
                             @if(isset($result['iteminfo']['actress']))
                                 @foreach($result['iteminfo']['actress'] as $actressList)
                                     <a
-                                        href={{ $actressList['name'] }}
+                                        href='/search/result/actress/detail/{{ $actressList['id'] }}/{{ $actressList['name'] }}'
                                         class="py-2 text-xs font-bold text-gray-600 hover:text-blue-500">
                                         ・{{ $actressList['name'] }}
                                     </a>
@@ -44,7 +44,7 @@
                         <div class="p-2">
                             @foreach($result['iteminfo']['genre'] as $genre)
                                 <a
-                                    href=""
+                                    href="/search/result/genre/{{$genre['id']}}/{{ $genre['name'] }}"
                                     class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                     <span class="">
                                         {{ $genre['name'] }}
@@ -88,13 +88,6 @@
             </div>
             {{-- バナーコンテンツ終わり --}}
             <div class="text-center">
-                <h3 class="text-xl font-bold text-gray-700">
-                    <i class="pl-3 fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                    ご一緒にこちらもいかがですか？
-                    <i class="pl-3 fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                </h3>
                 @include('components.banner.goods-banner')
             </div>
         @else

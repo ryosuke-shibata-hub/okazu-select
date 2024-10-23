@@ -38,7 +38,7 @@
                                 @if(isset($result['iteminfo']['actress']))
                                     @foreach($result['iteminfo']['actress'] as $actressList)
                                         <a
-                                            href={{ $actressList['name'] }}
+                                            href='/search/result/actress/detail/{{ $actressList['id'] }}/{{ $actressList['name'] }}'
                                             class="py-2 text-xs font-bold text-gray-600 hover:text-blue-500">
                                             ・{{ $actressList['name'] }}
                                         </a>
@@ -48,7 +48,7 @@
                             <div class="p-2">
                                 @foreach($result['iteminfo']['genre'] as $genre)
                                     <a
-                                        href=""
+                                        href="/search/result/genre/{{$genre['id']}}/{{ $genre['name'] }}"
                                         class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                         <span class="">
                                             {{ $genre['name'] }}
@@ -90,23 +90,21 @@
                         </div>
                     @endif
                 @endforeach
-                <div class="p-2 mx-auto my-2 border-2 border-gray-300 border-dashed rounded-md">
+                <div class="mx-auto my-2 border-2 border-gray-300 border-dashed rounded-md lg:p-2">
                     <div class="text-center">
                         <div
-                            class="p-3 px-5 mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
-                            <h1 class="">
+                            class="mt-4 text-xs font-bold text-gray-600 lg:p-3 lg:px-5 lg:mt-0 lg:text-xl">
                                 <h2 class="">
-                                    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                                    <i class="pr-3 fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                                    他にもマッチング度の高い作品が見つかりました！
-                                    <i class="pl-3 fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                                    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
+                                    <i class="fa-solid fa-arrow-down fa-bounce lg:fa-2xl" style="color: #ff8c82;"></i>
+                                    <i class="lg:pr-3 fa-solid fa-arrow-down fa-bounce lg:fa-2xl" style="color: #ff8c82;"></i>
+                                    こちらもおすすめです！
+                                    <i class="lg:pl-3 fa-solid fa-arrow-down fa-bounce lg:fa-2xl" style="color: #ff8c82;"></i>
+                                    <i class="fa-solid fa-arrow-down fa-bounce lg:fa-2xl" style="color: #ff8c82;"></i>
                                 </h2>
-                            </h1>
                         </div>
                     </div>
                     <section class="p-8">
-                        <div class="grid justify-center gap-5 my-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+                        <div class="grid justify-center gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
                             @foreach($getMatchingData['result']['items'] as $result)
                                 @if(!$loop->first)
                                     <div
@@ -134,7 +132,7 @@
                                             @if(isset($result['iteminfo']['actress']))
                                                 @foreach($result['iteminfo']['actress'] as $actressList)
                                                     <a
-                                                        href={{ $actressList['name'] }}
+                                                        href='/search/result/actress/detail/{{ $actressList['id'] }}/{{ $actressList['name'] }}'
                                                         class="py-2 text-xs font-bold text-gray-600 hover:text-blue-500">
                                                         ・{{ $actressList['name'] }}
                                                     </a>
@@ -144,7 +142,7 @@
                                         <div class="p-2">
                                             @foreach($result['iteminfo']['genre'] as $genre)
                                                 <a
-                                                    href=""
+                                                    href="/search/result/genre/{{$genre['id']}}/{{ $genre['name'] }}"
                                                     class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
                                                     style="font-size: 0.75rem;">
                                                     <span style="font-size: 0.55rem;">
@@ -161,7 +159,7 @@
                                                         id=""
                                                         type="button"
                                                         data-content-id={{ $result['content_id'] }}
-                                                        class="px-1 text-gray-900 bg-white border border-gray-200 rounded-full sampleVideoOpenModal font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+                                                        class="text-gray-900 bg-white border border-gray-200 rounded-full lg:px-1 sampleVideoOpenModal font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
                                                         style="font-size: 0.75rem;">
                                                         <i class="fa-solid fa-video" style="color: #ff6251;"></i>サンプル動画
                                                     </button>
@@ -171,7 +169,7 @@
                                                         id=""
                                                         type="button"
                                                         data-content-id={{ $result['content_id'] }}
-                                                        class="px-1 text-gray-900 bg-white border border-gray-200 rounded-full sampleImgOpenModal font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+                                                        class="text-gray-900 bg-white border border-gray-200 rounded-full lg:px-1 sampleImgOpenModal font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
                                                         style="font-size: 0.75rem;">
                                                         <i class="fa-regular fa-image" style="color: #74C0FC;"></i>サンプル画像
                                                     </button>
@@ -179,7 +177,7 @@
                                                 <a
                                                     target="_blank"
                                                     href={{ $result['affiliateURL'] }}
-                                                    class="px-1 py-1.5 text-right text-gray-900 bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+                                                    class="lg:px-1 lg:py-1.5 text-right text-gray-900 bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
                                                     style="font-size: 0.75rem;">
                                                     <i class="fa-solid fa-up-right-from-square"></i>FANZAへ
                                                 </a>
@@ -193,13 +191,6 @@
                 </div>
             </div>
             <div class="text-center">
-                <h3 class="text-xl font-bold text-gray-700">
-                    <i class="pl-3 fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                    ご一緒にこちらもいかがですか？
-                    <i class="pl-3 fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                    <i class="fa-solid fa-arrow-down fa-bounce fa-2xl" style="color: #ff8c82;"></i>
-                </h3>
                 @include('components.banner.goods-banner')
             </div>
         @else

@@ -24,4 +24,12 @@ class Infomation extends Model
         ->orderBy('created_at', 'desc')
         ->get();
     }
+
+    public static function getInfomationDetail($id)
+    {
+        return Infomation::where('id', $id)
+        ->where('delete_flg', config('const.INFOMATION.FLG.DELETE_FLG.ACTIVE'))
+        ->orderBy('created_at', 'desc')
+        ->first();
+    }
 }

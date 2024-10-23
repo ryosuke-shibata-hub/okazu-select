@@ -25,6 +25,14 @@ class MainController extends Controller
         ->with('infomation', $infomation);
     }
 
+    public function infomationDetailPage($id)
+    {
+        $targetInfomation = infomation::getInfomationDetail($id);
+
+        return view('page.infomationDetailPage')
+        ->with('targetInfomation', $targetInfomation);
+    }
+
     public function topPage()
     {
 

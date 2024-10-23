@@ -8,8 +8,12 @@ use App\Http\Controllers\GetApiDataController;
 //サイトの紹介&年齢確認
 Route::get('/', [MainController::class, 'welcomePage'])
 ->name('welcomePage');
+// お知らせ一覧
 Route::get('/infomation', [MainController::class, 'infomationPage'])
 ->name('infomationPage');
+// お知らせ詳細
+Route::get('/infomation/{id}', [MainController::class, 'infomationDetailPage'])
+->name('infomationDetailPage');
 //サイトトップ（人気ランキングページ）
 Route::get('/top', [MainController::class, 'topPage'])
 ->name('topPage');
@@ -34,9 +38,10 @@ Route::get('/search/result/genre/{id}/{name}',  [MainController::class, 'searchR
 //女優検索結果画面
 Route::get('/search/result/actress/detail/{id}/{name}',  [MainController::class, 'searchResultPageActress'])
 ->name('searchResultPageActress');
-//女優検索結果画面
+//キーワード検索
 Route::get('/search/result/free-word/',  [MainController::class, 'searchResultPageFreeWord'])
 ->name('searchResultPageFreeWord');
+
 //ヘルプページ
 Route::get('/help' , [MainController::class, 'helpPage'])->name('helpPage');
 

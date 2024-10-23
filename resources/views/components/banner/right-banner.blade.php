@@ -1,4 +1,4 @@
-<div class="px-2 text-center">
+<div class="text-center lg:px-2">
     {{-- バナー１ --}}
     <div class="py-4">
         <ins class="widget-banner"></ins>
