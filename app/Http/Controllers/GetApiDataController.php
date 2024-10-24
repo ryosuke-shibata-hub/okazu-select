@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Api\GenreModel;
 use App\Models\Api\FloorModel;
 use App\Models\Api\ActressModel;
+use App\Models\Api\MakerModel;
+use App\Models\Api\SeriesSearchModel;
 
 use Log;
 use DB;
@@ -16,24 +18,27 @@ class GetApiDataController extends Controller
 {
     public function getAllApiData()
     {
-        // $apiId = config('const.API_ID');
-        // $affiliateId = config('const.AFFILIATE_ID');
-        // $offset = 58301;
-        // $limit = 1; // 1回あたりの最大取得件数
-        // $hasMoreData = true;
+        $apiId = config('const.API_ID');
+        $affiliateId = config('const.AFFILIATE_ID');
+        $offset = 37400;
+        $limit = 100; // 1回あたりの最大取得件数
+        $hasMoreData = true;
         //ジャンル検索/取得用
         // $targeGenreUrl = "https://api.dmm.com/affiliate/v3/GenreSearch?api_id={$apiId}&affiliate_id={$affiliateId}&floor_id=43&hits=500&offset=1&output=json";
         // フロア検索/取得用
         // $targeFloorUrl = "https://api.dmm.com/affiliate/v3/FloorList?api_id={$apiId}&affiliate_id={$affiliateId}&output=json";
 
 
+
         // $responseGenreData = Http::get($targeGenreUrl);
         // $responseFloorData = Http::get($targeFloorUrl);
 
 
+
         // Log::info("ジャンル取得結果",[$responseGenreData]);
         // Log::info("フロア取得結果",[$responseFloorData]);
-        //  Log::info("女優取得結果",[$responseActressData]);
+        // Log::info("女優取得結果",[$responseActressData]);
+        // Log::info("メーカー取得結果",[$responseMakerData]);
 
         //ジャンルに紐づいているフロアIDを設定
         // $getDataGenreFloor = $responseGenreData['result']['floor_id'];
@@ -100,6 +105,99 @@ class GetApiDataController extends Controller
             //             }
             //         }
             //     }
+
+            //シリーズ取得・保存ロジック
+            while ($hasMoreData == true) {
+                Log::debug("シリーズデータ保存中...",["検索位置before"=>$offset]);
+                // メーカー検索/取得用
+                $targeSeriesUrl = "https://api.dmm.com/affiliate/v3/SeriesSearch?api_id={$apiId}&affiliate_id={$affiliateId}&floor_id=43&hits={$limit}&offset={$offset}&output=json";
+
+                Log::info("リクエストURL",[$targeSeriesUrl]);
+                $responseSeriesData = Http::get($targeSeriesUrl);
+                // Log::debug("取得女優データ",[$responseActressData]);
+                if (empty($responseSeriesData['result']['series'])) {
+                    Log::debug("メーカーデータ保存完了");
+                    $hasMoreData = false;
+                    break;
+                    return redirect('/top');
+                }
+
+                $siteData = $responseSeriesData['result'];
+                Log::debug("message",[$siteData]);
+                foreach ($siteData['series'] as $seriesData) {
+                    Log::debug("message",[$seriesData]);
+                    $seriesDataRecordData = [
+                        'site_name' => $siteData['site_name'],
+                        'site_code' => $siteData['site_code'],
+                        'service_name' => $siteData['service_name'],
+                        'service_code' => $siteData['service_code'],
+                        'floor_id' => $siteData['floor_id'],
+                        'floor_name' => $siteData['floor_name'],
+                        'floor_code' => $siteData['floor_code'],
+                        'series_id' => $seriesData['series_id'],
+                        'series_name' => $seriesData['name'],
+                        'series_name_ruby' => $seriesData['ruby'],
+                        'list_url' => $seriesData['list_url'],
+                    ];
+
+                    $checkUniqueSiries = SeriesSearchModel::checkUniqueSeries($seriesDataRecordData['series_id']);
+                    //すでに登録されているジャンルはスキップする
+                    if (!$checkUniqueSiries) {
+                        SeriesSearchModel::createNewSeries($seriesDataRecordData);
+                    }
+                }
+                // 100件ずつ取得件数を増やしていく
+                $offset += $limit;
+                Log::debug("シリーズーデータ保存中...",["検索位置after"=>$offset]);
+                sleep(1);
+            }
+
+
+
+            //メーカー取得・保存ロジック
+            // while ($hasMoreData == true) {
+            //     Log::debug("メーカーデータ保存中...",["検索位置before"=>$offset]);
+            //     // メーカー検索/取得用
+            //     $targeMakerUrl = "https://api.dmm.com/affiliate/v3/MakerSearch?api_id={$apiId}&affiliate_id={$affiliateId}&floor_id=43&hits={$limit}&offset={$offset}&output=json";
+
+            //     Log::info("リクエストURL",[$targeMakerUrl]);
+            //     $responseMakerData = Http::get($targeMakerUrl);
+            //     // Log::debug("取得女優データ",[$responseActressData]);
+            //     if (empty($responseMakerData['result']['maker'])) {
+            //         Log::debug("メーカーデータ保存完了");
+            //         $hasMoreData = false;
+            //         break;
+            //         return redirect('/top');
+            //     }
+
+            //     $siteData = $responseMakerData['result'];
+            //     Log::debug("message",[$siteData]);
+            //     foreach ($siteData['maker'] as $makerData) {
+            //         Log::debug("message",[$makerData]);
+            //         $makerRecordData = [
+            //             'site_name' => $siteData['site_name'],
+            //             'site_code' => $siteData['site_code'],
+            //             'service_name' => $siteData['service_name'],
+            //             'service_code' => $siteData['service_code'],
+            //             'floor_id' => $siteData['floor_id'],
+            //             'floor_name' => $siteData['floor_name'],
+            //             'floor_code' => $siteData['floor_code'],
+            //             'maker_id' => $makerData['maker_id'],
+            //             'maker_name' => $makerData['name'],
+            //             'maker_name_ruby' => $makerData['ruby'],
+            //             'list_url' => $makerData['list_url'],
+            //         ];
+
+            //         $checkUniqueMaker = MakerModel::checkUniqueMaker($makerRecordData['maker_id']);
+            //         //すでに登録されているジャンルはスキップする
+            //         if (!$checkUniqueMaker) {
+            //             MakerModel::createNewMaker($makerRecordData);
+            //         }
+            //     }
+            //     // 100件ずつ取得件数を増やしていく
+            //     $offset += $limit;
+            //     Log::debug("メーカーデータ保存中...",["検索位置after"=>$offset]);
+            //     sleep(1);
             // }
 
             // DB::commit();

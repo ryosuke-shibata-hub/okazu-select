@@ -56,6 +56,22 @@ return [
             ],
         ],
     ],
+    "MAKER" => [
+        "FLG" => [
+            "DELETE_FLG" => [
+                "ACTIVE" => 0, //有効
+                "DISABLED" => 1 //無効
+            ],
+        ],
+    ],
+    "SERIES" => [
+        "FLG" => [
+            "DELETE_FLG" => [
+                "ACTIVE" => 0, //有効
+                "DISABLED" => 1 //無効
+            ],
+        ],
+    ],
     'INFOMATION' => [
         "FLG" => [
             "DELETE_FLG" => [
