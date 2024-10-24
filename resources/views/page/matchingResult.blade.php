@@ -33,6 +33,13 @@
                                         {{ $result['title'] }}
                                     </h3>
                                 </a>
+                                <div class="pl-4">
+                                    @if(isset($result['iteminfo']['series']))
+                                        @foreach($result['iteminfo']['series'] as $iteminfo)
+                                            <span class="py-2 text-xs font-bold text-gray-600"><i class="pr-1 fa-solid fa-square"></i>{{ $iteminfo['name'] }}</span>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
                             <div class="">
                                 @if(isset($result['iteminfo']['actress']))
@@ -128,6 +135,13 @@
                                                 {{ $result['title'] }}
                                             </h3>
                                         </a>
+                                        <div class="pl-4">
+                                            @if(isset($result['iteminfo']['series']))
+                                                @foreach($result['iteminfo']['series'] as $iteminfo)
+                                                    <span class="py-2 text-xs font-bold text-gray-600"><i class="pr-1 fa-solid fa-square"></i>{{ $iteminfo['name'] }}</span>
+                                                @endforeach
+                                            @endif
+                                        </div>
                                         <div class="">
                                             @if(isset($result['iteminfo']['actress']))
                                                 @foreach($result['iteminfo']['actress'] as $actressList)

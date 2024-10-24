@@ -16,5 +16,10 @@
             </div>
         </div>
     </section>
+    <div class="text-center">
+        <a href="/infomation" class="text-xs border-b-2 border-gray-600 lg:text-base hover:text-blue-400">
+            一覧へ戻る
+        </a>
+    </div>
 
 @endsection

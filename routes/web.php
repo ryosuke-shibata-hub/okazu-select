@@ -46,6 +46,6 @@ Route::get('/search/result/free-word/',  [MainController::class, 'searchResultPa
 Route::get('/help' , [MainController::class, 'helpPage'])->name('helpPage');
 
 //ジャンルをAPIから取得してDBに直接保存するルート
-Route::get('/get/api/data/genre', [GetApiDataController::class, 'getAllApiData'])->name('getAllApiData');
+// Route::get('/get/api/data/genre', [GetApiDataController::class, 'getAllApiData'])->name('getAllApiData');
 
 require __DIR__.'/auth.php';
