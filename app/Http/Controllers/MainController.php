@@ -122,13 +122,13 @@ class MainController extends Controller
             ->with('getGoodMatchingData', $getGoodMatchingData);
         }
 
-        return view("page.error.404");
+        return view("errors.500");
     }
 
     public function searchResultPageGenre($id, $name)
     {
         if (!$id) {
-            return redirect('error.404');
+            return redirect('errors.404');
         }
 
         $apiId = config('const.API_ID');
@@ -160,13 +160,12 @@ class MainController extends Controller
 
         } catch (\Throwable $th) {
             Log::error("message", [$th]);
-            return redirect('500');
+            return view("errors.500");
         }
     }
 
     public function searchResultPageActress($id, $name)
     {
-        Log::debug("message",[$id, $name]);
         if (!$id) {
             return redirect('error.404');
         }
@@ -192,7 +191,7 @@ class MainController extends Controller
 
         } catch (\Throwable $th) {
             Log::error("message", [$th]);
-            return redirect('500');
+            return view("errors.500");
         }
     }
 
@@ -201,7 +200,7 @@ class MainController extends Controller
 
         $keyword = $request->searchKeyword;
         if (!$keyword) {
-            return redirect('error.404');
+            return view('errors.404');
         }
 
         $apiId = config('const.API_ID');
@@ -232,7 +231,7 @@ class MainController extends Controller
 
         } catch (\Throwable $th) {
             Log::error("message", [$th]);
-            return redirect('500');
+            return view('errors.500');
         }
     }
 }
