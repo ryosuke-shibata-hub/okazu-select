@@ -36,7 +36,7 @@
         <ins class="widget-banner"></ins>
         <script
             class="widget-banner-script"
-            src="https://widget-view.dmm.co.jp/js/banner_placement.js?affiliate_id=dmmx4545-002&banner_id=1333_160_600">
+            src="https://widget-view.dmm.co.jp/js/banner_placement.js?affiliate_id=dmmx4545-002&banner_id=377_160_600">
         </script>
     </div>
     {{-- バナー6 --}}

@@ -29,7 +29,7 @@ class Infomation extends Model
     {
         return Infomation::where('id', $id)
         ->where('delete_flg', config('const.INFOMATION.FLG.DELETE_FLG.ACTIVE'))
-        ->orderBy('created_at', 'desc')
+        ->orderBy('created_at', 'asc')
         ->first();
     }
 }
