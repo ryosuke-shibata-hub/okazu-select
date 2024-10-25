@@ -48,4 +48,4 @@ Route::get('/help' , [MainController::class, 'helpPage'])->name('helpPage');
 //ジャンルをAPIから取得してDBに直接保存するルート
 // Route::get('/get/api/data/genre', [GetApiDataController::class, 'getAllApiData'])->name('getAllApiData');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
