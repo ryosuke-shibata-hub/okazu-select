@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 use App\Models\Api\GenreModel;
 use App\Models\Api\ActressModel;
-use App\Models\infomation;
+use App\Models\Infomation;
 use Log;
 class MainController extends Controller
 {
@@ -19,7 +19,7 @@ class MainController extends Controller
 
     public function infomationPage()
     {
-        $infomation = infomation::getAllInfomation();
+        $infomation = Infomation::getAllInfomation();
 
         return view('page.infomation')
         ->with('infomation', $infomation);
@@ -27,7 +27,7 @@ class MainController extends Controller
 
     public function infomationDetailPage($id)
     {
-        $targetInfomation = infomation::getInfomationDetail($id);
+        $targetInfomation = Infomation::getInfomationDetail($id);
 
         return view('page.infomationDetailPage')
         ->with('targetInfomation', $targetInfomation);
