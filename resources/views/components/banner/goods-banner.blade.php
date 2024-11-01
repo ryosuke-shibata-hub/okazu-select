@@ -19,7 +19,7 @@
                             href={{ $result['affiliateURL'] }}
                             target="_blank"
                         >
-                        <h2 class="text-sm font-medium text-gray-700 title-font">{{ $result['title'] }}</h2>
+                        <h2 class="text-sm font-medium text-gray-700 title-font goods-banner">{{ $result['title'] }}</h2>
                         <p class="text-xs font-bold text-right text-gray-500">{{ $result['prices']['list_price'] ?? $result['prices']['price']}}円</p>
                         </a>
                         <div class="flex p-1 pt-3 text-xs lg:text-center lg:text-xl lg:p-3">

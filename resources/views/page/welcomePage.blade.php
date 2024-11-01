@@ -3,7 +3,7 @@
 <div class="">
     <div class="py-20">
         <div class="">
-            <img src="{{ asset('static/image/18.png') }}" alt="オカズセレクト" class="w-56 h-56 mx-auto" />
+            <img src="{{ asset('static/image/18.png') }}" alt="おかずせれくと.com" class="w-56 h-56 mx-auto" />
             <p class="pt-5 text-2xl font-bold text-center">ここから先は18歳以上の紳士のみ入場可能です。</p>
             <p class="pt-5 text-2xl font-bold text-center">あなたは18歳以上ですか？</p>
         </div>
@@ -29,13 +29,13 @@
                         </p>
                     </div>
                     <div class="inline ">
-                        <img src="{{ asset('static/image/site-introduction-01.png') }}" class="" />
+                        <img src="{{ asset('static/image/site-introduction-01.png') }}" alt="おかずせれくと.com" class="" />
                     </div>
                 </div>
 
                 <div class="flex items-center justify-start gap-4 pt-10">
                     <div class="inline ">
-                        <img src="{{ asset('static/image/site-introduction-02.png') }}" class="" />
+                        <img src="{{ asset('static/image/site-introduction-02.png') }}" alt="おかずせれくと.com" class="" />
                     </div>
                     <div class="p-3 text-gray-800 bg-blue-100 rounded-xl">
                         <h3 class="inline font-bold border-b-2 border-white">あなたに最適な「エロ」を</h3>
@@ -59,7 +59,7 @@
                         </p>
                     </div>
                     <div class="inline">
-                        <img src="{{ asset('static/image/site-introduction-03.png') }}" class="w-3/6 " />
+                        <img src="{{ asset('static/image/site-introduction-03.png') }}" alt="おかずせれくと.com" class="w-3/6 " />
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="pt-20">
-            <img src="{{ asset('static/image/18.png') }}" alt="オカズセレクト" class="w-56 h-56 mx-auto" />
+            <img src="{{ asset('static/image/18.png') }}" alt="おかずせれくと.com" class="w-56 h-56 mx-auto" />
             <p class="pt-5 text-2xl font-bold text-center">ここから先は18歳以上の紳士のみ入場可能です。</p>
             <p class="pt-5 text-2xl font-bold text-center">あなたは18歳以上ですか？</p>
         </div>

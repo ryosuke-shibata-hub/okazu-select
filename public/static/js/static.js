@@ -1,4 +1,18 @@
 $(function () {
+    var $setElm = $('.goods-banner');// 対象となるID・クラス
+    var cutFigure = '15';// カットしたい文字数
+    var afterTxt = '…';// カット後の文字
+
+    $setElm.each(function(){
+    var textLength = $(this).text().length;
+    var textTrim = $(this).text().substr(0,(cutFigure));
+    if(cutFigure < textLength) {
+        $(this).html(textTrim + afterTxt).css({visibility:'visible'});
+    } else if(cutFigure >= textLength) {
+        $(this).css({visibility:'visible'});
+    }
+    });
+
     // サンプル画像の取得
 	// 変数に要素を入れる
 	var sampleImgModalWrapper = $('#sampleImgModalWrapper'),
@@ -69,6 +83,7 @@ $(function () {
                                 position:relative;"
                             >
                                 <iframe
+                                name=${targetVideoTitle}
                                     class="sampleVideoIframe"
                                     max-width="1280px"
                                     style="position: absolute; top: 0; left: 0;"

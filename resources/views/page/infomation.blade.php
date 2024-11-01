@@ -9,9 +9,9 @@
     <table class="mx-auto font-bold text-gray-700">
         <thead class="py-5 text-sm lg:text-xl">
             <tr>
-            <th class="px-5 py-5">お知らせ</th>
-            <th class="px-5 py-5">カテゴリ</th>
-            <th class="px-5 py-5">更新日</th>
+            <th class="py-5">お知らせ</th>
+            <th class="py-5">カテゴリ</th>
+            <th class="py-5">更新日</th>
             </tr>
         </thead>
         <tbody class="">
@@ -22,7 +22,7 @@
                             {{ $list->title }}
                         </a>
                     </td>
-                    <td class="px-5">
+                    <td class="">
                         @if($list->category === 1)
                             リリース
                         @elseif($list->category === 3)
@@ -31,7 +31,7 @@
                             障害
                         @endif
                     </td>
-                    <td>{{ $list->created_at->format('Y年m月d日') }}</td>
+                    <td>{{ $list->created_at->format('Y/m/d') }}</td>
                 </tr>
 
             @endforeach

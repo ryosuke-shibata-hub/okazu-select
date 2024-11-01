@@ -110,7 +110,7 @@
                                 </h2>
                         </div>
                     </div>
-                    <section class="p-8">
+                    <section class="p-2">
                         <div class="grid justify-center gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
                             @foreach($getMatchingData['result']['items'] as $result)
                                 @if(!$loop->first)
