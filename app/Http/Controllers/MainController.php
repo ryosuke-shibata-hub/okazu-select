@@ -88,6 +88,7 @@ class MainController extends Controller
 
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
+        $getCount = config('const.API.MATCHING.GET_COUNT');
 
         $apiPram = config('const.API.PARAMETER.SEARCH.GENRE');
         // input要素をjsonに変換
@@ -109,7 +110,7 @@ class MainController extends Controller
         $searchKeyWordGoods = $apiPram['APIGOODSSEARCHPARAM'] . implode($apiPram['APIGOODSSEARCHPARAM'], $targetName);
 
         //ジャンルでの結果取得用API
-        $targetUrlToMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=10&sort=match&article=genre{$searchKeyWord}&output=json";
+        $targetUrlToMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits={$getCount}&sort=match&article=genre{$searchKeyWord}&output=json";
         //マッチングどの高いグッズの取得用API
         $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$searchKeyWordGoods}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        {{-- <script
+        <script
             type="text/javascript"
             data-cmp-ab="1"
             src="https://cdn.consentmanager.net/delivery/autoblocking/09a543deb1371.js"
@@ -17,7 +17,7 @@
             gtag('js', new Date());
 
             gtag('config', 'G-XLSWR16Q81');
-        </script> --}}
+        </script>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -14,6 +14,9 @@ return [
                 ],
             ],
         ],
+        "MATCHING" => [
+            "GET_COUNT" => 22,
+        ],
     ],
     "ACTRESS" => [
         "FLG" => [
