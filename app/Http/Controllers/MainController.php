@@ -128,6 +128,7 @@ class MainController extends Controller
     public function searchResultPageGenre($id, $name)
     {
         if (!$id) {
+            Log::error("ジャンル検索でidが送られていない");
             return redirect('errors.404');
         }
 
@@ -150,6 +151,7 @@ class MainController extends Controller
             }
 
             if ($response->ok() || $getGoodMatchingData->ok()) {
+                Log::info("ジャンル検索正常終了",["検索値"=>$name]);
                 return view('page.searchResultGenre')
                 ->with('name', $name)
                 ->with('response', $response)
@@ -159,7 +161,7 @@ class MainController extends Controller
             return array();
 
         } catch (\Throwable $th) {
-            Log::error("message", [$th]);
+            Log::error("ジャンルからの検索で例外エラー", [$th]);
             return view("errors.500");
         }
     }
@@ -167,6 +169,7 @@ class MainController extends Controller
     public function searchResultPageActress($id, $name)
     {
         if (!$id) {
+            Log::error("女優検索でidが送られていない");
             return redirect('error.404');
         }
 
@@ -181,6 +184,7 @@ class MainController extends Controller
             $response = Http::get($itemList);
 
             if ($response->ok() || $getGoodMatchingData->ok()) {
+                Log::info("女優検索正常終了",["検索値"=>$name]);
                 return view('page.searchResultActress')
                 ->with('name', $name)
                 ->with('response', $response)
@@ -190,7 +194,7 @@ class MainController extends Controller
             return array();
 
         } catch (\Throwable $th) {
-            Log::error("message", [$th]);
+            Log::error("女優検索で例外エラー", [$th]);
             return view("errors.500");
         }
     }
@@ -200,6 +204,7 @@ class MainController extends Controller
 
         $keyword = $request->searchKeyword;
         if (!$keyword) {
+            Log::error("キーワード検索でキーワードを受け取っていない");
             return view('errors.404');
         }
 
@@ -221,6 +226,7 @@ class MainController extends Controller
             }
 
             if ($response->ok() || $getGoodMatchingData->ok()) {
+                Log::info("キーワード検索正常終了",["検索値"=>$keyword]);
                 return view('page.searchResultKeyWord')
                 ->with('keyword', $keyword)
                 ->with('response', $response)
@@ -230,7 +236,7 @@ class MainController extends Controller
             return array();
 
         } catch (\Throwable $th) {
-            Log::error("message", [$th]);
+            Log::error("キーワード検索で例外エラー", [$th]);
             return view('errors.500');
         }
     }
