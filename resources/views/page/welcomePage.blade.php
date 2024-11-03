@@ -7,8 +7,11 @@
             <p class="pt-5 text-2xl font-bold text-center">ここから先は18歳以上の紳士のみ入場可能です。</p>
             <p class="pt-5 text-2xl font-bold text-center">あなたは18歳以上ですか？</p>
         </div>
-        <div class="pt-10 text-2xl font-bold text-center">
-            <a href="/top" class="hover:text-blue-500">YES(入場)</a>
+        <div class="flex justify-center pt-10 mx-auto text-2xl font-bold">
+            <form action={{ '/confirm-age' }} method="POST" class="">
+                @csrf
+                <button type="submit" class="hover:text-blue-500">YES(入場)</button>
+            </form>
             <span class="">/</span>
             <a href={{ config('const.REDIRECT') }} class="hover:text-red-500">NO(退場)</a>
         </div>
@@ -76,8 +79,11 @@
             <p class="pt-5 text-2xl font-bold text-center">ここから先は18歳以上の紳士のみ入場可能です。</p>
             <p class="pt-5 text-2xl font-bold text-center">あなたは18歳以上ですか？</p>
         </div>
-        <div class="pt-10 text-2xl font-bold text-center">
-            <a href="/top" class="hover:text-blue-500">YES(入場)</a>
+        <div class="flex justify-center pt-10 mx-auto text-2xl font-bold">
+            <form action={{ '/confirm-age' }} method="POST" class="">
+                @csrf
+                <button type="submit" class="hover:text-blue-500">YES(入場)</button>
+            </form>
             <span class="">/</span>
             <a href={{ config('const.REDIRECT') }} class="hover:text-red-500">NO(退場)</a>
         </div>

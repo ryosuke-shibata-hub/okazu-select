@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <script
+        {{-- <script
             type="text/javascript"
             data-cmp-ab="1"
             src="https://cdn.consentmanager.net/delivery/autoblocking/09a543deb1371.js"
             data-cmp-host="a.delivery.consentmanager.net"
             data-cmp-cdn="cdn.consentmanager.net"
             data-cmp-codesrc="16">
-        </script>
+        </script> --}}
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-XLSWR16Q81"></script>
         <script>
