@@ -12,6 +12,14 @@ use Log;
 class MainController extends Controller
 {
 
+    // public function ageVerificationCheck(Request $request)
+    // {
+    //     // 年齢確認の結果をセッションに保存
+    //     $request->session()->put('age_verified', true);
+    //     Log::debug("message",[$request->session()]);
+    //     // トップページへリダイレクト
+    //     return redirect('/top');
+    // }
     public function welcomePage()
     {
         return view('page.welcomePage');
