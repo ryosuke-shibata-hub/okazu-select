@@ -12,14 +12,6 @@ use Log;
 class MainController extends Controller
 {
 
-    // public function ageVerificationCheck(Request $request)
-    // {
-    //     // 年齢確認の結果をセッションに保存
-    //     $request->session()->put('age_verified', true);
-    //     Log::debug("message",[$request->session()]);
-    //     // トップページへリダイレクト
-    //     return redirect('/top');
-    // }
     public function welcomePage()
     {
         return view('page.welcomePage');
@@ -114,13 +106,11 @@ class MainController extends Controller
             }
         }
 
-        $searchKeyWord = $apiPram['APISEARCHPARAM'] . implode($apiPram['APISEARCHPARAM'], $targetId);
-        $searchKeyWordGoods = $apiPram['APIGOODSSEARCHPARAM'] . implode($apiPram['APIGOODSSEARCHPARAM'], $targetName);
-
+        $searchKeyWords = $apiPram['APIGOODSSEARCHPARAM'] . implode($apiPram['APIGOODSSEARCHPARAM'], $targetName);
         //ジャンルでの結果取得用API
-        $targetUrlToMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits={$getCount}&sort=match&article=genre{$searchKeyWord}&output=json";
+        $targetUrlToMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits={$getCount}&sort=match&keyword={$searchKeyWords}&output=json";
         //マッチングどの高いグッズの取得用API
-        $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$searchKeyWordGoods}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
+        $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$searchKeyWords}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
         $getMatchingData = Http::get($targetUrlToMatching);
         $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
