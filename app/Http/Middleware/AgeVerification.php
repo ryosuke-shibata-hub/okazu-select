@@ -20,9 +20,10 @@ class AgeVerification
     {
         // セッションに年齢確認情報がない場合、welcomeページにリダイレクト
         // age_verified セッションがない場合、welcomeページにリダイレクト
-        if (!Session::has('age_verified')) {
-            return redirect()->route('welcomePage');
-        }
+        // ↓現状インデックス登録のクロールのため無効化しておく
+        // if (!Session::has('age_verified')) {
+        //     return redirect()->route('welcomePage');
+        // }
 
         return $next($request);
     }
