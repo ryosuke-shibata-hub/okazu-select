@@ -55,11 +55,11 @@ class MainController extends Controller
     public function searchPage()
     {
         $genreData = GenreModel::getAllGenre();
-        $actressGojuon = config('const.ACTRESS.SEARCH_NAME.GOJUON');
+        $Gojuon = config('const.SEARCH_PARAM.GOJUON');
 
         return view('page.search')
         ->with('genreData', $genreData)
-        ->with('actressGojuon', $actressGojuon);
+        ->with('Gojuon', $Gojuon);
     }
 
     public function helpPage()
@@ -194,6 +194,40 @@ class MainController extends Controller
 
         } catch (\Throwable $th) {
             Log::error("女優検索で例外エラー", [$th]);
+            return view("errors.500");
+        }
+    }
+
+    public function searchResultPageMaker($id, $name)
+    {
+        if (!$id) {
+            Log::error("メーカー検索でidが送られていない");
+            return redirect('error.404');
+        }
+
+        $apiId = config('const.API_ID');
+        $affiliateId = config('const.AFFILIATE_ID');
+
+        try {
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=maker&article_id={$id}&keyword={$name}&floor=videoa&hits=50&sort=rank&output=json";
+            $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
+            Log::debug("message",[$itemList]);
+
+            $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
+            $response = Http::get($itemList);
+
+            if ($response->ok() || $getGoodMatchingData->ok()) {
+                Log::info("メーカー検索正常終了",["検索値"=>$name]);
+                return view('page.searchResultMaker')
+                ->with('name', $name)
+                ->with('response', $response)
+                ->with('getGoodMatchingData', $getGoodMatchingData);
+            }
+
+            return array();
+
+        } catch (\Throwable $th) {
+            Log::error("メーカー検索で例外エラー", [$th]);
             return view("errors.500");
         }
     }

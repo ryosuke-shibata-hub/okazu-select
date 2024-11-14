@@ -5,11 +5,11 @@ namespace App\Models\Api;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SeriesSearchModel extends Model
+class SeriesModel extends Model
 {
     use HasFactory;
 
-    protected $table = "series_search";
+    protected $table = "series";
 
     protected $fillable = [
         'series_id',
@@ -28,7 +28,7 @@ class SeriesSearchModel extends Model
 
     public static function checkUniqueSeries($seriesDataRecordData) {
 
-        $data = SeriesSearchModel::where('series_id', $seriesDataRecordData)
+        $data = SeriesModel::where('series_id', $seriesDataRecordData)
         ->first();
 
         return $data;
@@ -36,7 +36,7 @@ class SeriesSearchModel extends Model
 
     public static function createNewSeries($seriesDataRecordData)
     {
-        SeriesSearchModel::create([
+        SeriesModel::create([
             'series_id' => $seriesDataRecordData['series_id'],
             'site_name' => $seriesDataRecordData['site_name'],
             'site_code' => $seriesDataRecordData['site_code'],

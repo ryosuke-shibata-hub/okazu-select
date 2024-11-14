@@ -36,6 +36,17 @@
                                     @endforeach
                                 @endif
                             </div>
+                            <div class="pl-4">
+                                @if(isset($result['iteminfo']['maker']))
+                                    @foreach($result['iteminfo']['maker'] as $iteminfo)
+                                    <a
+                                        href='/search/result/maker/detail/{{ $iteminfo['id'] }}/{{ $iteminfo['name'] }}'
+                                        class="py-2 text-xs font-bold text-gray-600 hover:text-blue-500">
+                                        <i class="pr-1 fa-xs fa-solid fa-circle"></i>{{ $iteminfo['name'] }}
+                                    </a>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                         <div class="">
                             @if(isset($result['iteminfo']['actress']))

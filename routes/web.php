@@ -35,6 +35,9 @@ Route::middleware(AgeVerification::class)->group(function () {
     //五十音から女優名を取得
     Route::get('/get/api/actresses/{id}', [ApiController::class, 'getActressesByGroup'])
     ->name('getActressesByGroup');
+    //五十音からメーカーを取得
+    Route::get('/get/api/maker/{id}', [ApiController::class, 'getMakerByGroup'])
+    ->name('getMakerByGroup');
     // マッチングの結果表示
     Route::get('/result', [MainController::class, 'matchingResultApi'])
     ->name('matchingResultApi');
@@ -47,6 +50,9 @@ Route::middleware(AgeVerification::class)->group(function () {
     //女優検索結果画面
     Route::get('/search/result/actress/detail/{id}/{name}',  [MainController::class, 'searchResultPageActress'])
     ->name('searchResultPageActress');
+    //メーカー検索結果画面
+    Route::get('/search/result/maker/detail/{id}/{name}',  [MainController::class, 'searchResultPageMaker'])
+    ->name('searchResultPageMaker');
     //キーワード検索
     Route::get('/search/result/free-word/',  [MainController::class, 'searchResultPageFreeWord'])
     ->name('searchResultPageFreeWord');

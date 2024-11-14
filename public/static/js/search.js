@@ -1,23 +1,33 @@
 $(function () {
     var searchGenreArea = $('#search-genre-area');
     var searchActressesArea = $('#search-actress-area');
+    var searchMakerArea = $('#search-maker-area');
     var searchGenreBtn = $('#search-genre-btn');
-    var searchAreaBtn = $('#search-actress-btn');
-    var gojuonBtn = $('.search-acress-name-btn');
+    var searchActressAreaBtn = $('#search-actress-btn');
+    var searchMakerAreaBtn = $('#search-maker-btn');
+    var actressGojuonBtn = $('.search-acress-name-btn');
+    var makerGojuonBtn = $('.search-maker-name-btn');
     var actressList = $('#actress-list');
+    var makerList = $('#maker-list');
 
     $(searchGenreArea).css('display', 'none');
     $(searchActressesArea).css('display', 'none');
+    $(searchMakerArea).css('display', 'none');
 
     $(searchGenreBtn).on('click', function () {
         searchGenreArea.slideToggle();
     })
 
-    $(searchAreaBtn).on('click', function () {
+    $(searchActressAreaBtn).on('click', function () {
         searchActressesArea.slideToggle();
     })
 
-    $(gojuonBtn).on('click', function () {
+    $(searchMakerAreaBtn).on('click', function () {
+        searchMakerArea.slideToggle();
+    })
+
+    // 女優リストの取得
+    $(actressGojuonBtn).on('click', function () {
         document.getElementById('actress-modal').style.display = 'block';
 
         var targetGojyuon = $(this).data('group');
@@ -60,11 +70,52 @@ $(function () {
     });
 
     // モーダルを閉じる
-    document.querySelector('.close').addEventListener('click', function() {
+    document.querySelector('.actress-close').addEventListener('click', function() {
         document.getElementById('actress-modal').style.display = 'none';
     });
 
+    // メーカーリストの取得
+    $(makerGojuonBtn).on('click', function () {
+        document.getElementById('maker-modal').style.display = 'block';
 
+        var targetGojyuon = $(this).data('group');
+        makerList.empty().append('<p class="loading-message">読み込み中...<i class="fa-solid fa-spinner fa-spin"></i></p>');
 
+        $.ajax({
+            url: `/get/api/maker/${targetGojyuon}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                makerList.empty();
+                if (response && response.length > 0) {
+                    response.forEach(function (maker) {
+                        makerList.append(
+                            `
+                            <a href="/search/result/maker/detail/${maker.maker_id}/${maker.maker_name}" class="">
+                                <div
+                                    class="border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md"
+                                >
+                                    <p class="p-1 text-xs text-left text-gray-700 dark:text-gray-400">${maker.maker_name}</p>
+                                </div>
+                            </a>
+                            `
+                        );
+                    });
+                } else {
+                    makerList.append('<p>対象のメーカーが見つかりませんでした</p>');
+                    makerList.addClass('bg-white');
+                }
+            },
+            error: function (error) {
+                makerList.append('<p>メーカーデータを取得できませんでした</p>');
+                makerList.addClass('bg-white pt-10');
+                makerList.removeClass('hidden');
+            }
+        })
+        return false;
+    });
 
+    document.querySelector('.maker-close').addEventListener('click', function() {
+        document.getElementById('maker-modal').style.display = 'none';
+    });
 });

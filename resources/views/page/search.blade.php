@@ -51,17 +51,46 @@
                 <div
                     id="search-actress-area"
                     class="grid grid-cols-4 gap-2 p-2 md:grid-cols-8 md:gap-4">
-                    @foreach($actressGojuon as $group => $gojuon)
+                    @foreach($Gojuon as $group => $actress_gojuon)
                             <button
                                 id="search-acress-name-btn"
                                 data-group="{{ $group }}"
                                 class="search-acress-name-btn border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md">
                                 <p
+                                    class="p-1 text-xs text-left text-gray-700 actress-gojuon-btn dark:text-gray-400">
+                                    {{ $actress_gojuon }}
+                                </p>
+                            </button>
+                            @include('components.modal.actress-list')
+                    @endforeach
+                </div>
+            </div>
+            <!-- メーカーから -->
+            <div
+                class="my-3 border border-gray-200 rounded-md dark:border-slate-700">
+                <button
+                    id="search-maker-btn"
+                    class="w-full flex justify-between items-center py-2 px-4 bg-white dark:bg-[#20293A] dark:text-gray-400 text-gray-700 rounded-md mx-auto">
+                    <span class="mx-auto font-bold text-gray-600">メーカーから探す</span>
+                    <svg
+                        class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div
+                    id="search-maker-area"
+                    class="grid grid-cols-4 gap-2 p-2 md:grid-cols-8 md:gap-4">
+                    @foreach($Gojuon as $group => $gojuon)
+                            <button
+                                id="search-maker-name-btn"
+                                data-group="{{ $group }}"
+                                class="search-maker-name-btn border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md">
+                                <p
                                     class="p-1 text-xs text-left text-gray-700 gojuon-btn dark:text-gray-400">
                                     {{ $gojuon }}
                                 </p>
                             </button>
-                            @include('components.modal.actress-list')
+                            @include('components.modal.maker-list')
                     @endforeach
                 </div>
             </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 use App\Models\Api\ActressModel;
+use App\Models\Api\MakerModel;
 
 use Log;
 class ApiController extends Controller
@@ -33,6 +34,13 @@ class ApiController extends Controller
         $getActressList = ActressModel::getActressTarget($id);
 
         return $getActressList;
+    }
+
+    public function getMakerByGroup($id)
+    {
+        $getMakerList = MakerModel::getMakerTarget($id);
+
+        return $getMakerList;
     }
 
 }

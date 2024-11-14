@@ -7,11 +7,11 @@
     height: 100%;
     width: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .sampleImgModalWrapper,
 .sampleVideoModalWrapper {
-     z-index: 200;
+    z-index: 200;
 }
 .sampleVideoIframe {
     position: fixed;
@@ -20,10 +20,10 @@
     overflow: auto;
 }
 .search-genre-area,
-.search-actress-area {
+.search-actress-area,
+.search-maker-area {
     z-index: 50;
 }
-
 
 .modal {
     display: none; /* モーダルを隠す */
@@ -46,7 +46,8 @@
     overflow-y: auto;
 }
 
-.close {
+.actress-close,
+.maker-close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -59,30 +60,33 @@
     text-decoration: none;
     cursor: pointer;
 }
-#actress-modal {
+#actress-modal,
+#maker-modal {
     overflow: auto;
     overflow-y: auto;
 }
-#actress-list {
+#actress-list,
+#maker-list {
     display: flex;
-    flex-wrap: wrap;       /* 折り返しを許可 */
+    flex-wrap: wrap; /* 折り返しを許可 */
     justify-content: start; /* 左揃え */
-    gap: 6px;              /* 要素間にスペースを追加 */
+    gap: 6px; /* 要素間にスペースを追加 */
     padding: 0;
-    list-style: none;       /* リストマーカーを非表示 */
-
+    list-style: none; /* リストマーカーを非表示 */
 }
 .actress-image {
     object-fit: cover;
     border-radius: 8px;
 }
 
-.actress-name {
+.actress-name,
+.maker-name {
     font-size: 1rem;
     text-align: center;
 }
 
-.actress-link {
+.actress-link,
+.maker-link {
     text-decoration: none;
     color: inherit;
 }
