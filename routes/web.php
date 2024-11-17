@@ -38,6 +38,9 @@ Route::middleware(AgeVerification::class)->group(function () {
     //五十音からメーカーを取得
     Route::get('/get/api/maker/{id}', [ApiController::class, 'getMakerByGroup'])
     ->name('getMakerByGroup');
+    //五十音からシリーズを取得
+    Route::get('/get/api/series/{id}', [ApiController::class, 'getSeriesByGroup'])
+    ->name('getSeriesByGroup');
     // マッチングの結果表示
     Route::get('/result', [MainController::class, 'matchingResultApi'])
     ->name('matchingResultApi');
@@ -53,6 +56,9 @@ Route::middleware(AgeVerification::class)->group(function () {
     //メーカー検索結果画面
     Route::get('/search/result/maker/detail/{id}/{name}',  [MainController::class, 'searchResultPageMaker'])
     ->name('searchResultPageMaker');
+    //シリーズ検索結果画面
+    Route::get('/search/result/series/detail/{id}/{name}',  [MainController::class, 'searchResultPageSeries'])
+    ->name('searchResultPageSeries');
     //キーワード検索
     Route::get('/search/result/free-word/',  [MainController::class, 'searchResultPageFreeWord'])
     ->name('searchResultPageFreeWord');

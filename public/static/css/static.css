@@ -21,7 +21,8 @@
 }
 .search-genre-area,
 .search-actress-area,
-.search-maker-area {
+.search-maker-area,
+.serch-series-area {
     z-index: 50;
 }
 
@@ -47,7 +48,8 @@
 }
 
 .actress-close,
-.maker-close {
+.maker-close,
+.series-close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -55,18 +57,26 @@
 }
 
 .close:hover,
-.close:focus {
+.actress-close:hover,
+.maker-close:hover,
+.series-close:hover,
+.close:focus,
+.actress-close:focus,
+.maker-close:focus,
+.series-close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 #actress-modal,
-#maker-modal {
+#maker-modal,
+#series-modal {
     overflow: auto;
     overflow-y: auto;
 }
 #actress-list,
-#maker-list {
+#maker-list,
+#series-list {
     display: flex;
     flex-wrap: wrap; /* 折り返しを許可 */
     justify-content: start; /* 左揃え */
@@ -80,13 +90,15 @@
 }
 
 .actress-name,
-.maker-name {
+.maker-name,
+.series-name {
     font-size: 1rem;
     text-align: center;
 }
 
 .actress-link,
-.maker-link {
+.maker-link,
+.series-link {
     text-decoration: none;
     color: inherit;
 }

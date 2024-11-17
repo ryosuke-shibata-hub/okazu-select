@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 use App\Models\Api\ActressModel;
 use App\Models\Api\MakerModel;
+use App\Models\Api\SeriesModel;
 
 use Log;
 class ApiController extends Controller
@@ -41,6 +42,13 @@ class ApiController extends Controller
         $getMakerList = MakerModel::getMakerTarget($id);
 
         return $getMakerList;
+    }
+
+    public function getSeriesByGroup($id)
+    {
+        $getSeriesList = SeriesModel::getSeriesTarget($id);
+
+        return $getSeriesList;
     }
 
 }

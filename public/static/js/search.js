@@ -2,28 +2,34 @@ $(function () {
     var searchGenreArea = $('#search-genre-area');
     var searchActressesArea = $('#search-actress-area');
     var searchMakerArea = $('#search-maker-area');
+    var searchSeriesArea = $('#search-series-area');
     var searchGenreBtn = $('#search-genre-btn');
     var searchActressAreaBtn = $('#search-actress-btn');
     var searchMakerAreaBtn = $('#search-maker-btn');
+    var searchSeriesAreaBtn = $('#search-series-btn');
     var actressGojuonBtn = $('.search-acress-name-btn');
     var makerGojuonBtn = $('.search-maker-name-btn');
+    var seriesGojuonBtn = $('.search-series-name-btn');
     var actressList = $('#actress-list');
     var makerList = $('#maker-list');
+    var seriesList = $('#series-list');
 
     $(searchGenreArea).css('display', 'none');
     $(searchActressesArea).css('display', 'none');
     $(searchMakerArea).css('display', 'none');
+    $(searchSeriesArea).css('display', 'none');
 
     $(searchGenreBtn).on('click', function () {
         searchGenreArea.slideToggle();
     })
-
     $(searchActressAreaBtn).on('click', function () {
         searchActressesArea.slideToggle();
     })
-
     $(searchMakerAreaBtn).on('click', function () {
         searchMakerArea.slideToggle();
+    })
+    $(searchSeriesAreaBtn).on('click', function () {
+        searchSeriesArea.slideToggle();
     })
 
     // 女優リストの取得
@@ -117,5 +123,50 @@ $(function () {
 
     document.querySelector('.maker-close').addEventListener('click', function() {
         document.getElementById('maker-modal').style.display = 'none';
+    });
+
+       // シリーズリストの取得
+    $(seriesGojuonBtn).on('click', function () {
+        document.getElementById('series-modal').style.display = 'block';
+
+        var targetGojyuon = $(this).data('group');
+        seriesList.empty().append('<p class="loading-message">読み込み中...<i class="fa-solid fa-spinner fa-spin"></i></p>');
+
+        $.ajax({
+            url: `/get/api/series/${targetGojyuon}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                seriesList.empty();
+                if (response && response.length > 0) {
+                    response.forEach(function (series) {
+                        seriesList.append(
+                            `
+                            <a href="/search/result/series/detail/${series.series_id}/${series.series_name}" class="">
+                                <div
+                                    class="border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md"
+                                >
+                                    <p class="p-1 text-xs text-left text-gray-700 dark:text-gray-400">${series.series_name}</p>
+                                </div>
+                            </a>
+                            `
+                        );
+                    });
+                } else {
+                    seriesList.append('<p>対象のメーカーが見つかりませんでした</p>');
+                    seriesList.addClass('bg-white');
+                }
+            },
+            error: function (error) {
+                seriesList.append('<p>メーカーデータを取得できませんでした</p>');
+                seriesList.addClass('bg-white pt-10');
+                seriesList.removeClass('hidden');
+            }
+        })
+        return false;
+    });
+
+    document.querySelector('.series-close').addEventListener('click', function() {
+        document.getElementById('series-modal').style.display = 'none';
     });
 });
