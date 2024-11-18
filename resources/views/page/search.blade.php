@@ -12,10 +12,10 @@
         <div class="">
             <!-- ジャンル別 -->
             <div
-                class="my-5 border border-gray-200 rounded-md dark:border-slate-700">
+                class="my-5 border border-gray-200 rounded-md">
                 <button
                     id="search-genre-btn"
-                    class="w-full flex justify-between items-center py-2 px-4 bg-white dark:bg-[#20293A] dark:text-gray-400 text-gray-700 rounded-md mx-auto">
+                    class="flex items-center justify-between w-full px-4 py-2 mx-auto text-gray-700 bg-white rounded-md">
                     <span class="mx-auto font-bold text-gray-600">ジャンルから探す</span>
                     <svg
                         class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -28,9 +28,9 @@
                     @foreach($genreData as $genre)
                         <a href="/search/result/genre/{{ $genre->genre_id }}/{{ $genre->genre_name }}" class="">
                             <div
-                                class="border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md"
+                                class="overflow-hidden bg-white border border-gray-500 rounded-md"
                             >
-                                <p class="p-1 text-xs text-left text-gray-700 dark:text-gray-400">{{ $genre->genre_name }}</p>
+                                <p class="p-1 text-xs text-left text-gray-700">{{ $genre->genre_name }}</p>
                             </div>
                         </a>
                     @endforeach
@@ -38,10 +38,10 @@
             </div>
             <!-- 女優から -->
             <div
-                class="my-3 border border-gray-200 rounded-md dark:border-slate-700">
+                class="my-3 border border-gray-200 rounded-md">
                 <button
                     id="search-actress-btn"
-                    class="w-full flex justify-between items-center py-2 px-4 bg-white dark:bg-[#20293A] dark:text-gray-400 text-gray-700 rounded-md mx-auto">
+                    class="flex items-center justify-between w-full px-4 py-2 mx-auto text-gray-700 bg-white rounded-md">
                     <span class="mx-auto font-bold text-gray-600">女優から探す</span>
                     <svg
                         class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -55,9 +55,9 @@
                             <button
                                 id="search-acress-name-btn"
                                 data-group="{{ $group }}"
-                                class="search-acress-name-btn border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md">
+                                class="overflow-hidden bg-white border border-gray-500 rounded-md search-acress-name-btn">
                                 <p
-                                    class="p-1 text-xs text-left text-gray-700 actress-gojuon-btn dark:text-gray-400">
+                                    class="p-1 text-xs text-left text-gray-700 actress-gojuon-btn">
                                     {{ $actress_gojuon }}
                                 </p>
                             </button>
@@ -67,10 +67,10 @@
             </div>
             <!-- メーカーから -->
             <div
-                class="my-3 border border-gray-200 rounded-md dark:border-slate-700">
+                class="my-3 border border-gray-200 rounded-md">
                 <button
                     id="search-maker-btn"
-                    class="w-full flex justify-between items-center py-2 px-4 bg-white dark:bg-[#20293A] dark:text-gray-400 text-gray-700 rounded-md mx-auto">
+                    class="flex items-center justify-between w-full px-4 py-2 mx-auto text-gray-700 bg-white rounded-md">
                     <span class="mx-auto font-bold text-gray-600">メーカーから探す</span>
                     <svg
                         class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -84,9 +84,9 @@
                             <button
                                 id="search-maker-name-btn"
                                 data-group="{{ $group }}"
-                                class="search-maker-name-btn border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md">
+                                class="overflow-hidden bg-white border border-gray-500 rounded-md search-maker-name-btn">
                                 <p
-                                    class="p-1 text-xs text-left text-gray-700 gojuon-btn dark:text-gray-400">
+                                    class="p-1 text-xs text-left text-gray-700 gojuon-btn">
                                     {{ $gojuon }}
                                 </p>
                             </button>
@@ -96,10 +96,10 @@
             </div>
             <!-- シリーズから -->
             <div
-                class="my-3 border border-gray-200 rounded-md dark:border-slate-700">
+                class="my-3 border border-gray-200 rounded-md">
                 <button
                     id="search-series-btn"
-                    class="w-full flex justify-between items-center py-2 px-4 bg-white dark:bg-[#20293A] dark:text-gray-400 text-gray-700 rounded-md mx-auto">
+                    class="flex items-center justify-between w-full px-4 py-2 mx-auto text-gray-700 bg-white rounded-md">
                     <span class="mx-auto font-bold text-gray-600">シリーズから探す</span>
                     <svg
                         class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -113,9 +113,9 @@
                             <button
                                 id="search-series-name-btn"
                                 data-group="{{ $group }}"
-                                class="search-series-name-btn border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md">
+                                class="overflow-hidden bg-white border border-gray-500 rounded-md search-series-name-btn">
                                 <p
-                                    class="p-1 text-xs text-left text-gray-700 gojuon-btn dark:text-gray-400">
+                                    class="p-1 text-xs text-left text-gray-700 gojuon-btn">
                                     {{ $gojuon }}
                                 </p>
                             </button>

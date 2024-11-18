@@ -99,9 +99,9 @@ $(function () {
                             `
                             <a href="/search/result/maker/detail/${maker.maker_id}/${maker.maker_name}" class="">
                                 <div
-                                    class="border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md"
+                                    class="border border-gray-500 overflow-hidden bg-white rounded-md"
                                 >
-                                    <p class="p-1 text-xs text-left text-gray-700 dark:text-gray-400">${maker.maker_name}</p>
+                                    <p class="p-1 text-xs text-left text-gray-700">${maker.maker_name}</p>
                                 </div>
                             </a>
                             `
@@ -144,21 +144,21 @@ $(function () {
                             `
                             <a href="/search/result/series/detail/${series.series_id}/${series.series_name}" class="">
                                 <div
-                                    class="border border-gray-500 overflow-hidden bg-white dark:bg-[#20293A] rounded-md"
+                                    class="border border-gray-500 overflow-hidden bg-white rounded-md"
                                 >
-                                    <p class="p-1 text-xs text-left text-gray-700 dark:text-gray-400">${series.series_name}</p>
+                                    <p class="p-1 text-xs text-left text-gray-700">${series.series_name}</p>
                                 </div>
                             </a>
                             `
                         );
                     });
                 } else {
-                    seriesList.append('<p>対象のメーカーが見つかりませんでした</p>');
+                    seriesList.append('<p>対象のシリーズが見つかりませんでした</p>');
                     seriesList.addClass('bg-white');
                 }
             },
             error: function (error) {
-                seriesList.append('<p>メーカーデータを取得できませんでした</p>');
+                seriesList.append('<p>シリーズデータを取得できませんでした</p>');
                 seriesList.addClass('bg-white pt-10');
                 seriesList.removeClass('hidden');
             }
