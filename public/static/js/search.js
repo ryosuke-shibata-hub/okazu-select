@@ -1,6 +1,46 @@
 $(function () {
+
+    // ジャンル検索のオートコンプリート
+    const $filterInputGenre = $("#filterInputGenre"); // フィルタ入力フィールド
+    const $genreItems = $(".genre-item");  // 全ジャンルアイテム
+    // 入力イベントの監視
+    $filterInputGenre.on("input", function () {
+        const query = $(this).val().trim().toLowerCase(); // 入力値を取得して小文字に変換
+
+        $genreItems.each(function () {
+            const $genreItem = $(this); // 現在のアイテムをjQueryオブジェクト化
+            const genreName = $genreItem.data("genre").toLowerCase(); // `data-genre`属性を取得して小文字に変換
+
+            // 入力値に一致する場合は表示、一致しない場合は非表示
+            if (genreName.includes(query)) {
+                $genreItem.show(); // 表示
+            } else {
+                $genreItem.hide(); // 非表示
+            }
+        });
+    });
+
+    $(".actress-filter-input").on("input", function () {
+        const query = $(this).val().trim().toLowerCase();
+        const targetListId = $(this).data("target-list");
+        const $targetItems = $(`#${targetListId}`).find(".actress-filter-item");
+
+        $targetItems.each(function () {
+        const actressName = $(this).data("actress").toLowerCase();
+            if (actressName.includes(query)) {
+                $(this).closest(".actress-item").show();
+            } else {
+                $(this).closest(".actress-item").hide();
+            }
+        });
+    });
+
+
+
     var searchGenreArea = $('#search-genre-area');
+    var searchGenreInputArea = $('#open-filter-input-genre');
     var searchActressesArea = $('#search-actress-area');
+    var searchActressesInputArea = $('#open-filter-input-actress');
     var searchMakerArea = $('#search-maker-area');
     var searchSeriesArea = $('#search-series-area');
     var searchGenreBtn = $('#search-genre-btn');
@@ -15,15 +55,21 @@ $(function () {
     var seriesList = $('#series-list');
 
     $(searchGenreArea).css('display', 'none');
+    $(searchGenreInputArea).css('display', 'none');
+
     $(searchActressesArea).css('display', 'none');
+    $(searchActressesInputArea).css('display', 'none');
+
     $(searchMakerArea).css('display', 'none');
     $(searchSeriesArea).css('display', 'none');
 
     $(searchGenreBtn).on('click', function () {
         searchGenreArea.slideToggle();
+        searchGenreInputArea.slideToggle();
     })
     $(searchActressAreaBtn).on('click', function () {
         searchActressesArea.slideToggle();
+        searchActressesInputArea.slideToggle();
     })
     $(searchMakerAreaBtn).on('click', function () {
         searchMakerArea.slideToggle();
@@ -34,9 +80,12 @@ $(function () {
 
     // 女優リストの取得
     $(actressGojuonBtn).on('click', function () {
-        document.getElementById('actress-modal').style.display = 'block';
 
-        var targetGojyuon = $(this).data('group');
+        const targetModalId = $(this).data("target-modal");
+        const targetGojyuon = $(this).data("group");
+        const $targetModal = $("#" + targetModalId);
+        const actressList = $(`#actress-list-${targetGojyuon}`);
+        $targetModal.show();
         actressList.empty().append('<p class="loading-message">読み込み中...<i class="fa-solid fa-spinner fa-spin"></i></p>');
 
         $.ajax({
@@ -49,13 +98,13 @@ $(function () {
                     response.forEach(function (actress) {
                         actressList.append(
                             `
-                            <li class="actress-item mx-auto flex flex-col items-center">
-                                <a href="/search/result/actress/detail/${actress.actress_id}/${actress.actress_name}" class="actress-link">
-                                    <img
-                                        src="${actress.imageURL && actress.imageURL.trim() !== '' ?
-                                        actress.imageURL : '/static/image/now_printing.jpg'}"
-                                        alt="${actress.actress_name}" class="w-12 h-12 rounded-full"/>
-                                    <p class="actress-name mt-2 text-xs">${actress.actress_name}</p>
+                            <li class="actress-item flex flex-col items-center mx-auto actress-item">
+                                <a href="/search/result/actress/detail/${actress.actress_id}/${actress.actress_name}"
+                                class="actress-link actress-filter-item"
+                                data-actress="${actress.actress_name}">
+                                <img src="${actress.imageURL || '/static/image/now_printing.jpg'}"
+                                    alt="${actress.actress_name}" class="w-12 h-12 rounded-full"/>
+                                <p class="mt-2 text-xs actress-name">${actress.actress_name}</p>
                                 </a>
                             </li>
                             `

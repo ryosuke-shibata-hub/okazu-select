@@ -22,11 +22,22 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
+                <div class="p-5" id="open-filter-input-genre">
+                    <input
+                        type="text"
+                        id="filterInputGenre"
+                        class="w-full px-4 py-2 mb-3 border border-gray-300 rounded-md"
+                        placeholder="ジャンルを検索..."
+                    >
+                </div>
                 <div
                     id="search-genre-area"
                     class="grid grid-cols-3 gap-2 p-2 md:grid-cols-8 md:gap-4">
                     @foreach($genreData as $genre)
-                        <a href="/search/result/genre/{{ $genre->genre_id }}/{{ $genre->genre_name }}" class="">
+                        <a
+                            href="/search/result/genre/{{ $genre->genre_id }}/{{ $genre->genre_name }}"
+                            data-genre="{{ $genre->genre_name }}"
+                            class="genre-item">
                             <div
                                 class="overflow-hidden bg-white border border-gray-500 rounded-md"
                             >
@@ -55,6 +66,7 @@
                             <button
                                 id="search-acress-name-btn"
                                 data-group="{{ $group }}"
+                                data-target-modal="actress-modal-{{ $group }}"
                                 class="overflow-hidden bg-white border border-gray-500 rounded-md search-acress-name-btn">
                                 <p
                                     class="p-1 text-xs text-left text-gray-700 actress-gojuon-btn">

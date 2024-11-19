@@ -68,13 +68,13 @@
     text-decoration: none;
     cursor: pointer;
 }
-#actress-modal,
+.actress-modal,
 #maker-modal,
 #series-modal {
     overflow: auto;
     overflow-y: auto;
 }
-#actress-list,
+.actress-list,
 #maker-list,
 #series-list {
     display: flex;
