@@ -1,4 +1,4 @@
-<div id="actress-modal-{{ $group }}" class="modal actress-modal">
+<div id="actress-modal-{{ $group }}" class="modal actress-modal" data-target-close-modal="actress-close-modal-{{ $group }}">
     <div class="modal-content">
         <span class="actress-close">&times;</span>
         <h2>女優名リスト</h2>

@@ -19,7 +19,7 @@ $(function () {
             }
         });
     });
-
+    // 女優リストのインプット
     $(".actress-filter-input").on("input", function () {
         const query = $(this).val().trim().toLowerCase();
         const targetListId = $(this).data("target-list");
@@ -50,14 +50,17 @@ $(function () {
     var actressGojuonBtn = $('.search-acress-name-btn');
     var makerGojuonBtn = $('.search-maker-name-btn');
     var seriesGojuonBtn = $('.search-series-name-btn');
-    var actressList = $('#actress-list');
+    // var actressList = $('#actress-list');
     var makerList = $('#maker-list');
     var seriesList = $('#series-list');
+
+    var actressModalContent = $('.actress-modal')
 
     $(searchGenreArea).css('display', 'none');
     $(searchGenreInputArea).css('display', 'none');
 
     $(searchActressesArea).css('display', 'none');
+    // $(actressModalContent).css('display', 'block');
     $(searchActressesInputArea).css('display', 'none');
 
     $(searchMakerArea).css('display', 'none');
@@ -123,11 +126,14 @@ $(function () {
         })
         return false;
     });
-
-    // モーダルを閉じる
-    document.querySelector('.actress-close').addEventListener('click', function() {
-        document.getElementById('actress-modal').style.display = 'none';
+    // モーダルを閉じるボタンにイベントを付与
+    $(document).on('click', '.actress-close', function () {
+        const targetCloseModalId = $(this).closest('.actress-modal').attr('id');
+        const $targetCloseModal = $("#" + targetCloseModalId);
+        // モーダルを非表示にする
+        $targetCloseModal.hide();
     });
+
 
     // メーカーリストの取得
     $(makerGojuonBtn).on('click', function () {
@@ -170,7 +176,7 @@ $(function () {
         return false;
     });
 
-    document.querySelector('.maker-close').addEventListener('click', function() {
+    document.querySelector('.maker-close').addEventListener('click', function () {
         document.getElementById('maker-modal').style.display = 'none';
     });
 
