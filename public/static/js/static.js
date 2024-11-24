@@ -28,8 +28,16 @@ $(function () {
             method: 'GET',
             dataType: 'json',
             success: function (response) {
-                if (response && response.result.items[0]['sampleImageURL']) {
+                if (response && response.result.items[0]['sampleImageURL']['sample_l']) {
                     response.result.items[0]['sampleImageURL']['sample_l']['image'].forEach(function (targetImgUrl) {
+                        sampleImgModalWrapper.append(
+                            `
+                                <img src="${targetImgUrl}" class="mx-auto sample-image" alt="${targetImgUrl}" />
+                            `
+                        );
+                    });
+                } else if(response && response.result.items[0]['sampleImageURL']['sample_s']) {
+                    response.result.items[0]['sampleImageURL']['sample_s']['image'].forEach(function (targetImgUrl) {
                         sampleImgModalWrapper.append(
                             `
                                 <img src="${targetImgUrl}" class="mx-auto sample-image" alt="${targetImgUrl}" />

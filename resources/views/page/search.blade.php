@@ -96,6 +96,7 @@
                             <button
                                 id="search-maker-name-btn"
                                 data-group="{{ $group }}"
+                                data-target-modal="maker-modal-{{ $group }}"
                                 class="overflow-hidden bg-white border border-gray-500 rounded-md search-maker-name-btn">
                                 <p
                                     class="p-1 text-xs text-left text-gray-700 gojuon-btn">
@@ -125,6 +126,7 @@
                             <button
                                 id="search-series-name-btn"
                                 data-group="{{ $group }}"
+                                data-target-modal="series-modal-{{ $group }}"
                                 class="overflow-hidden bg-white border border-gray-500 rounded-md search-series-name-btn">
                                 <p
                                     class="p-1 text-xs text-left text-gray-700 gojuon-btn">

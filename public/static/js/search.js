@@ -34,37 +34,73 @@ $(function () {
             }
         });
     });
+    // メーカーリストのインプット
+    $(".maker-filter-input").on("input", function () {
+        const query = $(this).val().trim().toLowerCase();
+        const targetListId = $(this).data("target-list");
+        const $targetItems = $(`#${targetListId}`).find(".maker-filter-item");
+        $targetItems.each(function () {
+        const makersName = $(this).data("maker").toLowerCase();
+            if (makersName.includes(query)) {
+                $(this).closest(".maker-item").show();
+            } else {
+                $(this).closest(".maker-item").hide();
+            }
+        });
+    });
+
+    // シリーズリストのインプット
+    $(".series-filter-input").on("input", function () {
+        const query = $(this).val().trim().toLowerCase();
+        const targetListId = $(this).data("target-list");
+        const $targetItems = $(`#${targetListId}`).find(".series-filter-item");
+
+        $targetItems.each(function () {
+        const seriesName = $(this).data("series").toLowerCase();
+            if (seriesName.includes(query)) {
+                $(this).closest(".series-item").show();
+            } else {
+                $(this).closest(".series-item").hide();
+            }
+        });
+    });
 
 
-
+    //ジャンルリスト変数
     var searchGenreArea = $('#search-genre-area');
     var searchGenreInputArea = $('#open-filter-input-genre');
+    var searchGenreBtn = $('#search-genre-btn');
+    // 女優リスト変数
     var searchActressesArea = $('#search-actress-area');
     var searchActressesInputArea = $('#open-filter-input-actress');
-    var searchMakerArea = $('#search-maker-area');
-    var searchSeriesArea = $('#search-series-area');
-    var searchGenreBtn = $('#search-genre-btn');
     var searchActressAreaBtn = $('#search-actress-btn');
-    var searchMakerAreaBtn = $('#search-maker-btn');
-    var searchSeriesAreaBtn = $('#search-series-btn');
     var actressGojuonBtn = $('.search-acress-name-btn');
+    // メーカーリスト変数
+    var searchMakerArea = $('#search-maker-area');
+    var searchMakerInputArea = $('#open-filter-input-maker');
+    var searchMakerAreaBtn = $('#search-maker-btn');
     var makerGojuonBtn = $('.search-maker-name-btn');
-    var seriesGojuonBtn = $('.search-series-name-btn');
-    // var actressList = $('#actress-list');
     var makerList = $('#maker-list');
+    // シリーズリスト変数
+    var searchSeriesArea = $('#search-series-area');
+    var searchSeriesInputArea = $('#open-filter-input-series');
+    var searchSeriesAreaBtn = $('#search-series-btn');
+    var seriesGojuonBtn = $('.search-series-name-btn');
     var seriesList = $('#series-list');
 
-    var actressModalContent = $('.actress-modal')
 
     $(searchGenreArea).css('display', 'none');
     $(searchGenreInputArea).css('display', 'none');
 
     $(searchActressesArea).css('display', 'none');
-    // $(actressModalContent).css('display', 'block');
     $(searchActressesInputArea).css('display', 'none');
 
     $(searchMakerArea).css('display', 'none');
+    $(searchMakerInputArea).css('display', 'none');
+
     $(searchSeriesArea).css('display', 'none');
+    $(searchSeriesInputArea).css('display', 'none');
+
 
     $(searchGenreBtn).on('click', function () {
         searchGenreArea.slideToggle();
@@ -76,9 +112,11 @@ $(function () {
     })
     $(searchMakerAreaBtn).on('click', function () {
         searchMakerArea.slideToggle();
+        searchMakerInputArea.slideToggle();
     })
     $(searchSeriesAreaBtn).on('click', function () {
         searchSeriesArea.slideToggle();
+        searchSeriesInputArea.slideToggle();
     })
 
     // 女優リストの取得
@@ -137,9 +175,12 @@ $(function () {
 
     // メーカーリストの取得
     $(makerGojuonBtn).on('click', function () {
-        document.getElementById('maker-modal').style.display = 'block';
+        const targetModalId = $(this).data("target-modal");
+        const targetGojyuon = $(this).data("group");
+        const $targetModal = $("#" + targetModalId);
+        const makerList = $(`#maker-list-${targetGojyuon}`);
+        $targetModal.show();
 
-        var targetGojyuon = $(this).data('group');
         makerList.empty().append('<p class="loading-message">読み込み中...<i class="fa-solid fa-spinner fa-spin"></i></p>');
 
         $.ajax({
@@ -152,13 +193,17 @@ $(function () {
                     response.forEach(function (maker) {
                         makerList.append(
                             `
-                            <a href="/search/result/maker/detail/${maker.maker_id}/${maker.maker_name}" class="">
+                            <li class="maker-item flex flex-col items-center mx-auto">
+                            <a href="/search/result/maker/detail/${maker.maker_id}/${maker.maker_name}"
+                                class="maker-link maker-filter-item"
+                                data-maker="${maker.maker_name}">
                                 <div
                                     class="border border-gray-500 overflow-hidden bg-white rounded-md"
                                 >
                                     <p class="p-1 text-xs text-left text-gray-700">${maker.maker_name}</p>
                                 </div>
                             </a>
+                            </li>
                             `
                         );
                     });
@@ -175,16 +220,23 @@ $(function () {
         })
         return false;
     });
-
-    document.querySelector('.maker-close').addEventListener('click', function () {
-        document.getElementById('maker-modal').style.display = 'none';
+    // モーダルを閉じるボタンにイベントを付与
+    $(document).on('click', '.maker-close', function () {
+        const targetCloseModalId = $(this).closest('.maker-modal').attr('id');
+        const $targetCloseModal = $("#" + targetCloseModalId);
+        // モーダルを非表示にする
+        $targetCloseModal.hide();
     });
-
-       // シリーズリストの取得
+    // シリーズリストの取得
     $(seriesGojuonBtn).on('click', function () {
-        document.getElementById('series-modal').style.display = 'block';
+        const targetModalId = $(this).data("target-modal");
+        const targetGojyuon = $(this).data("group");
+        const $targetModal = $("#" + targetModalId);
+        const seriesList = $(`#series-list-${targetGojyuon}`);
+        $targetModal.show();
+        // document.getElementById('series-modal').style.display = 'block';
 
-        var targetGojyuon = $(this).data('group');
+        // var targetGojyuon = $(this).data('group');
         seriesList.empty().append('<p class="loading-message">読み込み中...<i class="fa-solid fa-spinner fa-spin"></i></p>');
 
         $.ajax({
@@ -197,13 +249,17 @@ $(function () {
                     response.forEach(function (series) {
                         seriesList.append(
                             `
-                            <a href="/search/result/series/detail/${series.series_id}/${series.series_name}" class="">
+                            <li class="series-item flex flex-col items-center mx-auto">
+                            <a href="/search/result/series/detail/${series.series_id}/${series.series_name}"
+                                class="series-link series-filter-item"
+                                data-series="${series.series_name}">
                                 <div
                                     class="border border-gray-500 overflow-hidden bg-white rounded-md"
                                 >
                                     <p class="p-1 text-xs text-left text-gray-700">${series.series_name}</p>
                                 </div>
                             </a>
+                            </li>
                             `
                         );
                     });
@@ -220,8 +276,11 @@ $(function () {
         })
         return false;
     });
-
-    document.querySelector('.series-close').addEventListener('click', function() {
-        document.getElementById('series-modal').style.display = 'none';
+    // モーダルを閉じるボタンにイベントを付与
+    $(document).on('click', '.series-close', function () {
+        const targetCloseModalId = $(this).closest('.series-modal').attr('id');
+        const $targetCloseModal = $("#" + targetCloseModalId);
+        // モーダルを非表示にする
+        $targetCloseModal.hide();
     });
 });

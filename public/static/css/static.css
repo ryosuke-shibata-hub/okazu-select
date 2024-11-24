@@ -69,14 +69,14 @@
     cursor: pointer;
 }
 .actress-modal,
-#maker-modal,
-#series-modal {
+.maker-modal,
+.series-modal {
     overflow: auto;
     overflow-y: auto;
 }
 .actress-list,
-#maker-list,
-#series-list {
+.maker-list,
+.series-list {
     display: flex;
     flex-wrap: wrap; /* 折り返しを許可 */
     justify-content: start; /* 左揃え */
