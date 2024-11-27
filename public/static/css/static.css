@@ -1,3 +1,43 @@
+.text-2xs {
+    font-size: 0.6rem;
+}
+.recommend-detail-lg {
+    max-width: 75%;
+}
+.balloon {
+    position: relative;
+    background-color: #f0f8ff;
+    border-radius: 20px;
+    padding: 1rem;
+    max-width: 70%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.balloon p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.balloon-arrow {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #f0f8ff transparent transparent;
+}
+/* 矢印（右向き） */
+.balloon-arrow-left {
+    right: -10px;
+    left: auto;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #f0f8ff;
+}
 .sampleImgModal,
 .sampleVideoModal {
     position: fixed;

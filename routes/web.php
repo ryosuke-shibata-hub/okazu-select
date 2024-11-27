@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\GetApiDataController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Middleware\AgeVerification;
+use App\Http\Controllers\Recommend\RecommendController;
 
 //年齢確認情報をsessionへ保存する
 Route::post('/confirm-age', function () {
@@ -26,6 +27,12 @@ Route::middleware(AgeVerification::class)->group(function () {
     //サイトトップ（人気ランキングページ）
     Route::get('/top', [MainController::class, 'topPage'])
     ->name('topPage');
+    //おすすめページ
+    Route::get('/recommendation', [RecommendController::class, 'recommendList'])
+    ->name('recommendList');
+    //おすすめの記事詳細
+    Route::get('/recommend/detail/{title}', [RecommendController::class, 'recommendDetail'])
+    ->name('recommendDetail');
     // マッチングページ
     Route::get('/matching', [MainController::class, 'matchingPage'])
     ->name('matchingPage');

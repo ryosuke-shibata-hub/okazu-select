@@ -35,7 +35,7 @@
                                         <a
                                             href='/search/result/series/detail/{{ $iteminfo['id'] }}/{{ $iteminfo['name'] }}'
                                             class="py-2 text-xs font-bold text-gray-600 hover:text-blue-500">
-                                            <i class="pr-1 fa-xs fa-solid fa-location-pin"></i>{{ $iteminfo['name'] }}
+                                            <i class="pr-1 fa-xs fa-solid fa-circle"></i>{{ $iteminfo['name'] }}
                                         </a>
                                     @endforeach
                                 @endif

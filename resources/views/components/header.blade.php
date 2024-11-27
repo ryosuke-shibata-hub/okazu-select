@@ -6,11 +6,16 @@
                 <img src="{{ asset('static/image/site-title.png') }}" alt="おかずせれくと.com" class="-mt-2 w-52" />
             </div>
             <div class="block w-full text-center lg:items-center lg:w-auto">
-                <div class="flex pt-5 text-xs font-bold text-gray-600 lg:block lg:text-lg">
+                <div class="flex pt-5 font-bold text-gray-600 text-2xs text-nowrap lg:block lg:text-lg">
                     <a
                         href="/infomation"
                         class="inline-block mt-4 lg:px-5 lg:mr-4 lg:mt-0 text-teal-lighter hover:text-green-400">
                         <i class="text-green-500 fa-solid fa-circle-info lg:mr-2"></i>お知らせ
+                    </a>
+                    <a
+                        href="/recommendation"
+                        class="inline-block mt-4 lg:px-5 lg:mt-0 text-teal-lighter hover:text-yellow-400">
+                        <i class="text-yellow-400 fa-regular fa-star lg:mr-2"></i>おすすめ
                     </a>
                     <a
                         href="/matching"

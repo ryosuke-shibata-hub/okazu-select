@@ -5,5 +5,4 @@
         <p>&copy; 2024 おかずせれくと.com. All rights reserved.</p>
         <p class="text-center">ver 1.3.1</p>
     </div>
-
 </footer>
