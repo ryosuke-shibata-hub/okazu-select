@@ -10,6 +10,10 @@ class Recommend extends Model
     use HasFactory;
     protected $table = "recommend";
 
+    protected $fillable = [
+        'view_count',
+    ];
+
     public static function getRecommendList()
     {
         $data = Recommend::where('delete_flg', 0)
@@ -21,10 +25,15 @@ class Recommend extends Model
 
     public static function getRecommendDetail($title)
     {
-        $data = Recommend::where('delete_flg', 0)
+        $targetData = Recommend::where('delete_flg', 0)
         ->where('title', $title)
         ->first();
 
-        return $data;
+        $targetData = $targetData;
+        $targetData->view_count = $targetData->view_count + 1;
+        $targetData->updated_at = now();
+        $targetData->save();
+
+        return $targetData;
     }
 }

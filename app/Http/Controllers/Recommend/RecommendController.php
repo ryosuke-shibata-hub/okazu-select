@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Recommend\Recommend;
 
 use Log;
+use DB;
 
 class RecommendController extends Controller
 {
@@ -41,14 +42,15 @@ class RecommendController extends Controller
             }
 
             $targeActressUrl = "https://api.dmm.com/affiliate/v3/ActressSearch?api_id={$apiId}&affiliate_id={$affiliateId}&actress_id={$actressTargetId}&output=json";
-            Log::alert("message",[$targeActressUrl]);
 
             $responseActressData = Http::get($targeActressUrl);
 
-            Log::debug("対象女優",[$responseActressData]);
+            DB::beginTransaction();
+
             $recommendDetail = Recommend::getRecommendDetail($title);
 
-            // if ($response->ok() || $getGoodMatchingData->ok()) {
+            DB::commit();
+
             if ($response->ok()) {
                 Log::info("対象記事の作品情報の取得正常終了",["検索値"=>$title]);
                 return view('page.recommend_detail')

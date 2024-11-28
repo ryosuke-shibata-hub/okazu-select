@@ -45,6 +45,9 @@
                                     </a>
                                 </p>
                                 @endif
+                                <p class="py-1 text-xs">
+                                    閲覧数：{{ $list->view_count }}
+                                </p>
                                 <span class="inline-flex">
                                     <a
                                         href="/recommend/detail/{{ $list->title }}"

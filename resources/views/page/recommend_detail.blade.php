@@ -65,7 +65,21 @@
                 </span>
             </div>
             <div class="py-5">
-                <img src={{ $result['sampleImageURL']['sample_l']['image'][3] }} />
+                <section class="text-gray-600 body-font">
+                    <div class="container px-5 py-24 mx-auto">
+                        <div class="flex flex-wrap -m-4">
+                            @foreach($result['sampleImageURL']['sample_l'] as $sampleImageList)
+                                @foreach($sampleImageList as $image)
+                                        <div class="p-4 md:w-1/3">
+                                            <div class="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
+                                            <img class="object-cover object-center w-full lg:h-48 md:h-36" src={{ $image }} alt="blog">
+                                            </div>
+                                        </div>
+                                @endforeach
+                            @endforeach
+                        </div>
+                    </div>
+                </section>
             </div>
             <div class="flex items-center justify-end space-x-4">
                 <div class="balloon balloon-left">
