@@ -45,6 +45,7 @@ class RecommendController extends Controller
 
             $responseActressData = Http::get($targeActressUrl);
 
+            Log::debug("対象女優",[$responseActressData]);
             $recommendDetail = Recommend::getRecommendDetail($title);
 
             // if ($response->ok() || $getGoodMatchingData->ok()) {

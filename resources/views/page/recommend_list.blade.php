@@ -14,9 +14,9 @@
             </p>
             </div>
             @foreach($recommendList as $list)
-                <div class="flex flex-wrap">
+                <div class="w-full">
                     <div class="p-4">
-                        <div class="flex flex-col items-center justify-center w-full h-full text-center w- sm:flex-row sm:justify-start sm:text-left">
+                        <div class="flex flex-col items-center justify-center w-full h-full text-center sm:flex-row sm:justify-start sm:text-left">
                             <img
                                 alt={{ $list->title }}
                                 class="flex-shrink-0 object-cover object-center w-48 h-48 mb-4 rounded-lg sm:mb-0"
@@ -52,8 +52,8 @@
                                         <i class="fa-solid fa-arrow-right"></i>この記事を読む
                                     </a>
                                 </span>
-                                <div class="w-full text-right">
-                                    <span class="text-2xs lg:text-xs">
+                                <div class="w-full ">
+                                    <span class="sm:text-center lg:right-0 text-2xs lg:text-xs">
                                         更新日 {{ $list->updated_at->format('Y年m月d日') }}
                                     </span>
                                 </div>
