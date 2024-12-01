@@ -49,8 +49,8 @@
         おかずセレクトをより良いサイトにするために、皆様のご意見やご要望をお待ちしております。<br>
         サイトの機能に関するご提案や改善点があれば、ぜひお聞かせください。
     </p>
-    <p class="pt-5 font-bold text-center text-gray-600 feedback-link">
-        ご意見・ご要望は<a href="https://forms.gle/PMP2CcXwvApLLjFu6" class="feedback-url" target="_blank">こちらのフォームまで</a>お問合せください。
+    <p class="pt-5 font-bold text-center text-gray-600 feedback-link hover:text-blue-500">
+        <a href="https://forms.gle/PMP2CcXwvApLLjFu6" class="feedback-url" target="_blank">ご意見・ご要望はこちらのフォームまでお問合せください。</a>
     </p>
 </div>
 @endsection

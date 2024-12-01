@@ -68,15 +68,17 @@
                                 @endif
                             </div>
                             <div class="p-2">
-                                @foreach($result['iteminfo']['genre'] as $genre)
-                                    <a
-                                        href="/search/result/genre/{{$genre['id']}}/{{ $genre['name'] }}"
-                                        class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
-                                        <span class="">
-                                            {{ $genre['name'] }}
-                                        </span>
-                                    </a>
-                                @endforeach
+                                @if(isset($result['iteminfo']['genre']))
+                                    @foreach($result['iteminfo']['genre'] as $genre)
+                                        <a
+                                            href="/search/result/genre/{{$genre['id']}}/{{ $genre['name'] }}"
+                                            class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                            <span class="">
+                                                {{ $genre['name'] }}
+                                            </span>
+                                        </a>
+                                    @endforeach
+                                @endif
                             </div>
                             <div class="text-center">
                                 <img class="mx-auto" src={{ $result['imageURL']['large'] }} alt={{ $result['title'] }} />
