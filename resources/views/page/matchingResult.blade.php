@@ -37,7 +37,7 @@
                                     @if(isset($result['iteminfo']['series']))
                                         @foreach($result['iteminfo']['series'] as $iteminfo)
                                             <a
-                                                href='/search/result/series/detail/{{ $iteminfo['id'] }}/{{ $iteminfo['name'] }}'
+                                                href='/search/result/series/detail/{{ $iteminfo['id'] }}/{{ str_replace('/', '／', $iteminfo['name']) }}'
                                                 class="py-2 text-xs font-bold text-gray-600 hover:text-blue-500">
                                                 <i class="pr-1 fa-xs fa-solid fa-location-pin"></i>{{ $iteminfo['name'] }}
                                             </a>
@@ -48,7 +48,7 @@
                                     @if(isset($result['iteminfo']['maker']))
                                         @foreach($result['iteminfo']['maker'] as $iteminfo)
                                             <a
-                                                href='/search/result/maker/detail/{{ $iteminfo['id'] }}/{{ $iteminfo['name'] }}'
+                                                href='/search/result/maker/detail/{{ $iteminfo['id'] }}/{{ str_replace('/', '／', $iteminfo['name']) }}'
                                                 class="py-2 text-xs font-bold text-gray-600 hover:text-blue-500">
                                                 <i class="pr-1 fa-xs fa-solid fa-circle"></i>{{ $iteminfo['name'] }}
                                             </a>

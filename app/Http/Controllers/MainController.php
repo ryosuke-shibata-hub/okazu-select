@@ -133,6 +133,7 @@ class MainController extends Controller
 
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
+        $name = str_replace('／','/', $name);
 
         try {
             $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$name}&article=genre&article_id={$id}&&floor=videoa&hits=50&sort=rank&output=json";
@@ -174,6 +175,7 @@ class MainController extends Controller
 
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
+        $name = str_replace('／','/', $name);
 
         try {
             $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits=50&sort=rank&output=json";
@@ -208,6 +210,7 @@ class MainController extends Controller
 
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
+        $name = str_replace('／','/', $name);
 
         try {
             $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=maker&article_id={$id}&keyword={$name}&floor=videoa&hits=50&sort=rank&output=json";
@@ -242,7 +245,7 @@ class MainController extends Controller
 
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
-
+        $name = str_replace('／','/', $name);
         try {
             $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=series&article_id={$id}&keyword={$name}&floor=videoa&hits=50&sort=rank&output=json";
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
