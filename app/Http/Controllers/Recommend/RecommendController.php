@@ -38,13 +38,19 @@ class RecommendController extends Controller
             foreach ($response['result']['items'] as $result) {
                 foreach ($result['iteminfo']['actress'] as $actress) {
                    $actressTargetId = $actress['id'];
+                   $actressTargetName = $actress['name'];
                 }
             }
 
             $targeActressUrl = "https://api.dmm.com/affiliate/v3/ActressSearch?api_id={$apiId}&affiliate_id={$affiliateId}&actress_id={$actressTargetId}&output=json";
 
-            $responseActressData = Http::get($targeActressUrl);
+            //マッチングどの高いグッズの取得用API
+            $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$actressTargetName}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
+
+            $responseActressData = Http::get($targeActressUrl);
+            $responseGoodsData = Http::get($targetUrlToGoodMatching);
+// dd($responseGoodsData['result']['result_count']);
             DB::beginTransaction();
 
             $recommendDetail = Recommend::getRecommendDetail($title);
@@ -56,7 +62,8 @@ class RecommendController extends Controller
                 return view('page.recommend_detail')
                 ->with('response', $response)
                 ->with('recommendDetail', $recommendDetail)
-                ->with('responseActressData', $responseActressData);
+                ->with('responseActressData', $responseActressData)
+                ->with('responseGoodsData', $responseGoodsData);
             }
 
             return array();
