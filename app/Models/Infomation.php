@@ -21,6 +21,7 @@ class Infomation extends Model
     {
 
         return Infomation::where('delete_flg', config('const.INFOMATION.FLG.DELETE_FLG.ACTIVE'))
+        ->where('created_at', '<', date("Y/m/d H:i:s"))
         ->orderBy('created_at', 'desc')
         ->get();
     }

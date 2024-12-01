@@ -50,7 +50,7 @@ class RecommendController extends Controller
 
             $responseActressData = Http::get($targeActressUrl);
             $responseGoodsData = Http::get($targetUrlToGoodMatching);
-// dd($responseGoodsData['result']['result_count']);
+
             DB::beginTransaction();
 
             $recommendDetail = Recommend::getRecommendDetail($title);

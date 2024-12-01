@@ -16,7 +16,8 @@ class Recommend extends Model
 
     public static function getRecommendList()
     {
-        $data = Recommend::where('delete_flg', 0)
+        $data = Recommend::where('created_at', '<', date("Y/m/d H:i:s"))
+        ->where('delete_flg', 0)
         ->orderBy('created_at', 'desc')
         ->get();
 
