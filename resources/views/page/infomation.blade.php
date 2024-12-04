@@ -40,5 +40,5 @@
     </div>
 </div>
 </div>
-
+@include('components.page-top-link')
 @endsection

@@ -187,5 +187,5 @@
     </div>
     @endforeach
 </div>
-
+@include('components.page-top-link')
 @endsection

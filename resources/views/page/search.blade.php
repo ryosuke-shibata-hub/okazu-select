@@ -157,4 +157,5 @@
     </div>
     @include('components.banner.right-banner')
 </div>
+@include('components.page-top-link')
 @endsection
