@@ -71,7 +71,7 @@ class MainController extends Controller
     {
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
-        $targetUrlToRanking = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=10&sort=rank&output=json";
+        $targetUrlToRanking = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=50&sort=rank&output=json";
 
         $response = Http::get($targetUrlToRanking);
 
@@ -136,7 +136,7 @@ class MainController extends Controller
         $name = str_replace('／','/', $name);
 
         try {
-            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$name}&article=genre&article_id={$id}&&floor=videoa&hits=50&sort=rank&output=json";
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$name}&article=genre&article_id={$id}&&floor=videoa&hits=100&sort=rank&output=json";
 
             //マッチングどの高いグッズの取得用API
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$name}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
@@ -178,7 +178,7 @@ class MainController extends Controller
         $name = str_replace('／','/', $name);
 
         try {
-            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits=50&sort=rank&output=json";
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
             Log::debug("message",[$itemList]);
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
@@ -213,7 +213,7 @@ class MainController extends Controller
         $name = str_replace('／','/', $name);
 
         try {
-            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=maker&article_id={$id}&keyword={$name}&floor=videoa&hits=50&sort=rank&output=json";
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=maker&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
             Log::debug("message",[$itemList]);
 
@@ -247,7 +247,7 @@ class MainController extends Controller
         $affiliateId = config('const.AFFILIATE_ID');
         $name = str_replace('／','/', $name);
         try {
-            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=series&article_id={$id}&keyword={$name}&floor=videoa&hits=50&sort=rank&output=json";
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=series&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
             Log::debug("message",[$itemList]);
 
@@ -283,7 +283,7 @@ class MainController extends Controller
         $affiliateId = config('const.AFFILIATE_ID');
 
         try {
-            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$keyword}&floor=videoa&hits=50&sort=rank&output=json";
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$keyword}&floor=videoa&hits=100&sort=rank&output=json";
             //マッチングどの高いグッズの取得用API
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$keyword}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
