@@ -116,6 +116,7 @@ class MainController extends Controller
         $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
 
         if ($getMatchingData->ok() || $getGoodMatchingData) {
+            Log::info("マッチング結果正常取得",['マッチング項目' => $searchKeyWords]);
             return view('page.matchingResult')
             ->with('getMatchingData', $getMatchingData)
             ->with('getGoodMatchingData', $getGoodMatchingData);
@@ -179,7 +180,6 @@ class MainController extends Controller
 
         try {
             $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
-            Log::debug("message",[$itemList]);
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
             $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
@@ -215,7 +215,6 @@ class MainController extends Controller
         try {
             $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=maker&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
-            Log::debug("message",[$itemList]);
 
             $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
             $response = Http::get($itemList);
@@ -249,13 +248,12 @@ class MainController extends Controller
         try {
             $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=series&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
-            Log::debug("message",[$itemList]);
 
             $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
             $response = Http::get($itemList);
 
             if ($response->ok() || $getGoodMatchingData->ok()) {
-                Log::info("メーカー検索正常終了",["検索値"=>$name]);
+                Log::info("シリーズ検索正常終了",["検索値"=>$name]);
                 return view('page.searchResult')
                 ->with('keyword', $name)
                 ->with('response', $response)
@@ -297,7 +295,7 @@ class MainController extends Controller
             }
 
             if ($response->ok() || $getGoodMatchingData->ok()) {
-                Log::info("キーワード検索正常終了",["検索値"=>$keyword]);
+                Log::info("フリーワード検索正常終了",["検索値"=>$keyword]);
                 return view('page.searchResult')
                 ->with('keyword', $keyword)
                 ->with('response', $response)
