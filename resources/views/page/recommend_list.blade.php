@@ -28,11 +28,13 @@
                                         {{ $list->title }}
                                     </a>
                                 </h2>
-                                <h3 class="mb-3 text-gray-500">
-                                    <a href="/search/result/free-word/?searchKeyword={{ $list->actress }}">
-                                        ・{{ $list->actress }}
-                                    </a>
-                                </h3>
+                                @if($list->actress)
+                                    <h3 class="mb-3 text-gray-500">
+                                        <a href="/search/result/free-word/?searchKeyword={{ $list->actress }}">
+                                            ・{{ $list->actress }}
+                                        </a>
+                                    </h3>
+                                @endif
                                 <p class="mb-1 text-xs">
                                     <a href="/search/result/free-word/?searchKeyword={{ $list->maker }}">
                                         <i class="pr-1 fa-xs fa-solid fa-circle"></i>{{ $list->maker }}

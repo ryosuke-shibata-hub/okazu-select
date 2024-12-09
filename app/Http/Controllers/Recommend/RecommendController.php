@@ -36,9 +36,14 @@ class RecommendController extends Controller
             $response = Http::get($targetCollection);
 
             foreach ($response['result']['items'] as $result) {
-                foreach ($result['iteminfo']['actress'] as $actress) {
-                   $actressTargetId = $actress['id'];
-                   $actressTargetName = $actress['name'];
+                if (isset($result['iteminfo']['actress'])) {
+                    foreach ($result['iteminfo']['actress'] as $actress) {
+                        $actressTargetId = $actress['id'];
+                        $actressTargetName = $actress['name'];
+                    }
+                } else {
+                        $actressTargetId = "";
+                        $actressTargetName = "";
                 }
             }
 

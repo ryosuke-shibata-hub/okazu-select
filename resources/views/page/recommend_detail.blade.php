@@ -8,14 +8,16 @@
             {{ $result['title'] }}
         </h1>
         <div class="pt-5">
-            <p class="text-sm font-bold text-gray-600 lg:text-base">出演女優</p>
-            <h2>
-                @foreach($result['iteminfo']['actress'] as $actress)
-                    <a class="font-bold text-gray-500" href="/search/result/free-word/?searchKeyword={{ $actress['name'] }}">
-                        ・{{ $actress['name'] }}
-                    </a>
-                @endforeach
-            </h2>
+            @if(isset($result['iteminfo']['actress']))
+                <p class="text-sm font-bold text-gray-600 lg:text-base">出演女優</p>
+                <h2>
+                    @foreach($result['iteminfo']['actress'] as $actress)
+                        <a class="font-bold text-gray-500" href="/search/result/free-word/?searchKeyword={{ $actress['name'] }}">
+                            ・{{ $actress['name'] }}
+                        </a>
+                    @endforeach
+                </h2>
+             @endif
             <p class="pt-5 text-sm font-bold text-gray-600 lg:text-base">メーカー</p>
             <h2>
                 @foreach($result['iteminfo']['maker'] as $maker)
@@ -90,85 +92,87 @@
                 </div>
                 <img src="{{ asset('static/image/18.png') }}" alt="オカズセレクト" class="rounded-full w-14 h-14">
             </div>
-            <div class="">
-                <h3 class="pb-10 font-bold text-gray-500">
-                    @foreach($result['iteminfo']['actress'] as $actress)
-                        {{ $actress['name'] }}さんのプロフィール
-                    @endforeach
-                </h3>
-                <div class="p-10 text-sm font-bold text-gray-600 rounded-lg shadow-2xl justify-items-center lg:text-base">
-                    @foreach($responseActressData['result']['actress'] as $actressData)
-                        <img src={{ $actressData['imageURL']['large'] }} class="w-48 h-48 rounded-full"/>
-                        <h3 class="py-1">
-                            女優名：{{ $actressData['name'] }}（{{ $actressData['ruby'] }}）
-                        </h3>
-                        <p class="py-1">
-                            @if($actressData['bust'] && $actressData['waist'] && $actressData['hip'])
-                                スリーサイズ：{{ $actressData['bust'] }}-{{ $actressData['waist'] }}-{{ $actressData['hip'] }}
-                            @else
-                                スリーサイズ：-
-                            @endif
-                        </p>
-                        <p class="py-1">
-                            @if($actressData['cup'])
-                                カップ数：{{ $actressData['cup'] }}
-                            @else
-                                カップ数：-
-                            @endif
-                        </p>
-                        <p class="py-1">
-                            @if($actressData['height'])
-                                身長：{{ $actressData['height'] }}cm
-                            @else
-                                身長：-
-                            @endif
-                        </p>
-                        <p class="py-1">
-                            @if($actressData['birthday'])
-                                生年月日：{{ date('Y年m月d日', strtotime($actressData['birthday'])) }}
-                            @else
-                                生年月日：-
-                            @endif
-                        </p>
-                        <p class="py-1">
-                            @if($actressData['blood_type'])
-                                血液型：{{ $actressData['blood_type'] }}型
-                            @else
-                                血液型：-
-                            @endif
-                        </p>
-                        <p class="py-1">
-                            @if($actressData['prefectures'])
-                                出身地：{{ $actressData['prefectures']}}
-                            @else
-                                出身地：-
-                            @endif
-                        </p>
-                        <p class="py-1">
-                            @if($actressData['hobby'])
-                                趣味：{{ $actressData['hobby'] }}型
-                            @else
-                                趣味：-
-                            @endif
-                        </p>
+            @if(isset($result['iteminfo']['actress']))
+                <div class="">
+                    <h3 class="pb-10 font-bold text-gray-500">
+                        @foreach($result['iteminfo']['actress'] as $actress)
+                            {{ $actress['name'] }}さんのプロフィール
+                        @endforeach
+                    </h3>
+                    <div class="p-10 text-sm font-bold text-gray-600 rounded-lg shadow-2xl justify-items-center lg:text-base">
+                        @foreach($responseActressData['result']['actress'] as $actressData)
+                            <img src={{ $actressData['imageURL']['large'] }} class="w-48 h-48 rounded-full"/>
+                            <h3 class="py-1">
+                                女優名：{{ $actressData['name'] }}（{{ $actressData['ruby'] }}）
+                            </h3>
+                            <p class="py-1">
+                                @if($actressData['bust'] && $actressData['waist'] && $actressData['hip'])
+                                    スリーサイズ：{{ $actressData['bust'] }}-{{ $actressData['waist'] }}-{{ $actressData['hip'] }}
+                                @else
+                                    スリーサイズ：-
+                                @endif
+                            </p>
+                            <p class="py-1">
+                                @if($actressData['cup'])
+                                    カップ数：{{ $actressData['cup'] }}
+                                @else
+                                    カップ数：-
+                                @endif
+                            </p>
+                            <p class="py-1">
+                                @if($actressData['height'])
+                                    身長：{{ $actressData['height'] }}cm
+                                @else
+                                    身長：-
+                                @endif
+                            </p>
+                            <p class="py-1">
+                                @if($actressData['birthday'])
+                                    生年月日：{{ date('Y年m月d日', strtotime($actressData['birthday'])) }}
+                                @else
+                                    生年月日：-
+                                @endif
+                            </p>
+                            <p class="py-1">
+                                @if($actressData['blood_type'])
+                                    血液型：{{ $actressData['blood_type'] }}型
+                                @else
+                                    血液型：-
+                                @endif
+                            </p>
+                            <p class="py-1">
+                                @if($actressData['prefectures'])
+                                    出身地：{{ $actressData['prefectures']}}
+                                @else
+                                    出身地：-
+                                @endif
+                            </p>
+                            <p class="py-1">
+                                @if($actressData['hobby'])
+                                    趣味：{{ $actressData['hobby'] }}型
+                                @else
+                                    趣味：-
+                                @endif
+                            </p>
+                            <div class="my-5">
+                                <a
+                                    href='/search/result/actress/detail/{{ $actressData['id'] }}/{{ $actressData['name'] }}'
+                                    class="px-2 py-1 text-right bg-white border border-gray-200 rounded-full text-2xs font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 text-nowrap">
+                                    <i class="pr-1 fa-solid fa-magnifying-glass"></i>{{ $actressData['name'] }}さんの作品をもっと見る？
+                                </a>
+                            </div>
+                        @endforeach
                         <div class="my-5">
                             <a
-                                href='/search/result/actress/detail/{{ $actressData['id'] }}/{{ $actressData['name'] }}'
-                                class="px-2 py-1 text-right bg-white border border-gray-200 rounded-full text-2xs font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 text-nowrap">
-                                <i class="pr-1 fa-solid fa-magnifying-glass"></i>{{ $actressData['name'] }}さんの作品をもっと見る？
+                                target="_blank"
+                                href={{ $result['affiliateURL'] }}
+                                class="px-2 py-1 text-right bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                <i class="pr-1 fa-solid fa-up-right-from-square"></i>FANZAで購入する
                             </a>
                         </div>
-                    @endforeach
-                    <div class="my-5">
-                        <a
-                            target="_blank"
-                            href={{ $result['affiliateURL'] }}
-                            class="px-2 py-1 text-right bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
-                            <i class="pr-1 fa-solid fa-up-right-from-square"></i>FANZAで購入する
-                        </a>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
         @if($responseGoodsData['result']['result_count'] != 0)
             <section class="text-gray-600 body-font">
