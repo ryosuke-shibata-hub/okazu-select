@@ -80,13 +80,11 @@ $(function () {
     var searchMakerInputArea = $('#open-filter-input-maker');
     var searchMakerAreaBtn = $('#search-maker-btn');
     var makerGojuonBtn = $('.search-maker-name-btn');
-    var makerList = $('#maker-list');
     // シリーズリスト変数
     var searchSeriesArea = $('#search-series-area');
     var searchSeriesInputArea = $('#open-filter-input-series');
     var searchSeriesAreaBtn = $('#search-series-btn');
     var seriesGojuonBtn = $('.search-series-name-btn');
-    var seriesList = $('#series-list');
 
 
     $(searchGenreArea).css('display', 'none');
@@ -234,9 +232,7 @@ $(function () {
         const $targetModal = $("#" + targetModalId);
         const seriesList = $(`#series-list-${targetGojyuon}`);
         $targetModal.show();
-        // document.getElementById('series-modal').style.display = 'block';
 
-        // var targetGojyuon = $(this).data('group');
         seriesList.empty().append('<p class="loading-message">読み込み中...<i class="fa-solid fa-spinner fa-spin"></i></p>');
 
         $.ajax({

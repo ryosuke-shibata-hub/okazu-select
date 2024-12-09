@@ -45,7 +45,9 @@
                     </a>
                 @endforeach
             </div>
-            <p class="pt-5 text-xs font-bold text-gray-600 lg:text-sm">配信開始日 {{ $result['date'] }}</p>
+            <p class="pt-5 text-xs font-bold text-gray-600 lg:text-sm">
+                配信開始日 {{ date('Y年m月d日', strtotime($result['date']))   }}
+            </p>
             <div class="py-5">
                 <img src={{ $result['imageURL']['large'] }} />
             </div>
@@ -53,7 +55,7 @@
                 <img src="{{ asset('static/image/18.png') }}" alt="オカズセレクト" class="rounded-full w-14 h-14">
                 <div class="balloon">
                     <div class="balloon-arrow"></div>
-                    <p>{{ $recommendDetail->detail_meta_1 }}</p>
+                    <p class="">{{ $recommendDetail->detail_meta_1 }}</p>
                 </div>
             </div>
             <div class="pt-5 text-xs font-bold text-gray-600 lg:text-sm">
@@ -101,30 +103,58 @@
                             女優名：{{ $actressData['name'] }}（{{ $actressData['ruby'] }}）
                         </h3>
                         <p class="py-1">
-                            スリーサイズ：{{ $actressData['bust'] }}-{{ $actressData['waist'] }}-{{ $actressData['hip'] }}
+                            @if($actressData['bust'] && $actressData['waist'] && $actressData['hip'])
+                                スリーサイズ：{{ $actressData['bust'] }}-{{ $actressData['waist'] }}-{{ $actressData['hip'] }}
+                            @else
+                                スリーサイズ：-
+                            @endif
                         </p>
                         <p class="py-1">
-                            カップ数：{{ $actressData['cup'] }}
+                            @if($actressData['cup'])
+                                カップ数：{{ $actressData['cup'] }}
+                            @else
+                                カップ数：-
+                            @endif
                         </p>
                         <p class="py-1">
-                            身長：{{ $actressData['height'] }}cm
+                            @if($actressData['height'])
+                                身長：{{ $actressData['height'] }}cm
+                            @else
+                                身長：-
+                            @endif
                         </p>
                         <p class="py-1">
-                            生年月日：{{ $actressData['birthday'] }}
+                            @if($actressData['birthday'])
+                                生年月日：{{ date('Y年m月d日', strtotime($actressData['birthday'])) }}
+                            @else
+                                生年月日：-
+                            @endif
                         </p>
                         <p class="py-1">
-                            血液型：{{ $actressData['blood_type'] }}型
+                            @if($actressData['blood_type'])
+                                血液型：{{ $actressData['blood_type'] }}型
+                            @else
+                                血液型：-
+                            @endif
                         </p>
                         <p class="py-1">
-                            出身地：{{ $actressData['prefectures']}}
+                            @if($actressData['prefectures'])
+                                出身地：{{ $actressData['prefectures']}}
+                            @else
+                                出身地：-
+                            @endif
                         </p>
                         <p class="py-1">
-                            趣味：{{ $actressData['hobby'] }}型
+                            @if($actressData['hobby'])
+                                趣味：{{ $actressData['hobby'] }}型
+                            @else
+                                趣味：-
+                            @endif
                         </p>
                         <div class="my-5">
                             <a
                                 href='/search/result/actress/detail/{{ $actressData['id'] }}/{{ $actressData['name'] }}'
-                                class="px-2 py-1 text-right bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                class="px-2 py-1 text-right bg-white border border-gray-200 rounded-full text-2xs font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 text-nowrap">
                                 <i class="pr-1 fa-solid fa-magnifying-glass"></i>{{ $actressData['name'] }}さんの作品をもっと見る？
                             </a>
                         </div>
