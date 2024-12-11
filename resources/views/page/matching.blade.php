@@ -52,7 +52,7 @@
             </form>
         </div>
     </div>
-    @include('components.banner.right-banner')
+    {{-- @include('components.banner.right-banner') --}}
 </div>
 <input type="hidden" id="genre-data" value="{{ json_encode($getRandomGenre, JSON_UNESCAPED_UNICODE) }}">
 @endsection
