@@ -94,8 +94,8 @@
                         </div>
                         <img src="{{ asset('static/image/18.png') }}" alt="オカズセレクト" class="rounded-full w-14 h-14">
                     </div>
-                    @if(isset($result['iteminfo']['actress']))
-                        <div class="">
+                    <div class="">
+                        @if(isset($result['iteminfo']['actress']))
                             <h3 class="pb-10 font-bold text-gray-500">
                                 @foreach($result['iteminfo']['actress'] as $actress)
                                     {{ $actress['name'] }}さんのプロフィール
@@ -168,17 +168,17 @@
                                         </a>
                                     </div>
                                 @endforeach
-                                <div class="my-5">
-                                    <a
-                                        target="_blank"
-                                        href={{ $result['affiliateURL'] }}
-                                        class="px-2 py-1 text-right bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
-                                        <i class="pr-1 fa-solid fa-up-right-from-square"></i>FANZAで購入する
-                                    </a>
-                                </div>
+                            @endif
+                            <div class="my-5 text-center">
+                                <a
+                                    target="_blank"
+                                    href={{ $result['affiliateURL'] }}
+                                    class="px-2 py-1 text-right bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                    <i class="pr-1 fa-solid fa-up-right-from-square"></i>FANZAで購入する
+                                </a>
                             </div>
                         </div>
-                    @endif
+                    </div>
                 </div>
                 @if($responseGoodsData['result']['result_count'] != 0)
                     <section class="text-gray-600 body-font">
