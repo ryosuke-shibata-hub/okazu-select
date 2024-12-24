@@ -125,22 +125,37 @@ class MainController extends Controller
         return view("errors.500");
     }
 
-    public function searchResultPageGenre($id, $name)
+    public function searchResultPageGenre(Request $request)
     {
-        if (!$id) {
-            Log::error("ジャンル検索でidが送られていない");
-            return redirect('errors.404');
+        $checkedGenreGenres = $request['checked_genre'];
+        // dd($data);
+        if (!$checkedGenreGenres) {
+            return view('page.searchResult')
+            ->with('response', '');
         }
 
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
-        $name = str_replace('／','/', $name);
+        $getCount = config('const.API.MATCHING.GET_COUNT');
+
+        $apiPram = config('const.API.PARAMETER.SEARCH.GENRE');
+
+        $targetName = [];
+        foreach ($checkedGenreGenres as $genre) {
+            $targetName[] = $genre;
+        }
+
+        $targetCheckedGenre = $apiPram['APIGOODSSEARCHPARAM'] . implode($apiPram['APIGOODSSEARCHPARAM'], $targetName);
+
+        $apiId = config('const.API_ID');
+        $affiliateId = config('const.AFFILIATE_ID');
+        // $name = str_replace('／','/', $name);
 
         try {
-            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$name}&article=genre&article_id={$id}&&floor=videoa&hits=100&sort=rank&output=json";
-
+            //ジャンルでの結果取得用API
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits={$getCount}&sort=match&keyword={$targetCheckedGenre}&output=json";
             //マッチングどの高いグッズの取得用API
-            $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$name}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
+            $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$targetCheckedGenre}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
             $response = Http::get($itemList);
             $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
@@ -152,9 +167,9 @@ class MainController extends Controller
             }
 
             if ($response->ok() || $getGoodMatchingData->ok()) {
-                Log::info("ジャンル検索正常終了",["検索値"=>$name]);
+                Log::info("ジャンル検索正常終了",["検索値"=>$targetName]);
                 return view('page.searchResult')
-                ->with('keyword', $name)
+                ->with('keyword', $targetName)
                 ->with('response', $response)
                 ->with('getGoodMatchingData', $getGoodMatchingData);
             }

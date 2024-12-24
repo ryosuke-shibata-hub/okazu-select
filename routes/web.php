@@ -55,7 +55,7 @@ Route::middleware(AgeVerification::class)->group(function () {
     Route::get('/search', [MainController::class, 'searchPage'])
     ->name('searchPage');
     //ジャンル検索結果画面
-    Route::get('/search/result/genre/{id}/{name}',  [MainController::class, 'searchResultPageGenre'])
+    Route::get('/search/result/genre',  [MainController::class, 'searchResultPageGenre'])
     ->name('searchResultPageGenre');
     //女優検索結果画面
     Route::get('/search/result/actress/detail/{id}/{name}',  [MainController::class, 'searchResultPageActress'])

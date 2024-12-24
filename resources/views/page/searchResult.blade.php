@@ -4,8 +4,22 @@
 @section('content')
 @include('components.modal.sample-img')
 @include('components.modal.sample-video')
+@if($response == '')
+    <div class="text-center">
+        <p class="pt-5 my-5 text-xl font-bold text-gray-600 text-nowrap">お探しの作品が見つかりませんでした。</p>
+        <a
+            href="/search"
+            class="inline-block pt-5 mt-4 text-xl font-bold text-gray-600 text-nowrap text-teal-lighter hover:text-blue-400">
+                再検索
+        </a>
+    </div>
+@else
 <h1 class="inline-block p-3 px-5 mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
-    <i class="mr-2 fa-solid fa-play fa-1xl" style="color: #63E6BE;"></i>{{ $keyword }}の検索結果
+    <i class="mr-2 fa-solid fa-play fa-1xl" style="color: #63E6BE;"></i>
+    @foreach($keyword as $value)
+        {{ $value }}、
+    @endforeach
+    の検索結果
 </h1>
 <div class="flex">
     <div class="w-11/12 p-2 mx-auto">
@@ -125,5 +139,6 @@
     {{-- バナー右 --}}
     {{-- @include('components.banner.right-banner') --}}
 </div>
+@endif
 @include('components.page-top-link')
 @endsection

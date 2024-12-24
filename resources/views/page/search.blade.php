@@ -30,22 +30,32 @@
                         placeholder="ジャンルを検索..."
                     >
                 </div>
-                <div
-                    id="search-genre-area"
-                    class="grid grid-cols-3 gap-2 p-2 md:grid-cols-8 md:gap-4">
-                    @foreach($genreData as $genre)
-                        <a
-                            href="/search/result/genre/{{ $genre->genre_id }}/{{ $genre->genre_name }}"
-                            data-genre="{{ $genre->genre_name }}"
-                            class="genre-item">
-                            <div
-                                class="overflow-hidden bg-white border border-gray-500 rounded-md"
-                            >
-                                <p class="p-1 text-xs text-left text-gray-700">{{ $genre->genre_name }}</p>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+                <form action="/search/result/genre" method="GET">
+                    <div
+                        id="search-genre-area"
+                        class="grid grid-cols-3 gap-2 p-2 mb-3 md:grid-cols-8 md:gap-4">
+                        @foreach($genreData as $genre)
+                        <div class="flex w-full genre-item" data-genre="{{ $genre->genre_name }}">
+                            <input
+                                type="checkbox"
+                                class="mx-auto my-auto mr-1 rounded-lg"
+                                name="checked_genre[]"
+                                value={{ $genre->genre_name }}
+                            />
+                                <div
+                                    class="w-full mx-auto my-auto overflow-hidden bg-white border border-gray-500 rounded-md genre-list"
+                                >
+                                    <p class="p-1 text-xs text-left text-gray-700">{{ $genre->genre_name }}</p>
+                                </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div id="open-filter-btn-genre" class="py-3 text-center">
+                        <button type="submit" class="px-5 py-1 text-base font-bold text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                            検索
+                        </button>
+                    </div>
+                </form>
             </div>
             <!-- 女優から -->
             <div

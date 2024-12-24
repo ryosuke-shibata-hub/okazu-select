@@ -69,6 +69,7 @@ $(function () {
     //ジャンルリスト変数
     var searchGenreArea = $('#search-genre-area');
     var searchGenreInputArea = $('#open-filter-input-genre');
+    var searchGenreBtnArea = $('#open-filter-btn-genre');
     var searchGenreBtn = $('#search-genre-btn');
     // 女優リスト変数
     var searchActressesArea = $('#search-actress-area');
@@ -89,6 +90,7 @@ $(function () {
 
     $(searchGenreArea).css('display', 'none');
     $(searchGenreInputArea).css('display', 'none');
+    $(searchGenreBtnArea).css('display', 'none');
 
     $(searchActressesArea).css('display', 'none');
     $(searchActressesInputArea).css('display', 'none');
@@ -103,6 +105,7 @@ $(function () {
     $(searchGenreBtn).on('click', function () {
         searchGenreArea.slideToggle();
         searchGenreInputArea.slideToggle();
+        searchGenreBtnArea.slideToggle();
     })
     $(searchActressAreaBtn).on('click', function () {
         searchActressesArea.slideToggle();
