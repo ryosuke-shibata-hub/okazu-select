@@ -3,7 +3,6 @@
 <script src={{ asset('static/js/static.js') }} defer></script>
 @section('content')
 @include('components.modal.sample-img')
-@include('components.modal.sample-video')
 <div class="inline-block p-3 px-5 mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
     <h1 class="">
         <i class="text-pink-600 lg:mr-2 fa-regular fa-heart"></i>マッチング結果
@@ -67,19 +66,8 @@
                                     @endforeach
                                 @endif
                             </div>
-                            <div class="p-2">
-                                @if(isset($result['iteminfo']['genre']))
-                                    @foreach($result['iteminfo']['genre'] as $genre)
-                                        <a
-                                            href="/search/result/genre/{{$genre['id']}}/{{ $genre['name'] }}"
-                                            class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
-                                            <span class="">
-                                                {{ $genre['name'] }}
-                                            </span>
-                                        </a>
-                                    @endforeach
-                                @endif
-                            </div>
+                            {{-- ジャンルでのタグ検索用 --}}
+                            @include('components.btn-group.search-genre-btn-group')
                             <div class="text-center">
                                 <img class="mx-auto" src={{ $result['imageURL']['large'] }} alt={{ $result['title'] }} />
                             </div>
@@ -87,10 +75,9 @@
                                 <div class="lg:mx-auto">
                                 @if(isset($result['sampleMovieURL']))
                                     <button
-                                        id=""
                                         type="button"
                                         data-content-id={{ $result['content_id'] }}
-                                        class="p-1 text-gray-900 bg-white border border-gray-200 rounded-full sampleVideoOpenModal font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                        class="px-2 py-1 text-gray-900 bg-white border border-gray-200 rounded-full play-sample-video-btn font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                         <i class="pr-1 fa-solid fa-video" style="color: #ff6251;"></i>サンプル動画
                                     </button>
                                 @endif
@@ -111,6 +98,7 @@
                                     </a>
                                 </div>
                             </div>
+                            @include('components.modal.sample-video')
                         </div>
                     @endif
                 @endforeach
@@ -185,29 +173,17 @@
                                                 @endforeach
                                             @endif
                                         </div>
-                                        <div class="p-2">
-                                            @foreach($result['iteminfo']['genre'] as $genre)
-                                                <a
-                                                    href="/search/result/genre/{{$genre['id']}}/{{ $genre['name'] }}"
-                                                    class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
-                                                    style="font-size: 0.75rem;">
-                                                    <span style="font-size: 0.55rem;">
-                                                        {{ $genre['name'] }}
-                                                    </span>
-                                                </a>
-                                            @endforeach
-                                        </div>
+                                        {{-- ジャンルでのタグ検索用 --}}
+                                        @include('components.btn-group.search-genre-btn-group')
                                         <img class="object-cover w-full h-56 lg:h-60" src={{ $result['imageURL']['large'] }} alt={{ $result['title'] }} />
                                         <div class="flex p-1 pt-3 text-xs lg:text-center lg:text-xl lg:p-3">
                                             <div class="lg:mx-auto">
                                                 @if(isset($result['sampleMovieURL']))
                                                     <button
-                                                        id=""
                                                         type="button"
                                                         data-content-id={{ $result['content_id'] }}
-                                                        class="text-gray-900 bg-white border border-gray-200 rounded-full lg:px-1 sampleVideoOpenModal font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
-                                                        style="font-size: 0.75rem;">
-                                                        <i class="fa-solid fa-video" style="color: #ff6251;"></i>サンプル動画
+                                                        class="px-2 py-1 text-gray-900 bg-white border border-gray-200 rounded-full play-sample-video-btn font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
+                                                        <i class="pr-1 fa-solid fa-video" style="color: #ff6251;"></i>サンプル動画
                                                     </button>
                                                 @endif
                                                 @if(isset($result['sampleImageURL']))
@@ -229,6 +205,7 @@
                                                 </a>
                                             </div>
                                         </div>
+                                    @include('components.modal.sample-video')
                                     </div>
                                 @endif
                             @endforeach

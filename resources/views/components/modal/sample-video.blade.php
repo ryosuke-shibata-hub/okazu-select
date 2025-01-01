@@ -1,8 +1,19 @@
-<div id="sampleVideoContainer" class="hidden w-full h-full pt-5 sampleVideoModal">
-    <div class="w-full h-full px-14 sampleVideoModalBody">
-        <button id="sampleVideoModalClose">
-            <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
+<div
+    id="play-sample-video-area"
+    class="hidden sampleVideoContainer play-sample-video-area"　
+    data-content-id="{{ $result['content_id'] }}"
+    style="min-height: 516px"
+>
+    <div class="sampleVideoModalBody">
+        <div class="sampleVideoModalWrapper"></div>
+    </div>
+    <div class="text-center sampleVideoCloseModal">
+        <button
+            type="button"
+            class="p-1 font-bold border rounded-md sampleVideoCloseBtn"
+            data-content-id="{{ $result['content_id'] }}"
+        >
+            閉じる
         </button>
-        <div id="sampleVideoModalWrapper" class="pt-5 text-center sampleVideoModalWrapper"></div>
     </div>
 </div>

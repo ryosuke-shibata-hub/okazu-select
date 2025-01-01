@@ -2,8 +2,6 @@
 @section('script')
 <script src={{ asset('static/js/search.js') }} defer></script>
 @section('content')
-@include('components.modal.sample-img')
-@include('components.modal.sample-video')
 <h1 class="inline-block p-3 px-5 mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
     <i class="text-blue-400 lg:mr-2 fa-solid fa-magnifying-glass"></i>検索
 </h1>

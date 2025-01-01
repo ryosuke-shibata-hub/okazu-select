@@ -38,17 +38,8 @@
                             @endforeach
                         </h2>
                     @endif
-                    <div class="p-2">
-                        @foreach($result['iteminfo']['genre'] as $genre)
-                            <a
-                                href="/search/result/genre/{{$genre['id']}}/{{ $genre['name'] }}"
-                                class="px-1 text-xs text-gray-900 bg-white border border-gray-200 rounded-full font-sm focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
-                                <span class="">
-                                    {{ $genre['name'] }}
-                                </span>
-                            </a>
-                        @endforeach
-                    </div>
+                    {{-- ジャンルでのタグ検索用 --}}
+                    @include('components.btn-group.search-genre-btn-group')
                     <p class="pt-5 text-xs font-bold text-gray-600 lg:text-sm">
                         配信開始日 {{ date('Y年m月d日', strtotime($result['date']))   }}
                     </p>

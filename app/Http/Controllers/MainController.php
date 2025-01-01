@@ -71,7 +71,7 @@ class MainController extends Controller
     {
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
-        $targetUrlToRanking = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=50&sort=rank&output=json";
+        $targetUrlToRanking = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=10&sort=rank&output=json";
 
         $response = Http::get($targetUrlToRanking);
 
@@ -128,7 +128,7 @@ class MainController extends Controller
     public function searchResultPageGenre(Request $request)
     {
         $checkedGenreGenres = $request['checked_genre'];
-        // dd($data);
+
         if (!$checkedGenreGenres) {
             return view('page.searchResult')
             ->with('response', '');
@@ -149,7 +149,6 @@ class MainController extends Controller
 
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
-        // $name = str_replace('／','/', $name);
 
         try {
             //ジャンルでの結果取得用API

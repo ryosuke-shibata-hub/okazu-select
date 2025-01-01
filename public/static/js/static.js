@@ -68,60 +68,60 @@ $(function () {
 
 
     // サンプル動画の取得
-	var sampleVideoModalWrapper = $('#sampleVideoModalWrapper'),
-		sampleVideoContainer = $('#sampleVideoContainer')
+    var playSampleVideoBtn = $('.play-sample-video-btn')
 
-    $('.sampleVideoOpenModal').on('click', function () {
-        var targetContentId = $(this).data('content-id');
-        sampleVideoModalWrapper.empty();
+    $(playSampleVideoBtn).on('click', function () {
+
+        var $button = $(this); // クリックしたボタン
+        var contentId = $button.data('content-id'); // ボタンのcontent-id
+        var $targetArea = $('.play-sample-video-area[data-content-id="' + contentId + '"]'); // 対応する動画エリア
+        var $targetWrapper = $targetArea.find('.sampleVideoModalWrapper'); // 対応する動画ラッパー
+
+        $targetArea.slideToggle();
+        $targetWrapper.empty();
 
         $.ajax({
-            url: `/get-sample-data-detail/${targetContentId}`,
+            url: `/get-sample-data-detail/${contentId}`,
             method: 'GET',
             dataType: 'json',
             success: function (response) {
                 if (response && response.result.items[0]['sampleMovieURL']) {
-                    targetVideoUrl = response.result.items[0]['sampleMovieURL']['size_720_480']
-                    targetVideoTitle = response.result.items[0]['title']
-                        sampleVideoModalWrapper.append(
+                    var targetVideoUrl = response.result.items[0]['sampleMovieURL']['size_720_480']
+                    var targetVideoTitle = response.result.items[0]['title']
+                        $targetWrapper.append(
                             `
-                            <div
-                                style="width:100%;
-                                padding-top: 75%;
-                                position:relative;"
-                            >
                                 <iframe
-                                name=${targetVideoTitle}
-                                    class="sampleVideoIframe"
-                                    max-width="1280px"
-                                    style="position: absolute; top: 0; left: 0;"
+                                    name=${targetVideoTitle}
+                                    class="w-full h-screen py-2"
+                                    style="min-height: 516px"
                                     src="${targetVideoUrl}"
                                     scrolling="no"
                                     frameborder="0"
                                     allowfullscreen>
                                 </iframe>
-                            </div>
                             `
                         );
                 } else {
-                    sampleVideoModalWrapper.append('<p>サンプル動画はありません。</p>');
-                    sampleVideoModalWrapper.addClass('bg-white')
+                    $targetWrapper.append('<p>サンプル動画はありません。</p>');
+                    $targetWrapper.addClass('bg-white')
                 }
-                sampleVideoContainer.removeClass('hidden')
+                $targetArea.removeClass('hidden')
             },
             error: function (error) {
-                sampleVideoModalWrapper.append('<p>サンプル動画を取得できませんでした。</p>');
-                sampleVideoModalWrapper.addClass('bg-white pt-10')
-                sampleVideoContainer.removeClass('hidden');
+                $targetWrapper.append('<p>サンプル動画を取得できませんでした。</p>');
+                $targetWrapper.addClass('bg-white pt-10')
+                $targetArea.removeClass('hidden');
             }
         })
         return false;
     })
 
-    $('#sampleVideoModalClose').on('click', function () {
-        sampleVideoContainer.addClass('hidden');
-    })
-    $('#sampleVideoContainer').on('click', function () {
-        sampleVideoContainer.addClass('hidden');
-    })
+    var playSampleVideoCloseBtn = $('.sampleVideoCloseBtn')
+
+    $(playSampleVideoCloseBtn).on('click', function () {
+        var $button = $(this); // クリックしたボタン
+        var contentId = $button.data('content-id'); // ボタンのcontent-id
+        var $targetArea = $('.play-sample-video-area[data-content-id="' + contentId + '"]'); // 対応する動画エリア
+        $targetArea.hide();
+     })
 });
