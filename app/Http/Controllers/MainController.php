@@ -33,13 +33,22 @@ class MainController extends Controller
         ->with('targetInfomation', $targetInfomation);
     }
 
-    public function topPage()
+    public function topPage(Request $request)
     {
+        if ($request->currentPage) {
+            Log::debug("あるよ");
+            $currentPage = $request->currentPage+10;
+        } else {
+            Log::debug("ないよ");
+            $currentPage = 1;
+        }
+        Log::debug($currentPage);
+        $targetUrlToRanking = $this->getApiDataToRanking($currentPage);
 
-        $targetUrlToRanking = $this->getApiDataToRanking();
 
         return view('page.topPage')
-        ->with('targetUrlToRanking', $targetUrlToRanking);
+        ->with('targetUrlToRanking', $targetUrlToRanking)
+        ->with('currentPage', $currentPage);
     }
 
     public function matchingPage()
@@ -67,11 +76,11 @@ class MainController extends Controller
         return view('page.help');
     }
 
-    public function getApiDataToRanking()
+    public function getApiDataToRanking($currentPage)
     {
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
-        $targetUrlToRanking = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=10&sort=rank&output=json";
+        $targetUrlToRanking = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits=10&sort=rank&offset={$currentPage}&output=json";
 
         $response = Http::get($targetUrlToRanking);
 
@@ -112,13 +121,13 @@ class MainController extends Controller
         //マッチングどの高いグッズの取得用API
         $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$searchKeyWords}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
-        $getMatchingData = Http::get($targetUrlToMatching);
+        $response = Http::get($targetUrlToMatching);
         $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
 
-        if ($getMatchingData->ok() || $getGoodMatchingData) {
+        if ($response->ok() || $getGoodMatchingData) {
             Log::info("マッチング結果正常取得",['マッチング項目' => $searchKeyWords]);
             return view('page.matchingResult')
-            ->with('getMatchingData', $getMatchingData)
+            ->with('response', $response)
             ->with('getGoodMatchingData', $getGoodMatchingData);
         }
 
@@ -168,7 +177,7 @@ class MainController extends Controller
             if ($response->ok() || $getGoodMatchingData->ok()) {
                 Log::info("ジャンル検索正常終了",["検索値"=>$targetName]);
                 return view('page.searchResult')
-                ->with('keyword', $targetName)
+                ->with('genre', $targetName)
                 ->with('response', $response)
                 ->with('getGoodMatchingData', $getGoodMatchingData);
             }

@@ -15,9 +15,14 @@
 @else
 <h1 class="inline-block p-3 px-5 mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
     <i class="mr-2 fa-solid fa-play fa-1xl" style="color: #63E6BE;"></i>
-    @foreach($keyword as $value)
-        「{{ $value }}」
-    @endforeach
+    @if(isset($genre))
+        @foreach($genre as $value)
+            「{{ $value }}」
+        @endforeach
+    @else
+        「{{ $keyword }}」
+    @endif
+
     の検索結果
 </h1>
 <div class="flex">

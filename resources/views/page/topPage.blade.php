@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('script')
 <script src={{ asset('static/js/static.js') }} defer></script>
+<script src={{ asset('static/js/loading-new-video-page.js') }} defer></script>
 @section('content')
 @include('components.modal.sample-img')
 <h1 class="inline-block p-3 px-5 mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
@@ -97,6 +98,14 @@
                         @include('components.modal.sample-video')
                     </div>
                 @endforeach
+                <div class="text-sm font-bold text-center text-gray-500">
+                    <form action="/top" method="GET">
+                    <input type="hidden" name="currentPage" value="{{ $currentPage }}" />
+                    <button>
+                        <i class="fa-solid fa-arrow-rotate-right">次のページ</i>
+                    </button>
+                    </form>
+                </div>
             </div>
         @else
             @include('components.message.error')
