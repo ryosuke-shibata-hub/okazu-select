@@ -3,7 +3,7 @@
     <div class="block">
         Powered by <a href="https://affiliate.dmm.com/api/" target="_blank">FANZA Webサービス</a>
         <p>&copy; 2024 おかずせれくと.com. All rights reserved.</p>
-        <p class="text-center">ver 1.5.1</p>
+        <p class="text-center">ver 1.5.2</p>
         <a
             href="https://x.com/okazuselect_com"
             class="text-xs font-bold"
