@@ -22,6 +22,7 @@ class RecommendController extends Controller
 
     public function recommendDetail($title)
     {
+
         if (!$title) {
             Log::error("記事の詳細で対象のパラメータが送られていない");
             return redirect('error.404');
@@ -35,13 +36,16 @@ class RecommendController extends Controller
 
             $response = Http::get($targetCollection);
 
+            Log::alert($targetCollection);
             foreach ($response['result']['items'] as $result) {
                 if (isset($result['iteminfo']['actress'])) {
+
                     foreach ($result['iteminfo']['actress'] as $actress) {
                         $actressTargetId = $actress['id'];
                         $actressTargetName = $actress['name'];
                     }
                 } else {
+
                         $actressTargetId = "";
                         $actressTargetName = "";
                 }

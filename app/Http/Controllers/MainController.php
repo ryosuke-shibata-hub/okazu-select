@@ -36,13 +36,10 @@ class MainController extends Controller
     public function topPage(Request $request)
     {
         if ($request->currentPage) {
-            Log::debug("あるよ");
             $currentPage = $request->currentPage+10;
         } else {
-            Log::debug("ないよ");
             $currentPage = 1;
         }
-        Log::debug($currentPage);
         $targetUrlToRanking = $this->getApiDataToRanking($currentPage);
 
 

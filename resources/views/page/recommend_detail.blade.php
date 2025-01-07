@@ -69,7 +69,7 @@
                                         @foreach($sampleImageList as $image)
                                                 <div class="p-4 md:w-1/3">
                                                     <div class="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
-                                                    <img class="object-cover object-center w-full lg:h-48 md:h-36" src={{ $image }} alt="blog">
+                                                    <img class="object-cover object-center w-full lg:h-80 md:h-36" src={{ $image }} alt="blog">
                                                     </div>
                                                 </div>
                                         @endforeach
