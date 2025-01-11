@@ -191,9 +191,10 @@ class MainController extends Controller
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
         $name = str_replace('／','/', $name);
+        $target = 'actress';
 
         try {
-            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort=rank&output=json";
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort=rank&output=json";
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=mono&floor=goods&hits={$this->getCountGoods}&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
             $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
@@ -204,7 +205,10 @@ class MainController extends Controller
                 return view('page.searchResult')
                 ->with('keyword', $name)
                 ->with('response', $response)
-                ->with('getGoodMatchingData', $getGoodMatchingData);
+                ->with('getGoodMatchingData', $getGoodMatchingData)
+                ->with('id', $id)
+                ->with('name', $name)
+                ->with('target', $target);
             }
 
             return array();
@@ -263,8 +267,9 @@ class MainController extends Controller
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
         $name = str_replace('／','/', $name);
+        $target = 'series';
         try {
-            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article=series&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort=rank&output=json";
+            $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort=rank&output=json";
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=mono&floor=goods&hits={$this->getCountGoods}&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
             $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
@@ -275,7 +280,10 @@ class MainController extends Controller
                 return view('page.searchResult')
                 ->with('keyword', $name)
                 ->with('response', $response)
-                ->with('getGoodMatchingData', $getGoodMatchingData);
+                ->with('getGoodMatchingData', $getGoodMatchingData)
+                ->with('id', $id)
+                ->with('name', $name)
+                ->with('target', $target);
             }
 
             return array();
@@ -330,7 +338,6 @@ class MainController extends Controller
 
     public function searchResultSortPage($target, $id, $name, $sort)
     {
-        // dd([$target, $id, $name, $sort]);
         if (!$target || !$id || !$name || !$sort) {
             Log::error("並び替えでパラメータ不正",
                 [
@@ -342,31 +349,25 @@ class MainController extends Controller
             return view('errors.404');
         }
 
-        Log::debug('1');
-
          try {
             if ($target == 'maker') {
-                $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article=maker&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort={$sort}&output=json";
+                $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort={$sort}&output=json";
             }
-
-            Log::debug('2');
-
+            if ($target == 'series') {
+                $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&{$this->getCountVideo}&sort={$sort}&output=json";
+            }
             // if ($target == 'genre') {
             //     $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits={$getCount}&sort=match&keyword={$targetCheckedGenre}&output=json";
             // }
-            // if ($target == 'series') {
-            //     $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=series&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
-            // }
-            // if ($target == 'actress') {
-            //     $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
-            // }
+
+            if ($target == 'actress') {
+                $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort={$sort}&output=json";
+            }
             // if ($target == 'keyword') {
             //     $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
             // }
             //マッチングどの高いグッズの取得用API
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=mono&floor=goods&hits={$this->getCountGoods}&sort=match&k&mono_stock=stock|reserve|reserve_empty|mono&output=json";
-
-            Log::debug('3');
 
             $response = Http::get($itemList);
             $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
@@ -375,8 +376,6 @@ class MainController extends Controller
                 $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits={$this->getCountGoods}&sort=rank&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
                 $getGoodMatchingData = Http::get($targetUrlToGoodMatching);
-
-                Log::debug('4');
 
             }
 
