@@ -188,8 +188,6 @@ class MainController extends Controller
             return redirect('error.404');
         }
 
-        $apiId = config('const.API_ID');
-        $affiliateId = config('const.AFFILIATE_ID');
         $name = str_replace('／','/', $name);
         $target = 'actress';
 
@@ -226,8 +224,6 @@ class MainController extends Controller
             return redirect('error.404');
         }
 
-        $apiId = config('const.API_ID');
-        $affiliateId = config('const.AFFILIATE_ID');
         $name = str_replace('／','/', $name);
         $target = 'maker';
 
@@ -264,8 +260,6 @@ class MainController extends Controller
             return redirect('error.404');
         }
 
-        $apiId = config('const.API_ID');
-        $affiliateId = config('const.AFFILIATE_ID');
         $name = str_replace('／','/', $name);
         $target = 'series';
         try {
@@ -303,8 +297,7 @@ class MainController extends Controller
             return view('errors.404');
         }
 
-        $apiId = config('const.API_ID');
-        $affiliateId = config('const.AFFILIATE_ID');
+        $target = 'keyword';
 
         try {
             $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&keyword={$keyword}&floor=videoa&hits={$this->getCountVideo}&sort=rank&output=json";
@@ -325,7 +318,10 @@ class MainController extends Controller
                 return view('page.searchResult')
                 ->with('keyword', $keyword)
                 ->with('response', $response)
-                ->with('getGoodMatchingData', $getGoodMatchingData);
+                ->with('getGoodMatchingData', $getGoodMatchingData)
+                ->with('id', 'searchkeyword')
+                ->with('name', $keyword)
+                ->with('target', $target);
             }
 
             return array();
@@ -363,9 +359,9 @@ class MainController extends Controller
             if ($target == 'actress') {
                 $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort={$sort}&output=json";
             }
-            // if ($target == 'keyword') {
-            //     $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&article=actress&article_id={$id}&keyword={$name}&floor=videoa&hits=100&sort=rank&output=json";
-            // }
+            if ($target == 'keyword') {
+                $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort={$sort}&output=json";
+            }
             //マッチングどの高いグッズの取得用API
             $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=mono&floor=goods&hits={$this->getCountGoods}&sort=match&k&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
