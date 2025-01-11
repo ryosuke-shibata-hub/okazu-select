@@ -28,6 +28,20 @@
 <div class="flex">
     <div class="w-11/12 p-2 mx-auto">
         @if($response['result']['items'])
+            <div class="py-3 text-xs font-bold text-gray-500">
+                <a href="/search/result/{{ $target }}/{{ $id }}/{{ $name }}/match" class="p-2 mr-2 border rounded-lg hover:bg-blue-300 hover:text-white">
+                    おすすめ順
+                </a>
+                <a href="/search/result/{{ $target }}/{{ $id }}/{{ $name }}/rank" class="p-2 mr-3 border rounded-lg hover:bg-blue-300 hover:text-white">
+                    人気順
+                </a>
+                <a href="/search/result/{{ $target }}/{{ $id }}/{{ $name }}/date" class="p-2 mr-3 border rounded-lg hover:bg-blue-300 hover:text-white">
+                    新着順
+                </a>
+                <a href="/search/result/{{ $target }}/{{ $id }}/{{ $name }}/review" class="p-2 mr-3 border rounded-lg hover:bg-blue-300 hover:text-white">
+                    評価順
+                </a>
+            </div>
             <div class="">
                 @foreach($response['result']['items'] as $result)
                     <div class="p-2 mx-auto my-2 border-2 border-gray-300 border-dashed rounded-md">

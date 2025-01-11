@@ -12,6 +12,8 @@ return [
                     "APISEARCHPARAM" => "&article_id[0]=",
                     "APIGOODSSEARCHPARAM" => "|",
                 ],
+                "GET_COUNT_VIDEO" => 100,
+                "GET_COUNT_GOODS" => 18,
             ],
         ],
         "MATCHING" => [

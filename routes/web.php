@@ -69,6 +69,9 @@ Route::middleware(AgeVerification::class)->group(function () {
     //キーワード検索
     Route::get('/search/result/free-word/',  [MainController::class, 'searchResultPageFreeWord'])
     ->name('searchResultPageFreeWord');
+    //並び替え
+    Route::get('/search/result/{target}/{id}/{name}/{sort}', [MainController::class, 'searchResultSortPage'])
+    ->name('searchResultSortPage');
 });
 
 
