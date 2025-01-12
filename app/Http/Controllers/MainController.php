@@ -73,6 +73,7 @@ class MainController extends Controller
         $genreData = GenreModel::getAllGenre();
         $Gojuon = config('const.SEARCH_PARAM.GOJUON');
 
+
         return view('page.search')
         ->with('genreData', $genreData)
         ->with('Gojuon', $Gojuon);
