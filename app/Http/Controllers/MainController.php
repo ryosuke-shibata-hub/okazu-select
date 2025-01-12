@@ -149,6 +149,7 @@ class MainController extends Controller
         }
 
         $targetCheckedGenre = $this->apiPram['APIGOODSSEARCHPARAM'] . implode($this->apiPram['APIGOODSSEARCHPARAM'], $targetName);
+        $target = 'genre';
 
         try {
             //ジャンルでの結果取得用API
@@ -170,7 +171,10 @@ class MainController extends Controller
                 return view('page.searchResult')
                 ->with('genre', $targetName)
                 ->with('response', $response)
-                ->with('getGoodMatchingData', $getGoodMatchingData);
+                ->with('getGoodMatchingData', $getGoodMatchingData)
+                ->with('id', 'searchGenre')
+                ->with('name', $targetCheckedGenre)
+                ->with('target', $target);
             }
 
             return array();
@@ -344,17 +348,21 @@ class MainController extends Controller
                 ]);
             return view('errors.404');
         }
-
-         try {
+        $genre = null;
+        try {
             if ($target == 'maker') {
                 $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort={$sort}&output=json";
             }
             if ($target == 'series') {
                 $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&{$this->getCountVideo}&sort={$sort}&output=json";
             }
-            // if ($target == 'genre') {
-            //     $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&floor=videoa&hits={$getCount}&sort=match&keyword={$targetCheckedGenre}&output=json";
-            // }
+            if ($target == 'genre') {
+                $searchName = $name;
+                $genre = explode("|", $name);
+                // 配列に直した時に先頭が置換文字で不要なため先頭の配列削除
+                $genreDelete = array_shift($genre);
+                $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&floor=videoa&hits={$this->getCountVideo}&sort=match&keyword={$searchName}&sort={$sort}&output=json";
+            }
 
             if ($target == 'actress') {
                 $itemList = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&article={$target}&article_id={$id}&keyword={$name}&floor=videoa&hits={$this->getCountVideo}&sort={$sort}&output=json";
@@ -378,6 +386,7 @@ class MainController extends Controller
             if ($response->ok() || $getGoodMatchingData->ok()) {
                 Log::info("並び替え検索の正常終了",["検索値"=>$name]);
                 return view('page.searchResult')
+                ->with('genre', $genre)
                 ->with('keyword', $name)
                 ->with('response', $response)
                 ->with('getGoodMatchingData', $getGoodMatchingData)
