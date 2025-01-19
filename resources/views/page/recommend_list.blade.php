@@ -10,7 +10,7 @@
             <section class="text-gray-600 body-font">
                     <div class="container px-5 py-24 mx-auto">
                         <div class="flex flex-col w-full mb-20 text-center">
-                        <h1 class="mb-4 text-sm font-medium tracking-widest text-gray-900 lg:text-2xl title-font">おかずせれくと.comのおすすめAV</h1>
+                        <h1 class="mb-4 text-base font-medium tracking-widest text-gray-900 lg:text-2xl title-font">おかずせれくと.comのおすすめAV</h1>
                         <p class="mx-auto leading-relaxed text-2xs lg:text-base lg:w-2/3">
                             おかずせれくと.comの中の人が個人的におすすめするAV作品を紹介！
                         </p>
@@ -26,7 +26,7 @@
                                         >
                                         <div class="flex-grow sm:pl-8">
                                             <h2 class="text-lg font-medium text-gray-900 title-font">
-                                                <a href="/recommend/detail/{{ $list->title }}">
+                                                <a href="/recommend/detail/{{ $list->content_id }}">
                                                     {{ $list->title }}
                                                 </a>
                                             </h2>
@@ -54,7 +54,7 @@
                                             </p>
                                             <span class="inline-flex">
                                                 <a
-                                                    href="/recommend/detail/{{ $list->title }}"
+                                                    href="/recommend/detail/{{ $list->content_id }}"
                                                     class="px-2 py-1 text-right text-gray-900 bg-white border border-gray-200 rounded-full font-md focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">
                                                     <i class="fa-solid fa-arrow-right"></i>この記事を読む
                                                 </a>

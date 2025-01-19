@@ -14,7 +14,6 @@ class MainController extends Controller
 
     public function __construct()
     {
-        $this->viewImagePath = config('const.ARTICLE.IMAGE.PATH');
         $this->apiId = config('const.API_ID');
         $this->affiliateId = config('const.AFFILIATE_ID');
         $this->getCountVideo = config('const.API.PARAMETER.SEARCH.GET_COUNT_VIDEO');

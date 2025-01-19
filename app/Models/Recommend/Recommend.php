@@ -24,10 +24,10 @@ class Recommend extends Model
         return $data;
     }
 
-    public static function getRecommendDetail($title)
+    public static function getRecommendDetail($content_id)
     {
         $targetData = Recommend::where('delete_flg', 0)
-        ->where('title', $title)
+        ->where('content_id', $content_id)
         ->first();
 
         $targetData = $targetData;

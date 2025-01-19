@@ -12,6 +12,16 @@ use DB;
 
 class RecommendController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->apiId = config('const.API_ID');
+        $this->affiliateId = config('const.AFFILIATE_ID');
+        $this->getCountVideo = config('const.API.PARAMETER.SEARCH.GET_COUNT_VIDEO');
+        $this->getCountGoods = config('const.API.PARAMETER.SEARCH.GET_COUNT_GOODS');
+        $this->apiPram = config('const.API.PARAMETER.SEARCH.GENRE');
+    }
+
     public function recommendList()
     {
         $recommendList = Recommend::getRecommendList();
@@ -20,23 +30,19 @@ class RecommendController extends Controller
         ->with('recommendList', $recommendList);
     }
 
-    public function recommendDetail($title)
+    public function recommendDetail($content_id)
     {
 
-        if (!$title) {
+        if (!$content_id) {
             Log::error("記事の詳細で対象のパラメータが送られていない");
             return redirect('error.404');
         }
 
-        $apiId = config('const.API_ID');
-        $affiliateId = config('const.AFFILIATE_ID');
-
         try {
-            $targetCollection = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=digital&keyword={$title}&floor=videoa&hits=50&sort=rank&output=json";
+            $targetCollection = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=digital&cid={$content_id}&floor=videoa&hits=1&sort=rank&output=json";
 
             $response = Http::get($targetCollection);
 
-            Log::alert($targetCollection);
             foreach ($response['result']['items'] as $result) {
                 if (isset($result['iteminfo']['actress'])) {
 
@@ -51,10 +57,10 @@ class RecommendController extends Controller
                 }
             }
 
-            $targeActressUrl = "https://api.dmm.com/affiliate/v3/ActressSearch?api_id={$apiId}&affiliate_id={$affiliateId}&actress_id={$actressTargetId}&output=json";
+            $targeActressUrl = "https://api.dmm.com/affiliate/v3/ActressSearch?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&actress_id={$actressTargetId}&output=json";
 
             //マッチングどの高いグッズの取得用API
-            $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$apiId}&affiliate_id={$affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$actressTargetName}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
+            $targetUrlToGoodMatching = "https://api.dmm.com/affiliate/v3/ItemList?api_id={$this->apiId}&affiliate_id={$this->affiliateId}&site=FANZA&service=mono&floor=goods&hits=18&sort=match&keyword={$actressTargetName}&mono_stock=stock|reserve|reserve_empty|mono&output=json";
 
 
             $responseActressData = Http::get($targeActressUrl);
@@ -62,12 +68,12 @@ class RecommendController extends Controller
 
             DB::beginTransaction();
 
-            $recommendDetail = Recommend::getRecommendDetail($title);
+            $recommendDetail = Recommend::getRecommendDetail($content_id);
 
             DB::commit();
 
             if ($response->ok()) {
-                Log::info("対象記事の作品情報の取得正常終了",["検索値"=>$title]);
+                Log::info("対象記事の作品情報の取得正常終了",["検索値"=>$content_id]);
                 return view('page.recommend_detail')
                 ->with('response', $response)
                 ->with('recommendDetail', $recommendDetail)

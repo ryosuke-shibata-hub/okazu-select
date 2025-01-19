@@ -7,7 +7,7 @@
             @foreach($response['result']['items'] as $result)
             <div class="p-3 px-5 mx-auto recommend-detail-lg ">
                 <h1 class="mt-4 text-xs font-bold text-gray-600 lg:mt-0 text-teal-lighter lg:text-xl">
-                    {{ $result['title'] }}
+                    {{ $recommendDetail['title'] }}
                 </h1>
                 <div class="pt-5">
                     @if(isset($result['iteminfo']['actress']))

@@ -31,7 +31,7 @@ Route::middleware(AgeVerification::class)->group(function () {
     Route::get('/recommendation', [RecommendController::class, 'recommendList'])
     ->name('recommendList');
     //おすすめの記事詳細
-    Route::get('/recommend/detail/{title}', [RecommendController::class, 'recommendDetail'])
+    Route::get('/recommend/detail/{content_id}', [RecommendController::class, 'recommendDetail'])
     ->name('recommendDetail');
     // マッチングページ
     Route::get('/matching', [MainController::class, 'matchingPage'])
