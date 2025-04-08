@@ -20,7 +20,7 @@ class GetApiDataController extends Controller
     {
         $apiId = config('const.API_ID');
         $affiliateId = config('const.AFFILIATE_ID');
-        $offset = 37400;
+        $offset = 58901; //女優のオフセット
         $limit = 100; // 1回あたりの最大取得件数
         $hasMoreData = true;
         //ジャンル検索/取得用
@@ -45,37 +45,47 @@ class GetApiDataController extends Controller
 
         try {
 
-            // DB::beginTransaction();
+            DB::beginTransaction();
 
-            // while ($hasMoreData == true) {
-            //     Log::debug("女優データ保存中...",["検索位置before"=>$offset]);
-            //     // 女優検索/取得用
-            //     $targeActressUrl = "https://api.dmm.com/affiliate/v3/ActressSearch?api_id={$apiId}&affiliate_id={$affiliateId}&hits={$limit}&offset={$offset}&output=json";
+            while ($hasMoreData == true) {
+                try {
+                    Log::debug("女優データ保存中...",["検索位置before"=>$offset]);
+                    // 女優検索/取得用
+                    $targeActressUrl = "https://api.dmm.com/affiliate/v3/ActressSearch?api_id={$apiId}&affiliate_id={$affiliateId}&hits={$limit}&offset={$offset}&output=json";
 
-            //     $responseActressData = Http::get($targeActressUrl);
-            //     // Log::debug("取得女優データ",[$responseActressData]);
-            //     if (empty($responseActressData['result'])) {
-            //         Log::debug("女優データ保存完了");
-            //         $hasMoreData = false;
-            //         break;
-            //         return redirect('/top');
-            //     }
+                    $responseActressData = Http::get($targeActressUrl);
+                    // Log::debug("取得女優データ",[$responseActressData['result']]);
+                    if (empty($responseActressData['result'])) {
+                        Log::debug("女優データ保存完了");
+                        $hasMoreData = false;
+                        break;
+                        return redirect('/top');
+                    }
 
-            //     // 女優データ保存ロジック
-            //     foreach ($responseActressData['result']['actress'] as $actressData) {
-            //         $getUniqueActress = ActressModel::checkUniqueActress($actressData);
-            //         //すでに登録されているジャンルはスキップする
-            //         if (!$getUniqueActress) {
-            //             ActressModel::createNewActress($actressData);
-            //         }
-            //     }
-            //     // 100件ずつ取得件数を増やしていく
-            //     $offset += $limit;
-            //     Log::debug("女優データ保存中...",["検索位置after"=>$offset]);
-            //     sleep(1);
-            // }
+                    // 女優データ保存ロジック
+                    foreach ($responseActressData['result']['actress'] as $actressData) {
+                        $getUniqueActress = ActressModel::checkUniqueActress($actressData);
+                        //すでに登録されているジャンルはスキップする
+                        if (!$getUniqueActress) {
+                            ActressModel::createNewActress($actressData);
+                            Log::debug("コミット！");
+                            DB::commit();
+                        }
+                    }
+                    // 100件ずつ取得件数を増やしていく
+                    $offset += $limit;
+                    Log::debug("女優データ保存中...",["検索位置after"=>$offset]);
+                    sleep(1);
+                } catch (\Throwable $th) {
+                    break;
+                    Log::error("API(女優)取得・保存エラー",[$th]);
+                    return redirect('/top');
+                }
+                break;
 
+            }
             // Log::debug("女優データ保存中...",["検索位置"=>$offset]);
+
             // ジャンルデータの保存ロジック
             // foreach ($responseGenreData['result']['genre'] as $genreData) {
             //     $getUniqueGenre = GenreModel::checkUniqueGenre($genreData);
@@ -107,50 +117,50 @@ class GetApiDataController extends Controller
             //     }
 
             //シリーズ取得・保存ロジック
-            while ($hasMoreData == true) {
-                Log::debug("シリーズデータ保存中...",["検索位置before"=>$offset]);
-                // メーカー検索/取得用
-                $targeSeriesUrl = "https://api.dmm.com/affiliate/v3/SeriesSearch?api_id={$apiId}&affiliate_id={$affiliateId}&floor_id=43&hits={$limit}&offset={$offset}&output=json";
+            // while ($hasMoreData == true) {
+            //     Log::debug("シリーズデータ保存中...",["検索位置before"=>$offset]);
+            //     // メーカー検索/取得用
+            //     $targeSeriesUrl = "https://api.dmm.com/affiliate/v3/SeriesSearch?api_id={$apiId}&affiliate_id={$affiliateId}&floor_id=43&hits={$limit}&offset={$offset}&output=json";
 
-                Log::info("リクエストURL",[$targeSeriesUrl]);
-                $responseSeriesData = Http::get($targeSeriesUrl);
-                // Log::debug("取得女優データ",[$responseActressData]);
-                if (empty($responseSeriesData['result']['series'])) {
-                    Log::debug("メーカーデータ保存完了");
-                    $hasMoreData = false;
-                    break;
-                    return redirect('/top');
-                }
+            //     Log::info("リクエストURL",[$targeSeriesUrl]);
+            //     $responseSeriesData = Http::get($targeSeriesUrl);
+            //     // Log::debug("取得女優データ",[$responseActressData]);
+            //     if (empty($responseSeriesData['result']['series'])) {
+            //         Log::debug("メーカーデータ保存完了");
+            //         $hasMoreData = false;
+            //         break;
+            //         return redirect('/top');
+            //     }
 
-                $siteData = $responseSeriesData['result'];
-                Log::debug("message",[$siteData]);
-                foreach ($siteData['series'] as $seriesData) {
-                    Log::debug("message",[$seriesData]);
-                    $seriesDataRecordData = [
-                        'site_name' => $siteData['site_name'],
-                        'site_code' => $siteData['site_code'],
-                        'service_name' => $siteData['service_name'],
-                        'service_code' => $siteData['service_code'],
-                        'floor_id' => $siteData['floor_id'],
-                        'floor_name' => $siteData['floor_name'],
-                        'floor_code' => $siteData['floor_code'],
-                        'series_id' => $seriesData['series_id'],
-                        'series_name' => $seriesData['name'],
-                        'series_name_ruby' => $seriesData['ruby'],
-                        'list_url' => $seriesData['list_url'],
-                    ];
+            //     $siteData = $responseSeriesData['result'];
+            //     Log::debug("message",[$siteData]);
+            //     foreach ($siteData['series'] as $seriesData) {
+            //         Log::debug("message",[$seriesData]);
+            //         $seriesDataRecordData = [
+            //             'site_name' => $siteData['site_name'],
+            //             'site_code' => $siteData['site_code'],
+            //             'service_name' => $siteData['service_name'],
+            //             'service_code' => $siteData['service_code'],
+            //             'floor_id' => $siteData['floor_id'],
+            //             'floor_name' => $siteData['floor_name'],
+            //             'floor_code' => $siteData['floor_code'],
+            //             'series_id' => $seriesData['series_id'],
+            //             'series_name' => $seriesData['name'],
+            //             'series_name_ruby' => $seriesData['ruby'],
+            //             'list_url' => $seriesData['list_url'],
+            //         ];
 
-                    $checkUniqueSiries = SeriesSearchModel::checkUniqueSeries($seriesDataRecordData['series_id']);
-                    //すでに登録されているジャンルはスキップする
-                    if (!$checkUniqueSiries) {
-                        SeriesSearchModel::createNewSeries($seriesDataRecordData);
-                    }
-                }
+            //         $checkUniqueSiries = SeriesSearchModel::checkUniqueSeries($seriesDataRecordData['series_id']);
+            //         //すでに登録されているジャンルはスキップする
+            //         if (!$checkUniqueSiries) {
+            //             SeriesSearchModel::createNewSeries($seriesDataRecordData);
+            //         }
+            //     }
                 // 100件ずつ取得件数を増やしていく
-                $offset += $limit;
-                Log::debug("シリーズーデータ保存中...",["検索位置after"=>$offset]);
-                sleep(1);
-            }
+            //     $offset += $limit;
+            //     Log::debug("シリーズーデータ保存中...",["検索位置after"=>$offset]);
+            //     sleep(1);
+            // }
 
 
 
@@ -200,7 +210,7 @@ class GetApiDataController extends Controller
             //     sleep(1);
             // }
 
-            // DB::commit();
+            DB::commit();
 
             Log::debug("APIデータ取得正常終了");
             return redirect('/top');
